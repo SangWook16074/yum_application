@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
 class DatePickerWidget extends StatelessWidget {
   final void Function()? onTap;
@@ -10,8 +12,7 @@ class DatePickerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.only(
-            top: 10.0, bottom: 10.0, right: 16.0, left: 48.0),
+        padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, right: 16.0),
         height: 40,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -20,10 +21,14 @@ class DatePickerWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              "년",
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+            Consumer<IngredientViewModel>(builder: (context, provider, child) {
+              return Text(
+                (provider.selectedIngredient != null)
+                    ? provider.selectedIngredient!.startAt!.year.toString()
+                    : "년",
+                style: Theme.of(context).textTheme.labelSmall,
+              );
+            }),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: VerticalDivider(

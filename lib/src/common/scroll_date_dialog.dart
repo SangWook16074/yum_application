@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yum_application/src/common/basic_bottom_sheet.dart';
 
 class ScrollDateDialog extends StatefulWidget {
-  const ScrollDateDialog({super.key});
+  final ValueSetter<DateTime> onComplete;
+  const ScrollDateDialog({super.key, required this.onComplete});
 
   @override
   State<ScrollDateDialog> createState() => _ScrollDateDialogState();
@@ -253,7 +254,10 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
           backgroundColor: Theme.of(context).colorScheme.primary,
           fixedSize: const Size(390, 48),
         ),
-        onPressed: () {},
+        onPressed: () {
+          widget.onComplete(DateTime(selectedYear, selectedMonth, selectedDay));
+          Navigator.of(context).pop();
+        },
         child: Text(
           "선택하기",
           style: Theme.of(context).textTheme.labelMedium,

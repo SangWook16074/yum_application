@@ -15,8 +15,12 @@ class IngredientAddView extends StatefulWidget {
 }
 
 class _IngredientAddViewState extends State<IngredientAddView> {
+  late final IngredientViewModel _ingredientViewModel;
+
   @override
   void initState() {
+    _ingredientViewModel =
+        Provider.of<IngredientViewModel>(context, listen: false);
     super.initState();
   }
 
@@ -162,7 +166,10 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                                   borderRadius: BorderRadius.vertical(
                                       top: Radius.circular(32.0))),
                               context: context,
-                              builder: (context) => const ScrollDateDialog());
+                              builder: (context) => ScrollDateDialog(
+                                    onComplete:
+                                        _ingredientViewModel.updateStartAt,
+                                  ));
                         },
                       ),
                       Padding(
@@ -199,7 +206,9 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                                   borderRadius: BorderRadius.vertical(
                                       top: Radius.circular(32.0))),
                               context: context,
-                              builder: (context) => const ScrollDateDialog());
+                              builder: (context) => ScrollDateDialog(
+                                  onComplete:
+                                      _ingredientViewModel.updateStartAt));
                         },
                       ),
                       Opacity(

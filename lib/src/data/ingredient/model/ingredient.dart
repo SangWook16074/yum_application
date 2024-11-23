@@ -49,6 +49,8 @@ class Ingredient {
   void updateIsFavorite() {
     isFavorite = !isFavorite;
   }
+
+  void updateStartAt(DateTime newStartAt) {}
 }
 
 // 재료 속성 enum
