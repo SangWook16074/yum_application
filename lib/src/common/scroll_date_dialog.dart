@@ -57,8 +57,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
   }
 
   bool isButtonDisabled() {
-    return endAt
-        .isBefore(startAt); // Disable if expiration is earlier than purchase
+    return endAt.isBefore(startAt);
   }
 
   @override
