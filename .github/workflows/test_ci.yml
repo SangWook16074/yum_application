@@ -21,9 +21,12 @@ jobs:
           channel: stable
       - run: flutter --version
 
+      - name: copy .env file
+        run: echo "BASE_URL=${{secrets.API_URL}} >> /.env"
+
       - name: Install dependencies
         run: flutter pub get
 
       # 테스트 수행
       - name: Run tests
-        run: flutter test
+        run: flutter test --dart-define=BASE_URL=${{secrets.API_URL}}

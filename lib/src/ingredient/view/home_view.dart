@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
@@ -33,6 +30,7 @@ class HomeView extends StatelessWidget {
 
   Widget _header() {
     return Padding(
+      key: const Key("header"),
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 8.0),
       child: Builder(builder: (context) {
         return Row(
@@ -49,6 +47,7 @@ class HomeView extends StatelessWidget {
 
   Widget _freezer() {
     return Padding(
+      key: const Key("freezer"),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Consumer<IngredientViewModel>(builder: (context, provider, child) {
         return RefreginatorContainer(
@@ -59,6 +58,7 @@ class HomeView extends StatelessWidget {
 
   Widget _fridge() {
     return Padding(
+      key: const Key("fridge"),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Consumer<IngredientViewModel>(builder: (context, provider, child) {
         return RefreginatorContainer(
@@ -71,6 +71,7 @@ class HomeView extends StatelessWidget {
 
   Widget _fab() => Builder(builder: (context) {
         return FloatingActionButton(
+          key: const Key("fab"),
           foregroundColor: const Color(0xffffffff),
           backgroundColor: Theme.of(context).colorScheme.primary,
           onPressed: () {

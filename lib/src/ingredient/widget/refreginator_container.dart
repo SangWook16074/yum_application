@@ -53,7 +53,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
       List<Widget> sublist = oneDArray.sublist(i,
           i + groupSize > oneDArray.length ? oneDArray.length : i + groupSize);
 
-      // 마지막 그룹이 8개 미만이면 Container()로 채움
+      // 마지막 그룹이 8개 미만이면 Empty Item으로 채움
       if (sublist.length < groupSize) {
         sublist = sublist +
             List.generate(
@@ -87,8 +87,10 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Container(
       constraints: BoxConstraints(maxHeight: widget.rowCount * 115),
+      height: height * 0.13 * widget.rowCount,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -106,6 +108,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   Widget _displayPageView() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: PageView(
+            key: const Key("Ingredient Page View"),
             controller: _pageController,
             onPageChanged: _handlePageViewChanged,
             children: List.generate(
@@ -129,7 +132,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   /// 가운데에 빌드
   Center _emptyPageView() {
     // 랜덤 글자
-    final _emptyStatusString = <String>[
+    final emptyStatusString = <String>[
       "꼬르륵",
       "밥꼭챙",
       "뭐먹지",
@@ -139,13 +142,14 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     ];
 
     // 글자 중 하나를 선택해서 빌드
-    final _randomString =
-        _emptyStatusString[Random().nextInt(_emptyStatusString.length)];
+    final randomString =
+        emptyStatusString[Random().nextInt(emptyStatusString.length)];
     return Center(
+      key: const Key("Random empty string widget"),
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          _randomString,
+          randomString,
           style: Theme.of(context).textTheme.bodyLarge,
           overflow: TextOverflow.clip,
         ),
@@ -251,6 +255,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
         alignment: Alignment.bottomCenter,
         child: (_totalPage > 1)
             ? PageIndicator(
+                key: const Key("Indicator"),
                 tabController: _tabController,
                 currentPageIndex: _pageIndex,
                 onUpdateCurrentPageIndex: _updateCurrentPageIndex,
