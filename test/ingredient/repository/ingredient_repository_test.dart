@@ -28,5 +28,35 @@ void main() {
       final result = await ingredientRepository.getMyIngredient();
       expect(result, isA<List<Ingredient>>());
     });
+
+    test("getAllIngredient 요청이 성공하면 <Ingredient>가 반환된다", () async {
+      final json = {
+        "name": "egg",
+        "isFreezed": false,
+        "category": "egg",
+        "startAt": "2024-11-12",
+        "endAt": "2024-11-17"
+      };
+
+      final Ingredient ingredient = Ingredient(
+          name: "egg",
+          category: IngredientCategory.egg,
+          isFreezed: false,
+          startAt: DateTime(2024, 11, 12),
+          endAt: DateTime(2024, 11, 17));
+      when(remoteDatasource.createNewIngredient(ingredient.toJson()))
+          .thenAnswer((_) async => {
+                "id": 1,
+                "name": "egg",
+                "isFreezed": false,
+                "isFavorite": false,
+                "category": "egg",
+                "startAt": "2024-11-12",
+                "endAt": "2024-11-17"
+              });
+
+      final result = await ingredientRepository.createNewIngredient(ingredient);
+      expect(result, isA<Ingredient>());
+    });
   });
 }

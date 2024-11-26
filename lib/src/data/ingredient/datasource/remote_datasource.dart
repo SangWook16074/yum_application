@@ -14,4 +14,12 @@ class RemoteDatasource {
         (response) =>
             List<Map<String, dynamic>>.from(jsonDecode(response.body)));
   }
+
+  /// 나의 재료 생성 Api
+  Future<Map<String, dynamic>> createNewIngredient(
+      Map<String, dynamic> json) async {
+    return apiClient
+        .post(Uri.parse("$baseUrl/api/ingredients"), body: json)
+        .then((respone) => Map<String, dynamic>.from(jsonDecode(respone.body)));
+  }
 }

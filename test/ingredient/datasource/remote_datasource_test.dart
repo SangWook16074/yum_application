@@ -32,5 +32,29 @@ void main() async {
       final result = await remoteDatasource.getMyIngredient();
       expect(result.length, 1);
     });
+
+    test("http 요청이 성공하면 사용자의 생성한 재료 데이터를 반환한다", () async {
+      final testBody = {
+        "name": "egg",
+        "isFreezed": false,
+        "category": "egg",
+        "startAt": "2024-11-12",
+        "endAt": "2024-11-17"
+      };
+      when(apiClient.post(Uri.parse("$baseUrl/api/ingredients"),
+              body: testBody))
+          .thenAnswer((_) async => http.Response('''
+            {
+              "name" : "egg", 
+              "isFreezed" : false, 
+              "category": "egg",
+              "startAt" : "2024-11-12", 
+              "endAt": "2024-11-17"
+            }
+''', 201));
+
+      final result = await remoteDatasource.createNewIngredient(testBody);
+      expect(result["name"], "egg");
+    });
   });
 }

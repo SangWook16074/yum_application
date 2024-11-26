@@ -87,8 +87,10 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Container(
       constraints: BoxConstraints(maxHeight: widget.rowCount * 115),
+      height: height * 0.13 * widget.rowCount,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),

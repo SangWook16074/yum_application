@@ -24,21 +24,15 @@ class DatePickerWidget extends StatelessWidget {
               "년",
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: VerticalDivider(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+            VerticalDivider(
+              color: Theme.of(context).colorScheme.primary,
             ),
             Text(
               "월",
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              child: VerticalDivider(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+            VerticalDivider(
+              color: Theme.of(context).colorScheme.primary,
             ),
             Text(
               "일",

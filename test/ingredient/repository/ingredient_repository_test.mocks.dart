@@ -76,4 +76,18 @@ class MockRemoteDatasource extends _i1.Mock implements _i3.RemoteDatasource {
         returnValueForMissingStub: _i5.Future<List<Map<String, dynamic>>>.value(
             <Map<String, dynamic>>[]),
       ) as _i5.Future<List<Map<String, dynamic>>>);
+
+  @override
+  _i5.Future<Map<String, dynamic>> createNewIngredient(
+          Map<String, dynamic>? json) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewIngredient,
+          [json],
+        ),
+        returnValue:
+            _i5.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+        returnValueForMissingStub:
+            _i5.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i5.Future<Map<String, dynamic>>);
 }

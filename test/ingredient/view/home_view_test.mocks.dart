@@ -84,6 +84,15 @@ class MockIngredientViewModel extends _i1.Mock
       ) as bool);
 
   @override
+  void createNewIngredient() => super.noSuchMethod(
+        Invocation.method(
+          #createNewIngredient,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void selectIngredient(_i4.Ingredient? ingredient) => super.noSuchMethod(
         Invocation.method(
           #selectIngredient,
