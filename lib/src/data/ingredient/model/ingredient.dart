@@ -6,8 +6,8 @@ class Ingredient {
   bool isFreezed;
   final IngredientCategory category;
   bool isFavorite;
-  DateTime? startAt = DateTime.now();
-  DateTime? endAt = DateTime.now();
+  DateTime? startAt;
+  DateTime? endAt;
 
   Ingredient({
     this.id,
@@ -17,7 +17,12 @@ class Ingredient {
     this.isFavorite = false,
     this.startAt,
     this.endAt,
-  });
+  }) {
+    final now = DateTime.now();
+    final currTime = DateTime(now.year, now.month, now.day);
+    startAt = currTime;
+    endAt = currTime;
+  }
 
   /// 재료 이미지 getter
   IngredientImage get image {
@@ -48,6 +53,14 @@ class Ingredient {
 
   void updateIsFavorite() {
     isFavorite = !isFavorite;
+  }
+
+  void updateStartAt(DateTime newStartAt) {
+    startAt = newStartAt;
+  }
+
+  void updateEndAt(DateTime newEndAt) {
+    endAt = newEndAt;
   }
 }
 

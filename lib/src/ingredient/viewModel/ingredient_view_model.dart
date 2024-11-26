@@ -78,4 +78,24 @@ class IngredientViewModel extends ChangeNotifier {
     _isFreezed = !_isFreezed;
     notifyListeners();
   }
+
+  void updateStartAt(DateTime newStartAt) {
+    if (_selectedIngredient == null) {
+      print("null");
+      return;
+    }
+    print("Start Date: $newStartAt");
+    _selectedIngredient!.updateStartAt(newStartAt);
+    notifyListeners();
+  }
+
+  void updateEndAt(DateTime newEndAt) {
+    if (_selectedIngredient == null) {
+      print("null");
+      return;
+    }
+    print("End Date: $newEndAt");
+    _selectedIngredient!.updateEndAt(newEndAt);
+    notifyListeners();
+  }
 }
