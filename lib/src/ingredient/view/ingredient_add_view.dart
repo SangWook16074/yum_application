@@ -158,22 +158,29 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: [
-                      DatePickerWidget(
-                        onTap: () {
-                          showModalBottomSheet(
-                              backgroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(32.0))),
-                              context: context,
-                              builder: (context) => ScrollDateDialog(
-                                    onComplete:
-                                        _ingredientViewModel.updateStartAt,
-                                  ));
-                        },
-                      ),
+                      Consumer<IngredientViewModel>(
+                          builder: (context, provider, child) {
+                        return DatePickerWidget(
+                          time: provider.selectedIngredient?.startAt,
+                          onTap: () {
+                            showModalBottomSheet(
+                                isDismissible: false,
+                                backgroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(32.0))),
+                                context: context,
+                                builder: (context) => ScrollDateDialog(
+                                      onStartAtComp:
+                                          _ingredientViewModel.updateStartAt,
+                                      onEndAtComp:
+                                          _ingredientViewModel.updateEndAt,
+                                    ));
+                          },
+                        );
+                      }),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           "~",
                           style: Theme.of(context).textTheme.displayLarge,
@@ -198,19 +205,28 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
-                      DatePickerWidget(
-                        onTap: () {
-                          showModalBottomSheet(
-                              backgroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(32.0))),
-                              context: context,
-                              builder: (context) => ScrollDateDialog(
-                                  onComplete:
-                                      _ingredientViewModel.updateStartAt));
-                        },
-                      ),
+                      Consumer<IngredientViewModel>(
+                          builder: (context, provider, child) {
+                        return DatePickerWidget(
+                          time: provider.selectedIngredient?.endAt,
+                          onTap: () {
+                            showModalBottomSheet(
+                                isDismissible: false,
+                                backgroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(32.0))),
+                                context: context,
+                                builder: (context) => ScrollDateDialog(
+                                      initialStatus: false,
+                                      onStartAtComp:
+                                          _ingredientViewModel.updateStartAt,
+                                      onEndAtComp:
+                                          _ingredientViewModel.updateEndAt,
+                                    ));
+                          },
+                        );
+                      }),
                       Opacity(
                         opacity: 0.0,
                         child: Padding(

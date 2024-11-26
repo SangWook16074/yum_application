@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:yum_application/src/common/basic_bottom_sheet.dart';
 
 class ScrollDateDialog extends StatefulWidget {
-  final ValueSetter<DateTime> onComplete;
-  const ScrollDateDialog({super.key, required this.onComplete});
+  final ValueSetter<DateTime> onStartAtComp;
+  final ValueSetter<DateTime> onEndAtComp;
+  final bool initialStatus;
+  const ScrollDateDialog({
+    super.key,
+    required this.onStartAtComp,
+    required this.onEndAtComp,
+    this.initialStatus = true,
+  });
 
   @override
   State<ScrollDateDialog> createState() => _ScrollDateDialogState();
@@ -19,7 +26,9 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
   int daysInMonth =
       DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
 
-  bool selectedButton = true;
+  late bool selectedButton;
+  late DateTime startAt;
+  late DateTime endAt;
 
   int getDaysInMonth(int year, int month) {
     return DateTime(year, month + 1, 0).day;
@@ -33,6 +42,31 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
         selectedDayIndex = selectedDay - 1;
       }
     });
+  }
+
+  void updateDate() {
+    DateTime selectedDate = DateTime(selectedYear, selectedMonth, selectedDay);
+
+    if (selectedButton) {
+      startAt = selectedDate;
+      widget.onStartAtComp(startAt);
+    } else {
+      endAt = selectedDate;
+      widget.onEndAtComp(endAt);
+    }
+  }
+
+  bool isButtonDisabled() {
+    return endAt
+        .isBefore(startAt); // Disable if expiration is earlier than purchase
+  }
+
+  @override
+  void initState() {
+    selectedButton = widget.initialStatus;
+    super.initState();
+    startAt = DateTime(selectedYear, selectedMonth, selectedDay);
+    endAt = DateTime(selectedYear, selectedMonth, selectedDay);
   }
 
   @override
@@ -69,6 +103,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
               setState(() {
                 selectedButton = true;
               });
+              updateDate();
             },
             child: Text(
               "구매날짜",
@@ -97,13 +132,14 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
               setState(() {
                 selectedButton = false;
               });
+              updateDate();
             },
             child: Text(
               "소비기한",
               style: !selectedButton
                   ? Theme.of(context).textTheme.bodyMedium
                   : Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: const Color(0xFFA2A2A2),
+                        color: const Color(0xffA2A2A2),
                       ),
             ),
           ),
@@ -148,11 +184,12 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
               selectedYearIndex = index;
               selectedYear = 2000 + index;
               updateDaysInMonth();
+              updateDate();
             });
           },
-          children: List<Widget>.generate(
+          children: List.generate(
             51,
-            (int index) {
+            (index) {
               bool isSelected = index == selectedYearIndex;
               return Container(
                 height: 28.0,
@@ -185,11 +222,12 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
               selectedMonthIndex = index;
               selectedMonth = index + 1;
               updateDaysInMonth();
+              updateDate();
             });
           },
-          children: List<Widget>.generate(
+          children: List.generate(
             12,
-            (int index) {
+            (index) {
               bool isSelected = index == selectedMonthIndex;
               return Container(
                 height: 28.0,
@@ -221,11 +259,12 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
             setState(() {
               selectedDayIndex = index;
               selectedDay = index + 1;
+              updateDate();
             });
           },
-          children: List<Widget>.generate(
+          children: List.generate(
             daysInMonth,
-            (int index) {
+            (index) {
               bool isSelected = index == selectedDayIndex;
               return Container(
                 height: 28.0,
@@ -251,13 +290,23 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: isButtonDisabled()
+              ? const Color(0xffF0ECE8)
+              : Theme.of(context).colorScheme.primary,
           fixedSize: const Size(390, 48),
         ),
-        onPressed: () {
-          widget.onComplete(DateTime(selectedYear, selectedMonth, selectedDay));
-          Navigator.of(context).pop();
-        },
+        onPressed: isButtonDisabled()
+            ? null
+            : () {
+                if (selectedButton) {
+                  widget.onStartAtComp(
+                      DateTime(selectedYear, selectedMonth, selectedDay));
+                } else {
+                  widget.onEndAtComp(
+                      DateTime(selectedYear, selectedMonth, selectedDay));
+                }
+                Navigator.of(context).pop();
+              },
         child: Text(
           "선택하기",
           style: Theme.of(context).textTheme.labelMedium,

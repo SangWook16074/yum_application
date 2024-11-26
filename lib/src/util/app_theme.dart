@@ -73,6 +73,7 @@ ThemeData get light => ThemeData(
         secondary: Color(0xffF89C78),
         onPrimaryContainer: Color(0xffffffff),
         onSecondaryContainer: Color(0xffd7d7d7),
+        surfaceContainer: Color(0xff2A2A2A),
         tertiary: Color(0xffF3F3F3)));
 
 ThemeData get dark => ThemeData(
