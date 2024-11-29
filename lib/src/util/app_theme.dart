@@ -5,7 +5,7 @@ ThemeData get light => ThemeData(
     useMaterial3: false,
     textTheme: const TextTheme(
         bodyLarge: TextStyle(
-          color: Color(0xffFCD5C5),
+          color: Color(0xffEBEAE6),
           fontFamily: "PartialSansKR",
           fontSize: 64,
           fontWeight: FontWeight.w400,
@@ -69,8 +69,8 @@ ThemeData get light => ThemeData(
           color: Color(0xffFFFFFF),
         )),
     colorScheme: const ColorScheme.light(
-        primary: Color(0xffF5713E),
-        secondary: Color(0xffF89C78),
+        primary: Color(0xff362703),
+        secondary: Color(0xffFFB300),
         onPrimaryContainer: Color(0xffffffff),
         onSecondaryContainer: Color(0xffd7d7d7),
         surfaceContainer: Color(0xff2A2A2A),
