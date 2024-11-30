@@ -73,7 +73,7 @@ class HomeView extends StatelessWidget {
         return FloatingActionButton(
           key: const Key("fab"),
           foregroundColor: const Color(0xffffffff),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const IngredientAddView()));

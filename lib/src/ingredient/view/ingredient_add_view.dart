@@ -137,7 +137,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              style: const TextStyle(color: Colors.white, fontSize: 16.0),
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ),
         ),
