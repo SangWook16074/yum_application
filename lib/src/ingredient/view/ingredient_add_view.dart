@@ -80,14 +80,16 @@ class _IngredientAddViewState extends State<IngredientAddView> {
               ),
             )),
       ),
-      body: Column(
-        children: [
-          _toggle(),
-          _description(),
-          const Spacer(),
-          _button(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _toggle(),
+            _description(),
+          ],
+        ),
       ),
+      bottomNavigationBar: _button(),
     );
   }
 
