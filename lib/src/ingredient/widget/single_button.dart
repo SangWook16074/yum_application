@@ -8,6 +8,7 @@ class SingleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      key: const Key("Single Button"),
       style: ElevatedButton.styleFrom(
           fixedSize: Size(MediaQuery.of(context).size.width - 20, 40),
           backgroundColor: Theme.of(context).colorScheme.primary,
