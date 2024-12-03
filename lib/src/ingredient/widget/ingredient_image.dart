@@ -21,7 +21,7 @@ class IngredientImage extends StatelessWidget {
         children: [
           ImageWidget(
             path: "assets/images/freezed.png",
-            width: width + 50,
+            width: width + 20,
           ),
           _icon(),
         ],
