@@ -104,7 +104,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
               return Switch.adaptive(
                 value: provider.isFreezed,
                 onChanged: provider.toggleIsFreezed,
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveThumbColor: Colors.grey,
               );
             })
