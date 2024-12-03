@@ -2,11 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 
-class IngredientViewModel extends ChangeNotifier {
+class IngredientViewModelImpl extends ChangeNotifier
+    implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
   List<Ingredient> _myIngredients = List.empty();
 
   /// 나의 냉동 재료 getter
+  @override
   List<Ingredient> get myFreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == true)
@@ -14,23 +16,27 @@ class IngredientViewModel extends ChangeNotifier {
   }
 
   /// 나의 냉장 재료 getter
+  @override
   List<Ingredient> get myUnfreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == false)
         .toList();
   }
 
-  IngredientViewModel({required this.ingredientRepository}) {
-    _fetchData();
+  IngredientViewModelImpl({required this.ingredientRepository}) {
+    fetchData();
   }
 
   Ingredient? _selectedIngredient;
+
+  @override
   Ingredient? get selectedIngredient => _selectedIngredient;
 
   bool _isFreezed = false;
   bool get isFreezed => _isFreezed;
 
-  void _fetchData() async {
+  @override
+  Future<void> fetchData() async {
     try {
       final result = await ingredientRepository.getMyIngredient();
       _myIngredients = result;
@@ -41,11 +47,13 @@ class IngredientViewModel extends ChangeNotifier {
     }
   }
 
-  void createNewIngredient() async {
+  @override
+  Future<void> createNewIngredient() async {
     // 선택한 재료가 없으면 return;
     if (_selectedIngredient == null) {
       return;
     }
+    print(_selectedIngredient);
     try {
       // 선택한 재료를 타겟으로 설정
       final newIngredient = selectedIngredient;
@@ -60,17 +68,20 @@ class IngredientViewModel extends ChangeNotifier {
     }
   }
 
+  @override
   void selectIngredient(Ingredient ingredient) {
     ingredient.isFreezed = _isFreezed;
     _selectedIngredient = ingredient;
     notifyListeners();
   }
 
+  @override
   void cancel() {
     _selectedIngredient = null;
     notifyListeners();
   }
 
+  @override
   void toggleIsFreezed(bool value) {
     if (_selectedIngredient != null) {
       _selectedIngredient!.isFreezed = !isFreezed;
@@ -79,6 +90,7 @@ class IngredientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  @override
   void updateStartAt(DateTime newStartAt) {
     if (_selectedIngredient == null) {
       print("null");
@@ -89,6 +101,7 @@ class IngredientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  @override
   void updateEndAt(DateTime newEndAt) {
     if (_selectedIngredient == null) {
       print("null");
@@ -98,4 +111,26 @@ class IngredientViewModel extends ChangeNotifier {
     _selectedIngredient!.updateEndAt(newEndAt);
     notifyListeners();
   }
+}
+
+abstract class IngredientViewModel {
+  List<Ingredient> get myFreezedIngredients;
+
+  List<Ingredient> get myUnfreezedIngredients;
+
+  Ingredient? get selectedIngredient;
+
+  Future<void> fetchData();
+
+  void createNewIngredient();
+
+  void selectIngredient(Ingredient ingredient);
+
+  void cancel();
+
+  void toggleIsFreezed(bool value);
+
+  void updateStartAt(DateTime startAt);
+
+  void updateEndAt(DateTime endAt);
 }

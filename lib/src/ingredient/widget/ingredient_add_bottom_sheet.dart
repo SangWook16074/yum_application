@@ -161,7 +161,7 @@ class _IngredientAddBottomSheetState extends State<IngredientAddBottomSheet> {
               children: ingredients
                   .map((i) => GestureDetector(
                         onTap: () {
-                          Provider.of<IngredientViewModel>(context,
+                          Provider.of<IngredientViewModelImpl>(context,
                                   listen: false)
                               .selectIngredient(i);
                           Navigator.of(context).pop();
