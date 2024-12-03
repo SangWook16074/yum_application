@@ -3,7 +3,8 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i5;
+import 'dart:async' as _i5;
+import 'dart:ui' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
@@ -37,11 +38,11 @@ class _FakeIngredientRepository_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [IngredientViewModel].
+/// A class which mocks [IngredientViewModelImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIngredientViewModel extends _i1.Mock
-    implements _i3.IngredientViewModel {
+class MockIngredientViewModelImpl extends _i1.Mock
+    implements _i3.IngredientViewModelImpl {
   @override
   _i2.IngredientRepository get ingredientRepository => (super.noSuchMethod(
         Invocation.getter(#ingredientRepository),
@@ -84,13 +85,24 @@ class MockIngredientViewModel extends _i1.Mock
       ) as bool);
 
   @override
-  void createNewIngredient() => super.noSuchMethod(
+  _i5.Future<void> fetchData() => (super.noSuchMethod(
+        Invocation.method(
+          #fetchData,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> createNewIngredient() => (super.noSuchMethod(
         Invocation.method(
           #createNewIngredient,
           [],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   void selectIngredient(_i4.Ingredient? ingredient) => super.noSuchMethod(
@@ -120,7 +132,25 @@ class MockIngredientViewModel extends _i1.Mock
       );
 
   @override
-  void addListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+  void updateStartAt(DateTime? newStartAt) => super.noSuchMethod(
+        Invocation.method(
+          #updateStartAt,
+          [newStartAt],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void updateEndAt(DateTime? newEndAt) => super.noSuchMethod(
+        Invocation.method(
+          #updateEndAt,
+          [newEndAt],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -129,7 +159,7 @@ class MockIngredientViewModel extends _i1.Mock
       );
 
   @override
-  void removeListener(_i5.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],

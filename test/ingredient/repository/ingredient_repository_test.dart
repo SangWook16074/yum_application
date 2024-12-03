@@ -7,12 +7,17 @@ import 'package:yum_application/src/data/ingredient/repository/ingredient_reposi
 
 import 'ingredient_repository_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<RemoteDatasource>()])
+@GenerateMocks([RemoteDatasource])
 void main() {
-  final RemoteDatasource remoteDatasource = MockRemoteDatasource();
-  final IngredientRepository ingredientRepository =
-      IngredientRepository(remoteDatasource: remoteDatasource);
+  late final RemoteDatasource remoteDatasource;
+  late final IngredientRepositoryImpl ingredientRepository;
   group("Ingredient Repository Unit Test", () {
+    setUpAll(() {
+      remoteDatasource = MockRemoteDatasource();
+      ingredientRepository =
+          IngredientRepositoryImpl(remoteDatasource: remoteDatasource);
+    });
+
     test("getAllIngredient 요청이 성공하면 List<Ingredient>가 반환된다", () async {
       when(remoteDatasource.getMyIngredient()).thenAnswer((_) async => [
             {
@@ -26,18 +31,19 @@ void main() {
             }
           ]);
       final result = await ingredientRepository.getMyIngredient();
+      verify(remoteDatasource.getMyIngredient()).called(1);
       expect(result, isA<List<Ingredient>>());
+      final first = result.first;
+      expect(first.id, 1);
+      expect(first.name, "egg");
+      expect(first.isFreezed, false);
+      expect(first.isFavorite, false);
+      expect(first.category, IngredientCategory.egg);
+      expect(first.startAt, DateTime(2024, 11, 12));
+      expect(first.endAt, DateTime(2024, 11, 17));
     });
 
-    test("getAllIngredient 요청이 성공하면 <Ingredient>가 반환된다", () async {
-      final json = {
-        "name": "egg",
-        "isFreezed": false,
-        "category": "egg",
-        "startAt": "2024-11-12",
-        "endAt": "2024-11-17"
-      };
-
+    test("getAllIngredient 요청이 성공하면 Ingredient가 반환된다", () async {
       final Ingredient ingredient = Ingredient(
           name: "egg",
           category: IngredientCategory.egg,
@@ -56,7 +62,15 @@ void main() {
               });
 
       final result = await ingredientRepository.createNewIngredient(ingredient);
+      verify(remoteDatasource.createNewIngredient(ingredient.toJson()))
+          .called(1);
       expect(result, isA<Ingredient>());
+      expect(result.name, "egg");
+      expect(result.isFreezed, false);
+      expect(result.isFavorite, false);
+      expect(result.category, IngredientCategory.egg);
+      expect(result.startAt, DateTime(2024, 11, 12));
+      expect(result.endAt, DateTime(2024, 11, 17));
     });
   });
 }

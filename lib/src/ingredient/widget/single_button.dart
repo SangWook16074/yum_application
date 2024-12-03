@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class SingleButton extends StatelessWidget {
   final String text;
-  const SingleButton({super.key, required this.text});
+  final void Function()? onTap;
+  const SingleButton({super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +13,7 @@ class SingleButton extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0))),
-      onPressed: () {
-        debugPrint("h");
-      },
+      onPressed: onTap,
       child: Text(
         text,
         style: Theme.of(context).textTheme.labelMedium,

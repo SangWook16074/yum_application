@@ -3,13 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i3;
 
-import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
 import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart'
-    as _i3;
+    as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,61 +22,27 @@ import 'package:yum_application/src/data/ingredient/datasource/remote_datasource
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeClient_0 extends _i1.SmartFake implements _i2.Client {
-  _FakeClient_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [RemoteDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoteDatasource extends _i1.Mock implements _i3.RemoteDatasource {
-  @override
-  _i2.Client get apiClient => (super.noSuchMethod(
-        Invocation.getter(#apiClient),
-        returnValue: _FakeClient_0(
-          this,
-          Invocation.getter(#apiClient),
-        ),
-        returnValueForMissingStub: _FakeClient_0(
-          this,
-          Invocation.getter(#apiClient),
-        ),
-      ) as _i2.Client);
+class MockRemoteDatasource extends _i1.Mock implements _i2.RemoteDatasource {
+  MockRemoteDatasource() {
+    _i1.throwOnMissingStub(this);
+  }
 
   @override
-  String get baseUrl => (super.noSuchMethod(
-        Invocation.getter(#baseUrl),
-        returnValue: _i4.dummyValue<String>(
-          this,
-          Invocation.getter(#baseUrl),
-        ),
-        returnValueForMissingStub: _i4.dummyValue<String>(
-          this,
-          Invocation.getter(#baseUrl),
-        ),
-      ) as String);
-
-  @override
-  _i5.Future<List<Map<String, dynamic>>> getMyIngredient() =>
+  _i3.Future<List<Map<String, dynamic>>> getMyIngredient() =>
       (super.noSuchMethod(
         Invocation.method(
           #getMyIngredient,
           [],
         ),
-        returnValue: _i5.Future<List<Map<String, dynamic>>>.value(
+        returnValue: _i3.Future<List<Map<String, dynamic>>>.value(
             <Map<String, dynamic>>[]),
-        returnValueForMissingStub: _i5.Future<List<Map<String, dynamic>>>.value(
-            <Map<String, dynamic>>[]),
-      ) as _i5.Future<List<Map<String, dynamic>>>);
+      ) as _i3.Future<List<Map<String, dynamic>>>);
 
   @override
-  _i5.Future<Map<String, dynamic>> createNewIngredient(
+  _i3.Future<Map<String, dynamic>> createNewIngredient(
           Map<String, dynamic>? json) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -86,8 +50,6 @@ class MockRemoteDatasource extends _i1.Mock implements _i3.RemoteDatasource {
           [json],
         ),
         returnValue:
-            _i5.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
-        returnValueForMissingStub:
-            _i5.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
-      ) as _i5.Future<Map<String, dynamic>>);
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
 }

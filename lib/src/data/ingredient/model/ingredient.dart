@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
 class Ingredient {
@@ -6,8 +7,8 @@ class Ingredient {
   bool isFreezed;
   final IngredientCategory category;
   bool isFavorite;
-  DateTime? startAt;
-  DateTime? endAt;
+  DateTime startAt;
+  DateTime endAt;
 
   Ingredient({
     this.id,
@@ -15,14 +16,10 @@ class Ingredient {
     required this.category,
     required this.isFreezed,
     this.isFavorite = false,
-    this.startAt,
-    this.endAt,
-  }) {
-    final now = DateTime.now();
-    final currTime = DateTime(now.year, now.month, now.day);
-    startAt = currTime;
-    endAt = currTime;
-  }
+    DateTime? startAt,
+    DateTime? endAt,
+  })  : startAt = startAt ?? DateTime.now(),
+        endAt = endAt ?? DateTime.now();
 
   /// 재료 이미지 getter
   IngredientImage get image {
@@ -42,13 +39,12 @@ class Ingredient {
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "name": name,
         "isFreezed": isFreezed,
         "isFavorite": isFavorite,
         "category": category.name,
-        "startAt": startAt,
-        "endAt": endAt,
+        "startAt": DateFormat("yyyy-MM-dd").format(startAt),
+        "endAt": DateFormat("yyyy-MM-dd").format(endAt),
       };
 
   void updateIsFavorite() {

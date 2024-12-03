@@ -49,7 +49,8 @@ class HomeView extends StatelessWidget {
     return Padding(
       key: const Key("freezer"),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Consumer<IngredientViewModel>(builder: (context, provider, child) {
+      child: Consumer<IngredientViewModelImpl>(
+          builder: (context, provider, child) {
         return RefreginatorContainer(
             label: "냉동 보관", children: provider.myFreezedIngredients);
       }),
@@ -60,7 +61,8 @@ class HomeView extends StatelessWidget {
     return Padding(
       key: const Key("fridge"),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Consumer<IngredientViewModel>(builder: (context, provider, child) {
+      child: Consumer<IngredientViewModelImpl>(
+          builder: (context, provider, child) {
         return RefreginatorContainer(
             label: "냉장 보관",
             rowCount: 3,

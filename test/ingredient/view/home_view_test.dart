@@ -9,14 +9,14 @@ import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.d
 import '../../common/mock_navigator_observer.dart';
 import 'home_view_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<IngredientViewModel>()])
+@GenerateNiceMocks([MockSpec<IngredientViewModelImpl>()])
 void main() {
   /// 테스트 UI 랜더링 의존성 주입 코드
   /// HomeView는 IngredientViewModel이 주입되어야
   /// Consumer 위젯이 해당 데이터를 가져옴
-  final viewModel = MockIngredientViewModel();
+  final viewModel = MockIngredientViewModelImpl();
   final mockNavigatorObserver = MockNavigatorObserver();
-  final homeView = ChangeNotifierProvider<IngredientViewModel>(
+  final homeView = ChangeNotifierProvider<IngredientViewModelImpl>(
     create: (context) => viewModel,
     builder: (context, child) => MaterialApp(
       navigatorObservers: [mockNavigatorObserver],
@@ -38,8 +38,6 @@ void main() {
       await tester.pumpWidget(homeView);
       await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
-
-      // verify(mockNavigatorObserver.didPush(any, any));
 
       expect(find.byType(IngredientAddView), findsOneWidget);
     });

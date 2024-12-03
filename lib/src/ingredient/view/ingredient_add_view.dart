@@ -15,12 +15,12 @@ class IngredientAddView extends StatefulWidget {
 }
 
 class _IngredientAddViewState extends State<IngredientAddView> {
-  late final IngredientViewModel _ingredientViewModel;
+  late final IngredientViewModelImpl _ingredientViewModel;
 
   @override
   void initState() {
     _ingredientViewModel =
-        Provider.of<IngredientViewModel>(context, listen: false);
+        Provider.of<IngredientViewModelImpl>(context, listen: false);
     super.initState();
   }
 
@@ -48,7 +48,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
             child: SizedBox(
               height: 250,
               child: Center(
-                child: Consumer<IngredientViewModel>(
+                child: Consumer<IngredientViewModelImpl>(
                     builder: (context, provider, child) {
                   return (provider.selectedIngredient == null)
                       ? GestureDetector(
@@ -66,7 +66,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                               style: Theme.of(context).textTheme.bodyLarge))
                       : GestureDetector(
                           onTap: () {
-                            Provider.of<IngredientViewModel>(context,
+                            Provider.of<IngredientViewModelImpl>(context,
                                     listen: false)
                                 .cancel();
                           },
@@ -102,7 +102,8 @@ class _IngredientAddViewState extends State<IngredientAddView> {
               "냉동",
               style: Theme.of(context).textTheme.displayMedium,
             ),
-            Consumer<IngredientViewModel>(builder: (context, provider, child) {
+            Consumer<IngredientViewModelImpl>(
+                builder: (context, provider, child) {
               return Switch.adaptive(
                 value: provider.isFreezed,
                 onChanged: provider.toggleIsFreezed,
@@ -160,7 +161,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: [
-                      Consumer<IngredientViewModel>(
+                      Consumer<IngredientViewModelImpl>(
                           builder: (context, provider, child) {
                         return DatePickerWidget(
                           time: provider.selectedIngredient?.startAt,
@@ -207,7 +208,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
-                      Consumer<IngredientViewModel>(
+                      Consumer<IngredientViewModelImpl>(
                           builder: (context, provider, child) {
                         return DatePickerWidget(
                           time: provider.selectedIngredient?.endAt,
@@ -248,7 +249,10 @@ class _IngredientAddViewState extends State<IngredientAddView> {
         ),
       ]);
 
-  Widget _button() => const Padding(
-      padding: EdgeInsets.only(top: 24.0, bottom: 40.0),
-      child: SingleButton(text: "등록하기"));
+  Widget _button() => Padding(
+      padding: const EdgeInsets.only(top: 24.0, bottom: 40.0),
+      child: SingleButton(
+        text: "등록하기",
+        onTap: _ingredientViewModel.createNewIngredient,
+      ));
 }
