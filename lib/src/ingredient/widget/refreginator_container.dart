@@ -23,7 +23,7 @@ class RefreginatorContainer extends StatefulWidget {
 class _RefreginatorContainerState extends State<RefreginatorContainer>
     with SingleTickerProviderStateMixin {
   int _pageIndex = 0;
-  late final List<List<List<dynamic>>> _items;
+  late final List<List<List<dynamic>>> _items = convertTo3D(widget.children);
   late final int _totalPage;
   late final PageController _pageController;
   late final TabController _tabController;
@@ -73,7 +73,6 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
     _pageController = PageController();
     _tabController = TabController(length: _totalPage, vsync: this);
-    _items = convertTo3D(widget.children);
 
     super.initState();
   }
