@@ -5,7 +5,7 @@ import 'package:yum_application/src/data/ingredient/repository/ingredient_reposi
 class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
-  List<Ingredient> _myIngredients = List.empty();
+  List<Ingredient> _myIngredients = List.empty(growable: true);
 
   /// 나의 냉동 재료 getter
   @override
@@ -39,6 +39,7 @@ class IngredientViewModelImpl extends ChangeNotifier
   Future<void> fetchData() async {
     try {
       final result = await ingredientRepository.getMyIngredient();
+      _myIngredients.clear();
       _myIngredients = result;
       notifyListeners();
     } on Exception catch (e) {

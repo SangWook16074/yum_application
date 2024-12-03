@@ -12,8 +12,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   @override
   Future<List<Map<String, dynamic>>> getMyIngredient() async {
     return apiClient.get(Uri.parse("$baseUrl/api/ingredients")).then(
-        (response) =>
-            List<Map<String, dynamic>>.from(jsonDecode(response.body)));
+        (response) => List<Map<String, dynamic>>.from(
+            jsonDecode(utf8.decode(response.bodyBytes))));
   }
 
   /// 나의 재료 생성 Api
@@ -22,7 +22,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       Map<String, dynamic> json) async {
     return apiClient
         .post(Uri.parse("$baseUrl/api/ingredients"), body: json)
-        .then((respone) => Map<String, dynamic>.from(jsonDecode(respone.body)));
+        .then((respone) => Map<String, dynamic>.from(
+            jsonDecode(utf8.decode(respone.bodyBytes))));
   }
 }
 
