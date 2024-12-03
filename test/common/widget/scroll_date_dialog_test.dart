@@ -52,7 +52,7 @@ main() {
     });
 
     testWidgets(
-        "사용자가 소비기한을 누른 후 연도, 달, 날짜를 모두 밑으로 내리면 2050년 12월 31일이 StartAt에 전달된다.",
+        "사용자가 구매날짜를 누른 후 연도, 달, 날짜를 모두 밑으로 내리면 2050년 12월 31일이 StartAt에 전달된다.",
         (WidgetTester tester) async {
       await tester.pumpWidget(widget);
       await tester.tap(find.byKey(const Key("Scroll Date Dialog 구매날짜 버튼")));
