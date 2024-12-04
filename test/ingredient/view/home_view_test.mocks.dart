@@ -3,15 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
-import 'dart:ui' as _i6;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
-    as _i4;
-import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart'
+import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i3;
 
 // ignore_for_file: type=lint
@@ -27,9 +24,8 @@ import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.d
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeIngredientRepository_0 extends _i1.SmartFake
-    implements _i2.IngredientRepository {
-  _FakeIngredientRepository_0(
+class _FakeIngredient_0 extends _i1.SmartFake implements _i2.Ingredient {
+  _FakeIngredient_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -38,150 +34,43 @@ class _FakeIngredientRepository_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [IngredientViewModelImpl].
+/// A class which mocks [IngredientRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIngredientViewModelImpl extends _i1.Mock
-    implements _i3.IngredientViewModelImpl {
+class MockIngredientRepository extends _i1.Mock
+    implements _i3.IngredientRepository {
   @override
-  _i2.IngredientRepository get ingredientRepository => (super.noSuchMethod(
-        Invocation.getter(#ingredientRepository),
-        returnValue: _FakeIngredientRepository_0(
-          this,
-          Invocation.getter(#ingredientRepository),
-        ),
-        returnValueForMissingStub: _FakeIngredientRepository_0(
-          this,
-          Invocation.getter(#ingredientRepository),
-        ),
-      ) as _i2.IngredientRepository);
-
-  @override
-  List<_i4.Ingredient> get myFreezedIngredients => (super.noSuchMethod(
-        Invocation.getter(#myFreezedIngredients),
-        returnValue: <_i4.Ingredient>[],
-        returnValueForMissingStub: <_i4.Ingredient>[],
-      ) as List<_i4.Ingredient>);
-
-  @override
-  List<_i4.Ingredient> get myUnfreezedIngredients => (super.noSuchMethod(
-        Invocation.getter(#myUnfreezedIngredients),
-        returnValue: <_i4.Ingredient>[],
-        returnValueForMissingStub: <_i4.Ingredient>[],
-      ) as List<_i4.Ingredient>);
-
-  @override
-  bool get isFreezed => (super.noSuchMethod(
-        Invocation.getter(#isFreezed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
-  _i5.Future<void> fetchData() => (super.noSuchMethod(
+  _i4.Future<List<_i2.Ingredient>> getMyIngredient() => (super.noSuchMethod(
         Invocation.method(
-          #fetchData,
+          #getMyIngredient,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<List<_i2.Ingredient>>.value(<_i2.Ingredient>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i2.Ingredient>>.value(<_i2.Ingredient>[]),
+      ) as _i4.Future<List<_i2.Ingredient>>);
 
   @override
-  _i5.Future<void> createNewIngredient() => (super.noSuchMethod(
+  _i4.Future<_i2.Ingredient> createNewIngredient(_i2.Ingredient? ingredient) =>
+      (super.noSuchMethod(
         Invocation.method(
           #createNewIngredient,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-
-  @override
-  void selectIngredient(_i4.Ingredient? ingredient) => super.noSuchMethod(
-        Invocation.method(
-          #selectIngredient,
           [ingredient],
         ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void cancel() => super.noSuchMethod(
-        Invocation.method(
-          #cancel,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void toggleIsFreezed(bool? value) => super.noSuchMethod(
-        Invocation.method(
-          #toggleIsFreezed,
-          [value],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void updateStartAt(DateTime? newStartAt) => super.noSuchMethod(
-        Invocation.method(
-          #updateStartAt,
-          [newStartAt],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void updateEndAt(DateTime? newEndAt) => super.noSuchMethod(
-        Invocation.method(
-          #updateEndAt,
-          [newEndAt],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-        Invocation.method(
-          #notifyListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i4.Future<_i2.Ingredient>.value(_FakeIngredient_0(
+          this,
+          Invocation.method(
+            #createNewIngredient,
+            [ingredient],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Ingredient>.value(_FakeIngredient_0(
+          this,
+          Invocation.method(
+            #createNewIngredient,
+            [ingredient],
+          ),
+        )),
+      ) as _i4.Future<_i2.Ingredient>);
 }

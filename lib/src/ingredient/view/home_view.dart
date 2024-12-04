@@ -15,14 +15,16 @@ class HomeView extends StatelessWidget {
       body: SafeArea(
         top: true,
         bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _header(),
-            _freezer(),
-            _fridge(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _header(),
+              _freezer(),
+              _fridge(),
+            ],
+          ),
         ),
       ),
     );
