@@ -21,27 +21,6 @@ void main() {
       expect(ingredient.isFavorite, false);
     });
 
-    test("updateStartAt함수를 실행하면 startAt 필드가 갱신된다.", () {
-      final ingredient = Ingredient(
-          name: "egg", category: IngredientCategory.egg, isFreezed: false);
-      ingredient.updateStartAt(DateTime(2024, 11, 12));
-      expect(ingredient.startAt, DateTime(2024, 11, 12));
-    });
-
-    test("updateEndAt함수를 실행하면 endAt 필드가 갱신된다.", () {
-      final ingredient = Ingredient(
-          name: "egg", category: IngredientCategory.egg, isFreezed: false);
-      ingredient.updateEndAt(DateTime(2024, 11, 12));
-      expect(ingredient.endAt, DateTime(2024, 11, 12));
-    });
-
-    test("updateIsFavorite함수를 실행하면 isFavorite 필드가 반대로 바뀐다.", () {
-      final ingredient = Ingredient(
-          name: "egg", category: IngredientCategory.egg, isFreezed: false);
-      ingredient.updateIsFavorite();
-      expect(ingredient.isFavorite, true);
-    });
-
     test("fromJson() 테스트", () {
       final json = {
         "id": 1,

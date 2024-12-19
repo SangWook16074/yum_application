@@ -142,8 +142,9 @@ class _IngredientAddBottomSheetState extends State<IngredientAddBottomSheet> {
 
   Widget _drinks() => _buildLabelAndImages("주류", drinks);
 
-  Widget _buildLabelAndImages(String label, List<Ingredient> ingredients) =>
-      Column(
+  Widget _buildLabelAndImages(String label, List<Ingredient> ingredients) {
+    final viewModel = Provider.of<IngredientViewModelImpl>(context, listen: false);
+    return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -161,13 +162,12 @@ class _IngredientAddBottomSheetState extends State<IngredientAddBottomSheet> {
               children: ingredients
                   .map((i) => GestureDetector(
                         onTap: () {
-                          Provider.of<IngredientViewModelImpl>(context,
-                                  listen: false)
-                              .selectIngredient(i);
+                          viewModel.selectIngredient(i);
                           Navigator.of(context).pop();
                         },
                         child: IngredientTile(
                           ingredient: i,
+                          onTap: viewModel.toggleIsFavorite,
                         ),
                       ))
                   .toList(),
@@ -175,4 +175,5 @@ class _IngredientAddBottomSheetState extends State<IngredientAddBottomSheet> {
           ),
         ],
       );
+}
 }
