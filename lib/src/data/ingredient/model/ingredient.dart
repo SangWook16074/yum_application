@@ -21,6 +21,26 @@ class Ingredient {
   })  : startAt = startAt ?? DateTime.now(),
         endAt = endAt ?? DateTime.now();
 
+  Ingredient copyWith({
+    int? id,
+    String? name,
+    bool? isFreezed,
+    IngredientCategory? cateorty,
+    bool? isFavorrite,
+    DateTime? startAt,
+    DateTime? endAt,
+  }) {
+    return Ingredient(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      isFreezed: isFreezed ?? this.isFreezed,
+      category: category ?? category,
+      isFavorite: isFavorite ?? isFavorite,
+      startAt: startAt ?? this.startAt,
+      endAt: endAt ?? this.endAt,
+    );
+  }
+
   /// 재료 이미지 getter
   IngredientImage get image {
     return IngredientImage(isFreezed: isFreezed, path: category.imagePath);
@@ -46,18 +66,6 @@ class Ingredient {
         "startAt": DateFormat("yyyy-MM-dd").format(startAt),
         "endAt": DateFormat("yyyy-MM-dd").format(endAt),
       };
-
-  void updateIsFavorite() {
-    isFavorite = !isFavorite;
-  }
-
-  void updateStartAt(DateTime newStartAt) {
-    startAt = newStartAt;
-  }
-
-  void updateEndAt(DateTime newEndAt) {
-    endAt = newEndAt;
-  }
 }
 
 // 재료 속성 enum

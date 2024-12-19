@@ -85,7 +85,9 @@ class IngredientViewModelImpl extends ChangeNotifier
   @override
   void toggleIsFreezed(bool value) {
     if (_selectedIngredient != null) {
-      _selectedIngredient!.isFreezed = !isFreezed;
+      _selectedIngredient = _selectedIngredient!.copyWith(
+        isFreezed: !_selectedIngredient!.isFreezed,
+      );
     }
     _isFreezed = !_isFreezed;
     notifyListeners();
@@ -98,7 +100,7 @@ class IngredientViewModelImpl extends ChangeNotifier
       return;
     }
     print("Start Date: $newStartAt");
-    _selectedIngredient!.updateStartAt(newStartAt);
+    _selectedIngredient = _selectedIngredient!.copyWith(startAt: newStartAt);
     notifyListeners();
   }
 
@@ -109,9 +111,11 @@ class IngredientViewModelImpl extends ChangeNotifier
       return;
     }
     print("End Date: $newEndAt");
-    _selectedIngredient!.updateEndAt(newEndAt);
+    _selectedIngredient = _selectedIngredient!.copyWith(endAt: newEndAt);
     notifyListeners();
   }
+
+  void toggleIsFavorite() {}
 }
 
 abstract class IngredientViewModel {
