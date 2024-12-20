@@ -7,7 +7,7 @@ class IngredientImage extends StatelessWidget {
   final double width;
   const IngredientImage(
       {super.key,
-      required this.isFreezed,
+      this.isFreezed = false,
       required this.path,
       this.width = 110});
 

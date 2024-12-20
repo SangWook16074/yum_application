@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/page_indicator.dart';
 
 class RefreginatorContainer extends StatefulWidget {
@@ -171,7 +172,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
         alignment: Alignment.bottomCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(row.length, (index) => row[index]),
@@ -201,7 +202,9 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
           padding: const EdgeInsets.all(2.0),
           child: Column(
             children: [
-              Padding(padding: const EdgeInsets.all(2.0), child: item.image),
+              Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: IngredientImage(path: item.category.imagePath)),
               Builder(builder: (context) {
                 return Text(
                   item.name,

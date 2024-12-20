@@ -3,13 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
+import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart'
     as _i2;
-import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
+import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
     as _i3;
+import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,8 +26,9 @@ import 'package:yum_application/src/data/ingredient/repository/ingredient_reposi
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeIngredient_0 extends _i1.SmartFake implements _i2.Ingredient {
-  _FakeIngredient_0(
+class _FakeRemoteDatasource_0 extends _i1.SmartFake
+    implements _i2.RemoteDatasource {
+  _FakeRemoteDatasource_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -34,37 +37,66 @@ class _FakeIngredient_0 extends _i1.SmartFake implements _i2.Ingredient {
         );
 }
 
-/// A class which mocks [IngredientRepository].
+class _FakeIngredient_1 extends _i1.SmartFake implements _i3.Ingredient {
+  _FakeIngredient_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [IngredientRepositoryImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIngredientRepository extends _i1.Mock
-    implements _i3.IngredientRepository {
-  MockIngredientRepository() {
-    _i1.throwOnMissingStub(this);
-  }
+class MockIngredientRepositoryImpl extends _i1.Mock
+    implements _i4.IngredientRepositoryImpl {
+  @override
+  _i2.RemoteDatasource get remoteDatasource => (super.noSuchMethod(
+        Invocation.getter(#remoteDatasource),
+        returnValue: _FakeRemoteDatasource_0(
+          this,
+          Invocation.getter(#remoteDatasource),
+        ),
+        returnValueForMissingStub: _FakeRemoteDatasource_0(
+          this,
+          Invocation.getter(#remoteDatasource),
+        ),
+      ) as _i2.RemoteDatasource);
 
   @override
-  _i4.Future<List<_i2.Ingredient>> getMyIngredient() => (super.noSuchMethod(
+  _i5.Future<List<_i3.Ingredient>> getMyIngredient() => (super.noSuchMethod(
         Invocation.method(
           #getMyIngredient,
           [],
         ),
-        returnValue: _i4.Future<List<_i2.Ingredient>>.value(<_i2.Ingredient>[]),
-      ) as _i4.Future<List<_i2.Ingredient>>);
+        returnValue: _i5.Future<List<_i3.Ingredient>>.value(<_i3.Ingredient>[]),
+        returnValueForMissingStub:
+            _i5.Future<List<_i3.Ingredient>>.value(<_i3.Ingredient>[]),
+      ) as _i5.Future<List<_i3.Ingredient>>);
 
   @override
-  _i4.Future<_i2.Ingredient> createNewIngredient(_i2.Ingredient? ingredient) =>
+  _i5.Future<_i3.Ingredient> createNewIngredient(_i3.Ingredient? ingredient) =>
       (super.noSuchMethod(
         Invocation.method(
           #createNewIngredient,
           [ingredient],
         ),
-        returnValue: _i4.Future<_i2.Ingredient>.value(_FakeIngredient_0(
+        returnValue: _i5.Future<_i3.Ingredient>.value(_FakeIngredient_1(
           this,
           Invocation.method(
             #createNewIngredient,
             [ingredient],
           ),
         )),
-      ) as _i4.Future<_i2.Ingredient>);
+        returnValueForMissingStub:
+            _i5.Future<_i3.Ingredient>.value(_FakeIngredient_1(
+          this,
+          Invocation.method(
+            #createNewIngredient,
+            [ingredient],
+          ),
+        )),
+      ) as _i5.Future<_i3.Ingredient>);
 }

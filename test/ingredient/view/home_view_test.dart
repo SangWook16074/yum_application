@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
@@ -61,7 +62,6 @@ void main() {
                 name: "계란",
                 category: IngredientCategory.egg,
                 isFreezed: true,
-                isFavorite: false,
                 startAt: DateTime(2024, 12, 4),
                 endAt: DateTime(2024, 12, 4)),
             Ingredient(
@@ -69,7 +69,6 @@ void main() {
                 name: "소고기",
                 category: IngredientCategory.egg,
                 isFreezed: true,
-                isFavorite: false,
                 startAt: DateTime(2024, 12, 4),
                 endAt: DateTime(2024, 12, 4)),
             Ingredient(
@@ -77,7 +76,6 @@ void main() {
                 name: "우유",
                 category: IngredientCategory.milk,
                 isFreezed: false,
-                isFavorite: false,
                 startAt: DateTime(2024, 12, 4),
                 endAt: DateTime(2024, 12, 4)),
           ]);
@@ -98,7 +96,6 @@ void main() {
                   name: "egg",
                   category: IngredientCategory.egg,
                   isFreezed: true,
-                  isFavorite: false,
                   startAt: DateTime(2024, 12, 4),
                   endAt: DateTime(2024, 12, 4))) +
           List.generate(
@@ -108,7 +105,6 @@ void main() {
                   name: "egg",
                   category: IngredientCategory.egg,
                   isFreezed: false,
-                  isFavorite: false,
                   startAt: DateTime(2024, 12, 4),
                   endAt: DateTime(2024, 12, 4))));
 

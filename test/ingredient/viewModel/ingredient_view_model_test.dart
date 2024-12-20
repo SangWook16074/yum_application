@@ -1,15 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
-import 'ingredient_view_model_test.mocks.dart';
+import '../view/home_view_test.mocks.dart';
 
-@GenerateMocks([IngredientRepository])
+@GenerateNiceMocks([MockSpec<IngredientRepositoryImpl>()])
 main() {
-  late final IngredientRepository ingredientRepository;
+  late final MockIngredientRepository ingredientRepository;
   late final IngredientViewModelImpl ingredientViewModel;
 
   final freezedIngredients = [
@@ -86,10 +87,10 @@ main() {
     });
 
     test("selectIngredient메소드를 이용해서 새로운 재료를 생성할 수 있다.", () {
-      final newIngredient = Ingredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        isFreezed: false,
+        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       final selectIngredient = ingredientViewModel.selectedIngredient!;
@@ -98,11 +99,11 @@ main() {
       expect(selectIngredient.isFreezed, false);
     });
 
-    test("toggleIsFreezed메소드를 이용해서 새로운 재료를 생성할 수 있다.", () {
-      final newIngredient = Ingredient(
+    test("toggleIsFreezed메소드를 이용해서 재료의 냉장 냉동 여부를 바꿀 수 있다.", () {
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        isFreezed: false,
+        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       ingredientViewModel.toggleIsFreezed(true);
@@ -110,10 +111,10 @@ main() {
     });
 
     test("updateStartAt 메소드로 구매날짜를 갱신할 수 있다.", () {
-      final newIngredient = Ingredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        isFreezed: false,
+        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       ingredientViewModel.updateStartAt(DateTime(2024, 12, 3));
@@ -122,10 +123,10 @@ main() {
     });
 
     test("updateEndAt 메소드로 소비날짜를 갱신할 수 있다.", () {
-      final newIngredient = Ingredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        isFreezed: false,
+        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       ingredientViewModel.updateEndAt(DateTime(2024, 12, 30));
@@ -134,18 +135,17 @@ main() {
     });
 
     test("createNewIngredients는 새로운 재료를 추가한 후 새로운 재료를 재료에 추가한다", () async {
-      final newIngredient = Ingredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        isFreezed: false,
+        type: IngredientType.meatsAndEggs,
       );
-      when(ingredientRepository.createNewIngredient(newIngredient)).thenAnswer(
+      when(ingredientRepository.createNewIngredient(any)).thenAnswer(
           (_) async => Ingredient(
               id: 6,
               name: "egg",
               category: IngredientCategory.egg,
               isFreezed: true,
-              isFavorite: false,
               startAt: DateTime(2024, 12, 3),
               endAt: DateTime(2024, 12, 30)));
 
@@ -155,7 +155,7 @@ main() {
       ingredientViewModel.updateEndAt(DateTime(2024, 12, 30));
       await ingredientViewModel.createNewIngredient();
 
-      verify(ingredientRepository.createNewIngredient(newIngredient)).called(1);
+      verify(ingredientRepository.createNewIngredient(any)).called(1);
 
       expect(ingredientViewModel.myFreezedIngredients.length, 4);
     });

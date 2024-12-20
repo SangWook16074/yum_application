@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 
 void main() {
@@ -18,28 +19,13 @@ void main() {
       expect(ingredient.endAt.year, year);
       expect(ingredient.endAt.month, month);
       expect(ingredient.endAt.day, day);
-      expect(ingredient.isFavorite, false);
     });
 
-    test("updateStartAt함수를 실행하면 startAt 필드가 갱신된다.", () {
+    test("copy함수를 실행하면 새로운 재료 인스턴스가 갱신된다.", () {
       final ingredient = Ingredient(
           name: "egg", category: IngredientCategory.egg, isFreezed: false);
-      ingredient.updateStartAt(DateTime(2024, 11, 12));
-      expect(ingredient.startAt, DateTime(2024, 11, 12));
-    });
-
-    test("updateEndAt함수를 실행하면 endAt 필드가 갱신된다.", () {
-      final ingredient = Ingredient(
-          name: "egg", category: IngredientCategory.egg, isFreezed: false);
-      ingredient.updateEndAt(DateTime(2024, 11, 12));
-      expect(ingredient.endAt, DateTime(2024, 11, 12));
-    });
-
-    test("updateIsFavorite함수를 실행하면 isFavorite 필드가 반대로 바뀐다.", () {
-      final ingredient = Ingredient(
-          name: "egg", category: IngredientCategory.egg, isFreezed: false);
-      ingredient.updateIsFavorite();
-      expect(ingredient.isFavorite, true);
+      final newIngredient = ingredient.copy(startAt: DateTime(2024, 11, 12));
+      expect(newIngredient.startAt, DateTime(2024, 11, 12));
     });
 
     test("fromJson() 테스트", () {
@@ -56,7 +42,6 @@ void main() {
       expect(ingredient.id, 1);
       expect(ingredient.name, "egg");
       expect(ingredient.isFreezed, false);
-      expect(ingredient.isFavorite, false);
       expect(ingredient.category, IngredientCategory.egg);
       expect(ingredient.startAt, DateTime(2024, 11, 12));
       expect(ingredient.endAt, DateTime(2024, 11, 17));
@@ -66,7 +51,6 @@ void main() {
       final ingredient = Ingredient(
         name: "egg",
         isFreezed: false,
-        isFavorite: false,
         category: IngredientCategory.egg,
         startAt: DateTime(2024, 11, 12),
         endAt: DateTime(2024, 11, 17),
@@ -75,7 +59,6 @@ void main() {
       expect(json, {
         "name": "egg",
         "isFreezed": false,
-        "isFavorite": false,
         "category": "egg",
         "startAt": "2024-11-12",
         "endAt": "2024-11-17"
