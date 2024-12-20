@@ -93,6 +93,7 @@ class _IngredientAddViewState extends State<IngredientAddView> {
     );
   }
 
+  /// 냉동 또는 냉장 여부를 토글하는 버튼 위젯
   Widget _toggle() => Align(
         alignment: Alignment.bottomRight,
         child: Row(
