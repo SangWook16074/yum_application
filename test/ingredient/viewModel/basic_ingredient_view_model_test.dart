@@ -71,9 +71,9 @@ void main() {
     });
 
     test("favorite을 통해서 즐겨찾기 식재료가 반환된다.", () {
-      viewModel.toggleIsFavorite(IngredientCategory.egg);
+      viewModel.toggleIsFavorite(IngredientCategory.beef);
       final result = viewModel.favorite;
-      expect(result.length, 2);
+      expect(result.length, 1);
       expect(result.first, isA<BasicIngredient>());
     });
   });
