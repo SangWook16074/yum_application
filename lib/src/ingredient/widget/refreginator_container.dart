@@ -87,8 +87,10 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 
   @override
   Widget build(BuildContext context) {
+    final containerHeight =
+        widget.rowCount > 0 ? widget.rowCount.toDouble() * 130 : 130.0;
     return Container(
-      constraints: BoxConstraints(maxHeight: widget.rowCount * 130),
+      constraints: BoxConstraints(maxHeight: containerHeight),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -114,9 +116,9 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
               (index) => Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Wrap(
+                    alignment: WrapAlignment.start,
+                    runSpacing: 8.0,
                     children: List.generate(widget.rowCount, (jndex) {
                       final rowItem = _items[index][jndex];
                       return _displayItemRow(rowItem);
