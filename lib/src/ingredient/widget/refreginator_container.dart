@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/page_indicator.dart';
 
 class RefreginatorContainer extends StatefulWidget {
@@ -86,10 +87,8 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Container(
-      constraints: BoxConstraints(maxHeight: widget.rowCount * 115),
-      height: height * 0.13 * widget.rowCount,
+      constraints: BoxConstraints(maxHeight: widget.rowCount * 130),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -105,7 +104,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   }
 
   Widget _displayPageView() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 30.0),
         child: PageView(
             key: const Key("Ingredient Page View"),
             controller: _pageController,
@@ -113,8 +112,8 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
             children: List.generate(
               _items.length,
               (index) => Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 20.0, top: 20.0, left: 8, right: 8),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                 child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -173,7 +172,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
         alignment: Alignment.bottomCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(row.length, (index) => row[index]),
@@ -203,7 +202,9 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
           padding: const EdgeInsets.all(2.0),
           child: Column(
             children: [
-              Padding(padding: const EdgeInsets.all(2.0), child: item.image),
+              Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: IngredientImage(path: item.category.imagePath)),
               Builder(builder: (context) {
                 return Text(
                   item.name,
@@ -240,7 +241,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     return Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -259,6 +260,8 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
                 currentPageIndex: _pageIndex,
                 onUpdateCurrentPageIndex: _updateCurrentPageIndex,
               )
-            : Container(),
+            : Container(
+                padding: const EdgeInsets.all(8.0),
+              ),
       );
 }

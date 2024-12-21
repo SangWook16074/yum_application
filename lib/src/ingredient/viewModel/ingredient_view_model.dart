@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 
@@ -70,9 +71,12 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   @override
-  void selectIngredient(Ingredient ingredient) {
-    ingredient.isFreezed = _isFreezed;
-    _selectedIngredient = ingredient;
+  void selectIngredient(BasicIngredient ingredient) {
+    final newIngredient = Ingredient(
+        name: ingredient.name,
+        category: ingredient.category,
+        isFreezed: _isFreezed);
+    _selectedIngredient = newIngredient;
     notifyListeners();
   }
 
@@ -85,37 +89,25 @@ class IngredientViewModelImpl extends ChangeNotifier
   @override
   void toggleIsFreezed(bool value) {
     if (_selectedIngredient != null) {
-      _selectedIngredient = _selectedIngredient!.copyWith(
-        isFreezed: !_selectedIngredient!.isFreezed,
-      );
+      _selectedIngredient = _selectedIngredient!.copy(isFreezed: value);
     }
-    _isFreezed = !_isFreezed;
+    _isFreezed = value;
     notifyListeners();
   }
 
   @override
   void updateStartAt(DateTime newStartAt) {
-    if (_selectedIngredient == null) {
-      print("null");
-      return;
-    }
-    print("Start Date: $newStartAt");
-    _selectedIngredient = _selectedIngredient!.copyWith(startAt: newStartAt);
+    if (_selectedIngredient == null) return;
+    _selectedIngredient = _selectedIngredient!.copy(startAt: newStartAt);
     notifyListeners();
   }
 
   @override
   void updateEndAt(DateTime newEndAt) {
-    if (_selectedIngredient == null) {
-      print("null");
-      return;
-    }
-    print("End Date: $newEndAt");
-    _selectedIngredient = _selectedIngredient!.copyWith(endAt: newEndAt);
+    if (_selectedIngredient == null) return;
+    _selectedIngredient = _selectedIngredient!.copy(endAt: newEndAt);
     notifyListeners();
   }
-
-  void toggleIsFavorite() {}
 }
 
 abstract class IngredientViewModel {
@@ -129,7 +121,7 @@ abstract class IngredientViewModel {
 
   void createNewIngredient();
 
-  void selectIngredient(Ingredient ingredient);
+  void selectIngredient(BasicIngredient ingredient);
 
   void cancel();
 

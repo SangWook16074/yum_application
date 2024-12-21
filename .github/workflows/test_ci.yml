@@ -22,7 +22,7 @@ jobs:
       - run: flutter --version
 
       - name: copy .env file
-        run: echo "BASE_URL=${{secrets.API_URL}} >> /.env"
+        run: echo "BASE_URL=${{secrets.API_URL}}" > .env
 
       - name: Install dependencies
         run: flutter pub get

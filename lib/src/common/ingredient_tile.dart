@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
 class IngredientTile extends StatelessWidget {
-  final Ingredient ingredient;
+  final BasicIngredient ingredient;
   final void Function()? onTap;
   const IngredientTile({
     super.key,
     required this.ingredient,
-    this.onTap,
+    required this.onTap,
   });
 
   @override
@@ -26,7 +27,7 @@ class IngredientTile extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ingredient.image,
+              IngredientImage(path: ingredient.category.imagePath),
               Text(ingredient.name,
                   style: Theme.of(context).textTheme.displaySmall)
             ],
