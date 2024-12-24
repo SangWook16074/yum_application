@@ -117,12 +117,16 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
                 padding:
                     const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                 child: Wrap(
-                    alignment: WrapAlignment.start,
-                    runSpacing: 8.0,
-                    children: List.generate(widget.rowCount, (jndex) {
+                  alignment: WrapAlignment.start,
+                  runSpacing: 8.0,
+                  children: List.generate(
+                    widget.rowCount,
+                    (jndex) {
                       final rowItem = _items[index][jndex];
                       return _displayItemRow(rowItem);
-                    })),
+                    },
+                  ),
+                ),
               ),
             )),
       );
