@@ -20,10 +20,19 @@ class IngredientRepositoryImpl implements IngredientRepository {
         await remoteDatasource.createNewIngredient(ingredient.toJson());
     return Ingredient.fromJson(response);
   }
+
+  /// 나의 재료 수정 Api
+  @override
+  Future<Ingredient> editIngredient(Ingredient ingredient) async {
+    final response = await remoteDatasource.editIngredient(ingredient.toJson());
+    return Ingredient.fromJson(response);
+  }
 }
 
 abstract class IngredientRepository {
   Future<List<Ingredient>> getMyIngredient();
 
   Future<Ingredient> createNewIngredient(Ingredient ingredient);
+
+  Future<Ingredient> editIngredient(Ingredient ingredient);
 }

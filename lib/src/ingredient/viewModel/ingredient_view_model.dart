@@ -71,6 +71,33 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   @override
+  Future<void> editIngredient() async {
+    // 선택한 재료가 없으면 return;
+    if (_selectedIngredient == null) {
+      return;
+    }
+    print(_selectedIngredient);
+    try {
+      // 선택한 재료를 타겟으로 설정
+      final editIngredient = selectedIngredient;
+
+      // Api를 통해 재료 수정
+      final updatedIngredient =
+          await ingredientRepository.editIngredient(editIngredient!);
+
+      // 기존 냉장고 재료 목록에서 해당 재료를 찾아 수정
+      final index = _myIngredients
+          .indexWhere((ingredient) => ingredient.id == updatedIngredient.id);
+      if (index != -1) {
+        _myIngredients[index] = updatedIngredient;
+      }
+      notifyListeners();
+    } on Exception catch (e) {
+      throw Exception("재료 수정 에러");
+    }
+  }
+
+  @override
   void selectIngredient(BasicIngredient ingredient) {
     final newIngredient = Ingredient(
         name: ingredient.name,
