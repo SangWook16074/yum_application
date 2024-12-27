@@ -206,7 +206,7 @@ class BasicIngredientViewModel extends ChangeNotifier {
 
   void fetchData() {}
 
-  toggleIsFavorite(IngredientCategory category) {
+  void toggleIsFavorite(IngredientCategory category) {
     final List<BasicIngredient> newIngredients =
         _allBasicIngredients.map((BasicIngredient ingredient) {
       if (ingredient.category == category) {
