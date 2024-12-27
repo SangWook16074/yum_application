@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/common/basic_bottom_sheet.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/ingredient/view/ingredient_edit_view.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
 class IngredientEditBottomSheet extends StatefulWidget {
@@ -78,7 +79,10 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
                     Theme.of(context).colorScheme.onSecondaryContainer,
                 fixedSize: Size(width, height),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const IngredientEditView()));
+              },
               child: Text(
                 "수정하기",
                 style: Theme.of(context).textTheme.titleMedium,
