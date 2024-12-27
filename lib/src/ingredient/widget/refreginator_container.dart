@@ -22,12 +22,12 @@ class RefreginatorContainer extends StatefulWidget {
 }
 
 class _RefreginatorContainerState extends State<RefreginatorContainer>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   int _pageIndex = 0;
-  late final List<List<List<dynamic>>> _items = convertTo3D(widget.children);
-  late final int _totalPage;
-  late final PageController _pageController;
-  late final TabController _tabController;
+  late List<List<List<dynamic>>> _items;
+  late int _totalPage;
+  late PageController _pageController;
+  late TabController _tabController;
 
   void _handlePageViewChanged(int currentPageIndex) {
     _tabController.index = currentPageIndex;
@@ -69,13 +69,32 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     return threeDArray;
   }
 
+  // @override
+  // void initState() {
+  //   _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
+  //   _pageController = PageController();
+  //   _tabController = TabController(length: _totalPage, vsync: this);
+  //   super.initState();
+  // }
+
   @override
   void initState() {
+    _items = convertTo3D(widget.children);
     _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
     _pageController = PageController();
     _tabController = TabController(length: _totalPage, vsync: this);
-
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant RefreginatorContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.children.length != widget.children.length) {
+      _tabController.dispose();
+      _items = convertTo3D(widget.children);
+      _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
+      _tabController = TabController(length: _totalPage, vsync: this);
+    }
   }
 
   @override
@@ -204,7 +223,10 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
             children: [
               Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: IngredientImage(path: item.category.imagePath)),
+                  child: IngredientImage(
+                    path: item.category.imagePath,
+                    isFreezed: item.isFreezed,
+                  )),
               Builder(builder: (context) {
                 return Text(
                   item.name,

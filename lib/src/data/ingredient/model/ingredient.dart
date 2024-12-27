@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 
-class Ingredient {
+class Ingredient extends Equatable {
   final int? id;
   final String name;
   final bool isFreezed;
@@ -54,4 +55,14 @@ class Ingredient {
       endAt: endAt ?? this.endAt,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        category,
+        isFreezed,
+        startAt,
+        endAt,
+      ];
 }

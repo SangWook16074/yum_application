@@ -1,34 +1,28 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
+import 'package:yum_application/src/util/global_variable.dart';
 
 class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
   List<Ingredient> _myIngredients = List.empty(growable: true);
 
-  /// 나의 냉동 재료 getter
-  @override
-  List<Ingredient> get myFreezedIngredients {
-    return _myIngredients
-        .where((ingredient) => ingredient.isFreezed == true)
-        .toList();
-  }
-
-  /// 나의 냉장 재료 getter
-  @override
-  List<Ingredient> get myUnfreezedIngredients {
-    return _myIngredients
-        .where((ingredient) => ingredient.isFreezed == false)
-        .toList();
-  }
-
   IngredientViewModelImpl({required this.ingredientRepository}) {
     fetchData();
   }
 
   Ingredient? _selectedIngredient;
+
+  @override
+  List<Ingredient> get myFreezedIngredients =>
+      _myIngredients.where((ingredient) => ingredient.isFreezed).toList();
+
+  @override
+  List<Ingredient> get myUnfreezedIngredients =>
+      _myIngredients.where((ingredient) => !ingredient.isFreezed).toList();
 
   @override
   Ingredient? get selectedIngredient => _selectedIngredient;
@@ -41,7 +35,7 @@ class IngredientViewModelImpl extends ChangeNotifier
     try {
       final result = await ingredientRepository.getMyIngredient();
       _myIngredients.clear();
-      _myIngredients = result;
+      _myIngredients.addAll(result);
       notifyListeners();
     } on Exception catch (e) {
       // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
@@ -55,18 +49,29 @@ class IngredientViewModelImpl extends ChangeNotifier
     if (_selectedIngredient == null) {
       return;
     }
-    print(_selectedIngredient);
     try {
       // 선택한 재료를 타겟으로 설정
-      final newIngredient = selectedIngredient;
+      final newIngredient = selectedIngredient!;
+      final prevIngredients = [
+        ..._myIngredients,
+      ];
+      _myIngredients = [...prevIngredients, newIngredient];
+      notifyListeners();
+      // 서버와 통신이 종료되면 원래의 데이터를 바꿔끼움.
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        final context = GlobalVariable.naviagatorState.currentContext!;
+        Navigator.of(context).pop();
+      });
       final result =
-          await ingredientRepository.createNewIngredient(newIngredient!);
-      // 냉장고에 새로운 재료 추가
-      _myIngredients.add(result);
-      // 화면을 다시 그림
+          await ingredientRepository.createNewIngredient(newIngredient);
+      _myIngredients = [
+        ...prevIngredients,
+        result,
+      ];
+      _selectedIngredient = null;
       notifyListeners();
     } on Exception catch (e) {
-      throw Exception("재료 생성 에러");
+      throw Exception(e.toString());
     }
   }
 

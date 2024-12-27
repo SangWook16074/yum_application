@@ -43,7 +43,7 @@ void main() {
       expect(first.endAt, DateTime(2024, 11, 17));
     });
 
-    test("getAllIngredient 요청이 성공하면 Ingredient가 반환된다", () async {
+    test("createIngredient 요청이 성공하면 Ingredient가 반환된다", () async {
       final Ingredient ingredient = Ingredient(
           name: "egg",
           category: IngredientCategory.egg,
