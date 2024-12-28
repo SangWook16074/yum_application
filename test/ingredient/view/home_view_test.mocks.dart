@@ -6,6 +6,8 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart'
+    as _i5;
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
     as _i2;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
@@ -73,4 +75,41 @@ class MockIngredientRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Ingredient>);
+
+  @override
+  _i4.Future<List<_i5.IngredientCategory>> getMyFavoriteIngredient() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMyFavoriteIngredient,
+          [],
+        ),
+        returnValue: _i4.Future<List<_i5.IngredientCategory>>.value(
+            <_i5.IngredientCategory>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i5.IngredientCategory>>.value(
+                <_i5.IngredientCategory>[]),
+      ) as _i4.Future<List<_i5.IngredientCategory>>);
+
+  @override
+  _i4.Future<void> createNewFavoriteIngredient(
+          _i5.IngredientCategory? category) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewFavoriteIngredient,
+          [category],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> deleteFavoriteIngredient(_i5.IngredientCategory? category) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteFavoriteIngredient,
+          [category],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
