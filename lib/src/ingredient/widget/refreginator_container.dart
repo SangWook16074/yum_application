@@ -69,14 +69,6 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     return threeDArray;
   }
 
-  // @override
-  // void initState() {
-  //   _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
-  //   _pageController = PageController();
-  //   _tabController = TabController(length: _totalPage, vsync: this);
-  //   super.initState();
-  // }
-
   @override
   void initState() {
     _items = convertTo3D(widget.children);

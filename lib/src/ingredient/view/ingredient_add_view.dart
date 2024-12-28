@@ -36,6 +36,7 @@ class IngredientAddView extends StatelessWidget {
               child: Center(
                 child: Consumer<IngredientViewModelImpl>(
                     builder: (context, provider, child) {
+                  print("재빌드");
                   return (provider.selectedIngredient == null)
                       ? GestureDetector(
                           onTap: () {
