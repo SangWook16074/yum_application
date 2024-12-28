@@ -71,7 +71,7 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   @override
-  Future<void> editIngredient() async {
+  Future<void> updateIngredient() async {
     // 선택한 재료가 없으면 return;
     if (_selectedIngredient == null) {
       return;
@@ -79,17 +79,17 @@ class IngredientViewModelImpl extends ChangeNotifier
     print(_selectedIngredient);
     try {
       // 선택한 재료를 타겟으로 설정
-      final editIngredient = selectedIngredient;
+      final newIngredient = selectedIngredient;
 
       // Api를 통해 재료 수정
-      final updatedIngredient =
-          await ingredientRepository.editIngredient(editIngredient!);
+      final newupdatedIngredient =
+          await ingredientRepository.updateIngredient(newIngredient!);
 
       // 기존 냉장고 재료 목록에서 해당 재료를 찾아 수정
       final index = _myIngredients
-          .indexWhere((ingredient) => ingredient.id == updatedIngredient.id);
+          .indexWhere((ingredient) => ingredient.id == newupdatedIngredient.id);
       if (index != -1) {
-        _myIngredients[index] = updatedIngredient;
+        _myIngredients[index] = newupdatedIngredient;
       }
       notifyListeners();
     } on Exception catch (e) {
@@ -147,6 +147,8 @@ abstract class IngredientViewModel {
   Future<void> fetchData();
 
   void createNewIngredient();
+
+  void updateIngredient();
 
   void selectIngredient(BasicIngredient ingredient);
 

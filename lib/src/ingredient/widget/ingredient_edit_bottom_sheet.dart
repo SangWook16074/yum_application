@@ -81,7 +81,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
               ),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const IngredientEditView()));
+                    builder: (context) => const IngredientUpdateView()));
               },
               child: Text(
                 "수정하기",
