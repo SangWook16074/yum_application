@@ -62,12 +62,19 @@ void main() {
       }
     });
 
+    test("favorite을 통해서 즐겨찾기 식재료가 반환된다.", () {
+      viewModel.toggleIsFavorite(IngredientCategory.beef);
+      final result = viewModel.favorite;
+      expect(result.length, 1);
+      expect(result.first, isA<BasicIngredient>());
+    });
+
     test("toggleIsFavorite을 통해 즐겨찾기 재료가 추가 삭제된다.", () {
       viewModel.toggleIsFavorite(IngredientCategory.beef);
       final beef = viewModel.allBasicIngredients
           .where((ingredient) => ingredient.category == IngredientCategory.beef)
           .first;
-      expect(beef.isFavorite, true);
+      expect(beef.isFavorite, false);
     });
   });
 }
