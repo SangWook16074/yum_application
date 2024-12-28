@@ -5,6 +5,7 @@ import 'package:yum_application/src/common/scroll_date_dialog.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_sheet.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
+import 'package:yum_application/src/ingredient/widget/select_ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
 class IngredientAddView extends StatelessWidget {
@@ -36,7 +37,6 @@ class IngredientAddView extends StatelessWidget {
               child: Center(
                 child: Consumer<IngredientViewModelImpl>(
                     builder: (context, provider, child) {
-                  print("재빌드");
                   return (provider.selectedIngredient == null)
                       ? GestureDetector(
                           onTap: () {
@@ -55,7 +55,7 @@ class IngredientAddView extends StatelessWidget {
                           onTap: () {
                             provider.cancel();
                           },
-                          child: IngredientImage(
+                          child: SelectIngredientImage(
                               width: 300,
                               isFreezed: provider.selectedIngredient!.isFreezed,
                               path: provider
