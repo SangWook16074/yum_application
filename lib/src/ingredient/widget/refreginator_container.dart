@@ -99,7 +99,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   @override
   Widget build(BuildContext context) {
     final containerHeight =
-        widget.rowCount > 0 ? widget.rowCount.toDouble() * 130 : 130.0;
+        widget.rowCount > 0 ? widget.rowCount.toDouble() * 120 : 120.0;
     return Container(
       constraints: BoxConstraints(maxHeight: containerHeight),
       width: double.infinity,
