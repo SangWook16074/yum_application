@@ -17,12 +17,18 @@ class IngredientAddView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        leading: GestureDetector(
-          onTap: Navigator.of(context).pop,
-          child: const Icon(
-            Icons.arrow_back_ios,
-          ),
-        ),
+        leading: Builder(builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              Provider.of<IngredientViewModelImpl>(context, listen: false)
+                  .cancel();
+              Navigator.of(context).pop();
+            },
+            child: const Icon(
+              Icons.arrow_back_ios,
+            ),
+          );
+        }),
         elevation: 0.0,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.0))),

@@ -68,8 +68,8 @@ class IngredientViewModelImpl extends ChangeNotifier
         ...prevIngredients,
         result,
       ];
-      _selectedIngredient = null;
-      notifyListeners();
+      // 선택 재료 초기화 및 화면 갱신
+      cancel();
     } on Exception catch (e) {
       throw Exception(e.toString());
     }

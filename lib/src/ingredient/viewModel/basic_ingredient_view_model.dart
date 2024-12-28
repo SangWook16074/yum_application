@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 
 class BasicIngredientViewModel extends ChangeNotifier {
+  final IngredientRepositoryImpl ingredientRepository;
+  BasicIngredientViewModel({required this.ingredientRepository}) {
+    fetchData();
+  }
   List<BasicIngredient> _allBasicIngredients = <BasicIngredient>[
     BasicIngredient(
         name: "밥",
@@ -204,17 +209,55 @@ class BasicIngredientViewModel extends ChangeNotifier {
       .where((ingredient) => ingredient.isFavorite)
       .toList();
 
-  void fetchData() {}
+  void fetchData() async {
+    try {
+      final result = await ingredientRepository.getMyFavoriteIngredient();
+      final newIngredients = _allBasicIngredients.map((ingredient) {
+        if (result.contains(ingredient.category)) {
+          return ingredient.copy(isFavorite: true);
+        } else {
+          return ingredient;
+        }
+      }).toList();
+      _allBasicIngredients = newIngredients;
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
-  void toggleIsFavorite(IngredientCategory category) {
+  void toggleIsFavorite(IngredientCategory category) async {
     final List<BasicIngredient> newIngredients =
         _allBasicIngredients.map((BasicIngredient ingredient) {
-      if (ingredient.category == category) {
-        return ingredient.copy(isFavorite: !ingredient.isFavorite);
+      if (ingredient.category != category) {
+        return ingredient;
       }
-      return ingredient;
+
+      if (ingredient.isFavorite) {
+        deleteFavoriteIngredient(category);
+        return ingredient.copy(isFavorite: false);
+      } else {
+        createNewFavoriteIngredient(category);
+        return ingredient.copy(isFavorite: true);
+      }
     }).toList();
     _allBasicIngredients = newIngredients;
     notifyListeners();
+  }
+
+  void createNewFavoriteIngredient(IngredientCategory category) {
+    try {
+      ingredientRepository.createNewFavoriteIngredient(category);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  void deleteFavoriteIngredient(IngredientCategory category) {
+    try {
+      ingredientRepository.deleteFavoriteIngredient(category);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
