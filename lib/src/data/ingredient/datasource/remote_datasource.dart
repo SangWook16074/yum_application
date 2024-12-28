@@ -28,9 +28,14 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
   /// 나의 냉장고 재료 수정하기 Api
   @override
-  Future<Map<String, dynamic>> editIngredient(Map<String, dynamic> json) async {
+  Future<Map<String, dynamic>> updateIngredient(
+      Map<String, dynamic> json) async {
     return apiClient
-        .put(Uri.parse("$baseUrl/api/ingredients"), body: json)
+        .put(
+          Uri.parse("$baseUrl/api/ingredients"),
+          headers: {"Content-Type": "application/json"},
+          body: json,
+        )
         .then((respone) => Map<String, dynamic>.from(
             jsonDecode(utf8.decode(respone.bodyBytes))));
   }
@@ -41,5 +46,5 @@ abstract class RemoteDatasource {
 
   Future<Map<String, dynamic>> createNewIngredient(Map<String, dynamic> json);
 
-  Future<Map<String, dynamic>> editIngredient(Map<String, dynamic> json);
+  Future<Map<String, dynamic>> updateIngredient(Map<String, dynamic> json);
 }

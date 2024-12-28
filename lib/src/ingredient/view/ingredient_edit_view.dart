@@ -7,14 +7,14 @@ import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_shee
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
-class IngredientEditView extends StatefulWidget {
-  const IngredientEditView({super.key});
+class IngredientUpdateView extends StatefulWidget {
+  const IngredientUpdateView({super.key});
 
   @override
-  State<IngredientEditView> createState() => _IngredientEditViewState();
+  State<IngredientUpdateView> createState() => _IngredientUpdateViewState();
 }
 
-class _IngredientEditViewState extends State<IngredientEditView> {
+class _IngredientUpdateViewState extends State<IngredientUpdateView> {
   late final IngredientViewModelImpl _ingredientViewModel;
 
   @override
@@ -254,6 +254,6 @@ class _IngredientEditViewState extends State<IngredientEditView> {
       padding: const EdgeInsets.only(top: 24.0, bottom: 40.0),
       child: SingleButton(
         text: "등록하기",
-        onTap: _ingredientViewModel.editIngredient,
+        onTap: _ingredientViewModel.updateIngredient,
       ));
 }
