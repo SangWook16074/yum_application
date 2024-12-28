@@ -47,12 +47,18 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       Map<String, dynamic> json) async {
     return apiClient
         .put(
-          Uri.parse("$baseUrl/api/ingredients"),
-          headers: {"Content-Type": "application/json"},
-          body: json,
-        )
-        .then((respone) => Map<String, dynamic>.from(
-            jsonDecode(utf8.decode(respone.bodyBytes))));
+      Uri.parse("$baseUrl/api/ingredients"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(json),
+    )
+        .then((response) {
+      if (response.statusCode == 201) {
+        return Map<String, dynamic>.from(
+            jsonDecode(utf8.decode(response.bodyBytes)));
+      } else {
+        throw jsonDecode(utf8.decode(response.bodyBytes));
+      }
+    });
   }
 }
 
