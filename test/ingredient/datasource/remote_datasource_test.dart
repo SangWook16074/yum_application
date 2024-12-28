@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
@@ -47,9 +49,11 @@ void main() async {
         "startAt": "2024-11-12",
         "endAt": "2024-11-17"
       };
-      when(apiClient.post(Uri.parse("$baseUrl/api/ingredients"),
-              body: testBody))
-          .thenAnswer((_) async => http.Response('''
+      when(apiClient.post(
+        Uri.parse("$baseUrl/api/ingredients"),
+        body: jsonEncode(testBody),
+        headers: {"Content-Type": "application/json"},
+      )).thenAnswer((_) async => http.Response('''
             {
               "name" : "egg", 
               "isFreezed" : false, 
@@ -60,9 +64,11 @@ void main() async {
 ''', 201));
 
       final result = await remoteDatasource.createNewIngredient(testBody);
-      verify(apiClient.post(Uri.parse("$baseUrl/api/ingredients"),
-              body: testBody))
-          .called(1);
+      verify(apiClient.post(
+        Uri.parse("$baseUrl/api/ingredients"),
+        body: jsonEncode(testBody),
+        headers: {"Content-Type": "application/json"},
+      )).called(1);
       expect(result["name"], "egg");
     });
   });

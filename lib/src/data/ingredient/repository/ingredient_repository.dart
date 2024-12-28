@@ -8,17 +8,17 @@ class IngredientRepositoryImpl implements IngredientRepository {
 
   /// 나의 냉장고 재료 조회 Api
   @override
-  Future<List<Ingredient>> getMyIngredient() async {
+  Future<List<Ingredient>> getMyIngredient() {
     return remoteDatasource.getMyIngredient().then((response) =>
         response.map((json) => Ingredient.fromJson(json)).toList());
   }
 
   /// 나의 재료 생성 Api
   @override
-  Future<Ingredient> createNewIngredient(Ingredient ingredient) async {
-    final response =
-        await remoteDatasource.createNewIngredient(ingredient.toJson());
-    return Ingredient.fromJson(response);
+  Future<Ingredient> createNewIngredient(Ingredient ingredient) {
+    return remoteDatasource
+        .createNewIngredient(ingredient.toJson())
+        .then((response) => Ingredient.fromJson(response));
   }
 }
 

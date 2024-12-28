@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -68,6 +69,10 @@ main() {
           IngredientViewModelImpl(ingredientRepository: ingredientRepository);
 
       verify(ingredientRepository.getMyIngredient()).called(1);
+
+      TestWidgetsFlutterBinding.ensureInitialized();
+      SchedulerBinding.instance
+          .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     });
 
     test("fetchData 실패 테스트", () {
