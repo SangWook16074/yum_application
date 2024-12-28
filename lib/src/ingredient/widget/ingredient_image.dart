@@ -24,10 +24,17 @@ class IngredientImage extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           ImageWidget(
-            path: "assets/images/freezed.png",
+            path: "assets/images/freezed_background.png",
             width: width + 30,
           ),
           _icon(),
+          Opacity(
+            opacity: 0.6,
+            child: ImageWidget(
+              path: "assets/images/freezed_foreground.png",
+              width: width + 30,
+            ),
+          )
         ],
       );
 
