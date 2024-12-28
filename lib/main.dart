@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/app_config.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/util/app_theme.dart';
+import 'package:yum_application/src/util/global_variable.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: GlobalVariable.naviagatorState,
       theme: light,
       home: const HomeView(),
     );

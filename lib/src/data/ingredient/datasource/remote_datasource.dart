@@ -11,19 +11,34 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   /// 나의 냉장고 재료 조회 Api
   @override
   Future<List<Map<String, dynamic>>> getMyIngredient() async {
-    return apiClient.get(Uri.parse("$baseUrl/api/ingredients")).then(
-        (response) => List<Map<String, dynamic>>.from(
-            jsonDecode(utf8.decode(response.bodyBytes))));
+    return apiClient
+        .get(Uri.parse("$baseUrl/api/ingredients"))
+        .then((response) {
+      if (response.statusCode == 200) {
+        return List<Map<String, dynamic>>.from(
+            jsonDecode(utf8.decode(response.bodyBytes)));
+      } else {
+        throw jsonDecode(utf8.decode(response.bodyBytes));
+      }
+    });
   }
 
   /// 나의 재료 생성 Api
   @override
   Future<Map<String, dynamic>> createNewIngredient(
       Map<String, dynamic> json) async {
-    return apiClient
-        .post(Uri.parse("$baseUrl/api/ingredients"), body: json)
-        .then((respone) => Map<String, dynamic>.from(
-            jsonDecode(utf8.decode(respone.bodyBytes))));
+    return apiClient.post(
+      Uri.parse("$baseUrl/api/ingredients"),
+      body: jsonEncode(json),
+      headers: {"Content-Type": "application/json"},
+    ).then((response) {
+      if (response.statusCode == 201) {
+        return Map<String, dynamic>.from(
+            jsonDecode(utf8.decode(response.bodyBytes)));
+      } else {
+        throw jsonDecode(utf8.decode(response.bodyBytes));
+      }
+    });
   }
 
   /// 나의 냉장고 재료 수정하기 Api

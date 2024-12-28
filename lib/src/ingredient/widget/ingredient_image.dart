@@ -13,17 +13,28 @@ class IngredientImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (isFreezed) ? _freezedIcon() : _icon();
+    if (isFreezed) {
+      return _freezedIcon();
+    } else {
+      return _icon();
+    }
   }
 
   Widget _freezedIcon() => Stack(
         alignment: Alignment.center,
         children: [
           ImageWidget(
-            path: "assets/images/freezed.png",
-            width: width + 20,
+            path: "assets/images/freezed_background.png",
+            width: width + 30,
           ),
           _icon(),
+          Opacity(
+            opacity: 0.6,
+            child: ImageWidget(
+              path: "assets/images/freezed_foreground.png",
+              width: width + 30,
+            ),
+          )
         ],
       );
 
