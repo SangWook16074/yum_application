@@ -1,21 +1,24 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/viewModel/basic_ingredient_view_model.dart';
 
-import '../viewModel/basic_ingredient_view_model_test.mocks.dart';
+import 'basic_ingredient_view_model_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<IngredientRepositoryImpl>()])
 void main() {
   late final MockIngredientRepositoryImpl ingredientRepository;
   late final BasicIngredientViewModel viewModel;
+
   group("Basic Ingredient View Model Unit Test", () {
     setUpAll(() {
       ingredientRepository = MockIngredientRepositoryImpl();
-      viewModel = BasicIngredientViewModel(
-        ingredientRepository: ingredientRepository,
-      );
+      when(ingredientRepository.getMyFavoriteIngredient())
+          .thenAnswer((_) async => []);
+      viewModel =
+          BasicIngredientViewModel(ingredientRepository: ingredientRepository);
     });
     test("allIngredients는 전체 재료가 모두 반환된다.", () {
       final result = viewModel.allBasicIngredients;

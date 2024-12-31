@@ -41,6 +41,20 @@ class RemoteDatasourceImpl implements RemoteDatasource {
     });
   }
 
+  /// 나의 냉장고 재료 삭제 Api
+  @override
+  Future<void> deleteIngredient(int id) {
+    return apiClient
+        .delete(Uri.parse("$baseUrl/api/ingredients/$id"))
+        .then((response) {
+      if (response.statusCode == 204) {
+        return;
+      } else {
+        throw jsonDecode(utf8.decode(response.bodyBytes));
+      }
+    });
+  }
+
   /// 나의 즐겨찾기 재료 불러오기 Api
   @override
   Future<List<Map<String, dynamic>>> getMyFavoriteIngredient() {
@@ -93,6 +107,8 @@ abstract class RemoteDatasource {
   Future<Map<String, dynamic>> createNewIngredient(Map<String, dynamic> json);
 
   Future<List<Map<String, dynamic>>> getMyFavoriteIngredient();
+
+  Future<void> deleteIngredient(int id);
 
   Future<void> createNewFavoriteIngredient(Map<String, dynamic> json);
 

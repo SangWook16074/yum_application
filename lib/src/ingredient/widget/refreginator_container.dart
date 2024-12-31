@@ -72,7 +72,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   @override
   void initState() {
     _items = convertTo3D(widget.children);
-    _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
+    _totalPage = ((widget.children.length) / (4 * widget.rowCount)).ceil();
     _pageController = PageController();
     _tabController = TabController(length: _totalPage, vsync: this);
     super.initState();
@@ -84,7 +84,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     if (oldWidget.children.length != widget.children.length) {
       _tabController.dispose();
       _items = convertTo3D(widget.children);
-      _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
+      _totalPage = ((widget.children.length) / (4 * widget.rowCount)).ceil();
       _tabController = TabController(length: _totalPage, vsync: this);
     }
   }

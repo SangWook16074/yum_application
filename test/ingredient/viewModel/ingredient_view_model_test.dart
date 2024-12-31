@@ -7,7 +7,7 @@ import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
-import '../viewModel/ingredient_view_model_test.mocks.dart';
+import 'ingredient_view_model_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<IngredientRepositoryImpl>()])
 main() {
