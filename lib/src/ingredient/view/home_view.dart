@@ -54,10 +54,7 @@ class HomeView extends StatelessWidget {
       child: Consumer<IngredientViewModelImpl>(
           builder: (context, provider, child) {
         return RefreginatorContainer(
-            label: "냉동 보관",
-            children: provider.myFreezedIngredients
-                .where((ingredients) => ingredients.isFreezed)
-                .toList());
+            label: "냉동 보관", children: provider.myFreezedIngredients);
       }),
     );
   }

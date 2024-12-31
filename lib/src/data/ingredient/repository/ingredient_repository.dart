@@ -22,6 +22,11 @@ class IngredientRepositoryImpl implements IngredientRepository {
         .then((response) => Ingredient.fromJson(response));
   }
 
+  @override
+  Future<void> deleteIngredient(int id) {
+    return remoteDatasource.deleteIngredient(id);
+  }
+
   // 나의 즐겨찾기 재료 Api
   @override
   Future<List<IngredientCategory>> getMyFavoriteIngredient() {
@@ -46,6 +51,8 @@ abstract class IngredientRepository {
   Future<Ingredient> createNewIngredient(Ingredient ingredient);
 
   Future<List<IngredientCategory>> getMyFavoriteIngredient();
+
+  Future<void> deleteIngredient(int id);
 
   Future<void> createNewFavoriteIngredient(IngredientCategory category);
 

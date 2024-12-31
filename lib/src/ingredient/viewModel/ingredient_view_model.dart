@@ -76,6 +76,17 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   @override
+  void deleteIngredient(Ingredient ingredient) {
+    _myIngredients = _myIngredients.where((i) => ingredient != i).toList();
+    ingredientRepository.deleteIngredient(ingredient.id!);
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final context = GlobalVariable.naviagatorState.currentContext!;
+      Navigator.of(context).pop();
+    });
+    notifyListeners();
+  }
+
+  @override
   void selectIngredient(BasicIngredient ingredient) {
     final newIngredient = Ingredient(
         name: ingredient.name,
@@ -93,10 +104,10 @@ class IngredientViewModelImpl extends ChangeNotifier
 
   @override
   void toggleIsFreezed(bool value) {
-    if (_selectedIngredient != null) {
-      _selectedIngredient = _selectedIngredient!.copy(isFreezed: value);
-    }
     _isFreezed = value;
+    if (_selectedIngredient != null) {
+      _selectedIngredient = _selectedIngredient!.copy(isFreezed: _isFreezed);
+    }
     notifyListeners();
   }
 
@@ -125,6 +136,8 @@ abstract class IngredientViewModel {
   Future<void> fetchData();
 
   void createNewIngredient();
+
+  void deleteIngredient(Ingredient ingredient);
 
   void selectIngredient(BasicIngredient ingredient);
 
