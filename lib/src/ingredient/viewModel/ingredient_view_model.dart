@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
+import 'package:yum_application/src/util/global_variable.dart';
 
 class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
@@ -58,13 +61,24 @@ class IngredientViewModelImpl extends ChangeNotifier
     print(_selectedIngredient);
     try {
       // 선택한 재료를 타겟으로 설정
-      final newIngredient = selectedIngredient;
+      final newIngredient = selectedIngredient!;
+      final prevIngredients = _myIngredients;
+      _myIngredients = [
+        ...prevIngredients,
+        newIngredient,
+      ];
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        final context = GlobalVariable.naviagatorState.currentContext!;
+        Navigator.of(context).pop();
+      });
       final result =
-          await ingredientRepository.createNewIngredient(newIngredient!);
-      // 냉장고에 새로운 재료 추가
-      _myIngredients.add(result);
-      // 화면을 다시 그림
-      notifyListeners();
+          await ingredientRepository.createNewIngredient(newIngredient);
+      _myIngredients = [
+        ...prevIngredients,
+        result,
+      ];
+      // 선택 재료 초기화 및 화면 갱신
+      cancel();
     } on Exception catch (e) {
       throw Exception("재료 생성 에러");
     }
@@ -98,6 +112,17 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   @override
+  void deleteIngredient(Ingredient ingredient) {
+    _myIngredients = _myIngredients.where((i) => ingredient != i).toList();
+    ingredientRepository.deleteIngredient(ingredient.id!);
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final context = GlobalVariable.naviagatorState.currentContext!;
+      Navigator.of(context).pop();
+    });
+    notifyListeners();
+  }
+
+  @override
   void selectIngredient(BasicIngredient ingredient) {
     final newIngredient = Ingredient(
         name: ingredient.name,
@@ -115,10 +140,10 @@ class IngredientViewModelImpl extends ChangeNotifier
 
   @override
   void toggleIsFreezed(bool value) {
-    if (_selectedIngredient != null) {
-      _selectedIngredient = _selectedIngredient!.copy(isFreezed: value);
-    }
     _isFreezed = value;
+    if (_selectedIngredient != null) {
+      _selectedIngredient = _selectedIngredient!.copy(isFreezed: _isFreezed);
+    }
     notifyListeners();
   }
 
@@ -149,6 +174,8 @@ abstract class IngredientViewModel {
   void createNewIngredient();
 
   void updateIngredient();
+
+  void deleteIngredient(Ingredient ingredient);
 
   void selectIngredient(BasicIngredient ingredient);
 

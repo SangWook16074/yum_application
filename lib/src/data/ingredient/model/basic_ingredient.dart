@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class BasicIngredient {
   final String name;
   final bool isFavorite;
@@ -78,8 +80,16 @@ enum IngredientCategory {
     return "assets/images/$name.png";
   }
 
+  factory IngredientCategory.fromJson(Map<String, dynamic> json) {
+    return IngredientCategory.fromString(json["category"]);
+  }
+
   factory IngredientCategory.fromString(String name) {
     return IngredientCategory.values
         .firstWhere((category) => category.name == name);
   }
+
+  Map<String, dynamic> toJson() => {
+        "category": name,
+      };
 }

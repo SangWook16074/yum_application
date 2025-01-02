@@ -7,11 +7,11 @@ import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
-import '../view/home_view_test.mocks.dart';
+import 'ingredient_view_model_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<IngredientRepositoryImpl>()])
 main() {
-  late final MockIngredientRepository ingredientRepository;
+  late final MockIngredientRepositoryImpl ingredientRepository;
   late final IngredientViewModelImpl ingredientViewModel;
 
   final freezedIngredients = [
@@ -62,7 +62,7 @@ main() {
 
   group("Ingredient View Model Unit Test", () {
     setUpAll(() {
-      ingredientRepository = MockIngredientRepository();
+      ingredientRepository = MockIngredientRepositoryImpl();
       when(ingredientRepository.getMyIngredient()).thenAnswer(
           (_) async => [...freezedIngredients, ...unfreezedIngredients]);
       ingredientViewModel =

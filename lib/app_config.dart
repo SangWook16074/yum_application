@@ -8,13 +8,16 @@ import 'package:http/http.dart' as http;
 
 List<ChangeNotifierProvider> getInitProvider() {
   final String baseUrl = dotenv.get("BASE_URL");
+  final RemoteDatasource remoteDatasource =
+      RemoteDatasourceImpl(apiClient: http.Client(), baseUrl: baseUrl);
+  final IngredientRepositoryImpl ingredientRepositoryImpl =
+      IngredientRepositoryImpl(remoteDatasource: remoteDatasource);
   return [
     ChangeNotifierProvider<IngredientViewModelImpl>(
         create: (context) => IngredientViewModelImpl(
-            ingredientRepository: IngredientRepositoryImpl(
-                remoteDatasource: RemoteDatasourceImpl(
-                    apiClient: http.Client(), baseUrl: baseUrl)))),
+            ingredientRepository: ingredientRepositoryImpl)),
     ChangeNotifierProvider<BasicIngredientViewModel>(
-        create: (context) => BasicIngredientViewModel()),
+        create: (context) => BasicIngredientViewModel(
+            ingredientRepository: ingredientRepositoryImpl)),
   ];
 }
