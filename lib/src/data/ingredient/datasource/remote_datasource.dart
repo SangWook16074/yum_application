@@ -52,7 +52,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       body: jsonEncode(json),
     )
         .then((response) {
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         return Map<String, dynamic>.from(
             jsonDecode(utf8.decode(response.bodyBytes)));
       } else {

@@ -25,9 +25,9 @@ class IngredientRepositoryImpl implements IngredientRepository {
   /// 나의 재료 수정 Api
   @override
   Future<Ingredient> updateIngredient(Ingredient ingredient) async {
-    final response =
-        await remoteDatasource.updateIngredient(ingredient.toJson());
-    return Ingredient.fromJson(response);
+    return remoteDatasource
+        .updateIngredient(ingredient.toJson())
+        .then((response) => Ingredient.fromJson(response));
   }
 
   @override

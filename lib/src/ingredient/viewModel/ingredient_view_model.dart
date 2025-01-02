@@ -10,6 +10,15 @@ class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
   List<Ingredient> _myIngredients = List.empty(growable: true);
+  IngredientViewModelImpl({required this.ingredientRepository}) {
+    fetchData();
+  }
+
+  String _ingredientName = "";
+
+  void updateIngredientName(String newName) {
+    _ingredientName = newName;
+  }
 
   /// 나의 냉동 재료 getter
   @override
@@ -25,10 +34,6 @@ class IngredientViewModelImpl extends ChangeNotifier
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == false)
         .toList();
-  }
-
-  IngredientViewModelImpl({required this.ingredientRepository}) {
-    fetchData();
   }
 
   Ingredient? _selectedIngredient;
@@ -90,24 +95,40 @@ class IngredientViewModelImpl extends ChangeNotifier
     if (_selectedIngredient == null) {
       return;
     }
-    print(_selectedIngredient);
     try {
+      final updatedIngredient =
+          _selectedIngredient!.copy(name: _ingredientName);
+      print(updatedIngredient);
       // 선택한 재료를 타겟으로 설정
-      final newIngredient = selectedIngredient;
-
-      // Api를 통해 재료 수정
-      final newupdatedIngredient =
-          await ingredientRepository.updateIngredient(newIngredient!);
-
       // 기존 냉장고 재료 목록에서 해당 재료를 찾아 수정
-      final index = _myIngredients
-          .indexWhere((ingredient) => ingredient.id == newupdatedIngredient.id);
-      if (index != -1) {
-        _myIngredients[index] = newupdatedIngredient;
-      }
+      _myIngredients = _myIngredients.map((ingredient) {
+        if (ingredient.id == updatedIngredient.id) {
+          return updatedIngredient;
+        } else {
+          return ingredient;
+        }
+      }).toList();
+
       notifyListeners();
-    } on Exception catch (e) {
-      throw Exception("재료 수정 에러");
+
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        final context = GlobalVariable.naviagatorState.currentContext!;
+        Navigator.of(context).pop();
+      });
+      // Api를 통해 재료 수정
+      final result =
+          await ingredientRepository.updateIngredient(updatedIngredient);
+
+      _myIngredients = _myIngredients.map((ingredient) {
+        if (ingredient.id == result.id) {
+          return result;
+        } else {
+          return ingredient;
+        }
+      }).toList();
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -129,6 +150,13 @@ class IngredientViewModelImpl extends ChangeNotifier
         category: ingredient.category,
         isFreezed: _isFreezed);
     _selectedIngredient = newIngredient;
+    notifyListeners();
+  }
+
+  @override
+  void selectPrevIngredient(Ingredient prevIngredient) {
+    _selectedIngredient = prevIngredient;
+    _isFreezed = prevIngredient.isFreezed;
     notifyListeners();
   }
 
@@ -178,6 +206,8 @@ abstract class IngredientViewModel {
   void deleteIngredient(Ingredient ingredient);
 
   void selectIngredient(BasicIngredient ingredient);
+
+  void selectPrevIngredient(Ingredient prevIngredient);
 
   void cancel();
 
