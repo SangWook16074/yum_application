@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/basic_bottom_sheet.dart';
+import 'package:yum_application/src/common/delete_dialog.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_edit_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
@@ -103,9 +104,18 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   fixedSize: Size(width, height),
                 ),
-                onPressed: () =>
-                    Provider.of<IngredientViewModelImpl>(context, listen: false)
-                        .deleteIngredient(widget.ingredient),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => DeleteDialog(
+                      onConfirm: () {
+                        Provider.of<IngredientViewModelImpl>(context,
+                                listen: false)
+                            .deleteIngredient(widget.ingredient);
+                      },
+                    ),
+                  );
+                },
                 child: Text(
                   "삭제하기",
                   style: Theme.of(context)
