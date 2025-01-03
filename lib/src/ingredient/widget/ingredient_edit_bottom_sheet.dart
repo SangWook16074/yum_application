@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/basic_bottom_sheet.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_expiration_date_chart.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
 class IngredientEditBottomSheet extends StatefulWidget {
@@ -30,43 +31,70 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
         ));
   }
 
-  Widget _top() => Padding(
-        padding: const EdgeInsets.only(top: 68),
-        child: Column(children: [
-          Text(
-            "소비기한이 46 일 남았어요!",
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            "2024년 10월 12일 ~ 2024년 12월 25일",
-            style: Theme.of(context).textTheme.labelSmall,
-          )
-        ]),
-      );
+  Widget _top() {
+    final ingredient = widget.ingredient;
+    final start = ingredient.startAt;
+    final now = DateTime.now();
+    final end = ingredient.endAt;
+    final diff = (end.difference(now).inHours / 24).ceil();
 
-  Widget _middle() => Padding(
-        padding: const EdgeInsets.only(top: 33.0),
-        child: Column(children: [
-          IngredientImage(
-            isFreezed: widget.ingredient.isFreezed,
-            path: widget.ingredient.category.imagePath,
-            width: 350,
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: Column(children: [
+        Text(
+          "소비기한이 $diff 일 남았어요!",
+          style: Theme.of(context).textTheme.titleLarge,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          "${start.year}년 ${start.month}월 ${start.day}일 ~ ${end.year}년 ${end.month}월 ${end.day}일",
+          style: Theme.of(context).textTheme.labelSmall,
+        )
+      ]),
+    );
+  }
+
+  Widget _middle() {
+    final ratio = MediaQuery.of(context).devicePixelRatio;
+    final line = 800 / ratio;
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomPaint(
+            size: Size(line, line),
+            painter: IngredientExprationDateChart(
+                startAt: widget.ingredient.startAt,
+                endAt: widget.ingredient.endAt),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          Text(widget.ingredient.name,
-              style: Theme.of(context).textTheme.titleLarge)
-        ]),
-      );
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IngredientImage(
+                path: widget.ingredient.category.imagePath,
+                width: 300,
+                isFreezed: widget.ingredient.isFreezed,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 23.3),
+                child: Text(widget.ingredient.name,
+                    style: Theme.of(context).textTheme.titleLarge),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
 
   Widget _bottom() {
     final ratio = MediaQuery.of(context).devicePixelRatio;
     final height = 130 / ratio;
     final width = height * (10 / 3);
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
         bottom: true,
         child: Row(
