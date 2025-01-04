@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
@@ -9,20 +10,33 @@ class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
   List<Ingredient> _myIngredients = List.empty(growable: true);
-
   IngredientViewModelImpl({required this.ingredientRepository}) {
     fetchData();
   }
 
+  String _ingredientName = "";
+
+  void updateIngredientName(String newName) {
+    _ingredientName = newName;
+  }
+
+  /// 나의 냉동 재료 getter
+  @override
+  List<Ingredient> get myFreezedIngredients {
+    return _myIngredients
+        .where((ingredient) => ingredient.isFreezed == true)
+        .toList();
+  }
+
+  /// 나의 냉장 재료 getter
+  @override
+  List<Ingredient> get myUnfreezedIngredients {
+    return _myIngredients
+        .where((ingredient) => ingredient.isFreezed == false)
+        .toList();
+  }
+
   Ingredient? _selectedIngredient;
-
-  @override
-  List<Ingredient> get myFreezedIngredients =>
-      _myIngredients.where((ingredient) => ingredient.isFreezed).toList();
-
-  @override
-  List<Ingredient> get myUnfreezedIngredients =>
-      _myIngredients.where((ingredient) => !ingredient.isFreezed).toList();
 
   @override
   Ingredient? get selectedIngredient => _selectedIngredient;
@@ -49,15 +63,15 @@ class IngredientViewModelImpl extends ChangeNotifier
     if (_selectedIngredient == null) {
       return;
     }
+    print(_selectedIngredient);
     try {
       // 선택한 재료를 타겟으로 설정
       final newIngredient = selectedIngredient!;
-      final prevIngredients = [
-        ..._myIngredients,
+      final prevIngredients = _myIngredients;
+      _myIngredients = [
+        ...prevIngredients,
+        newIngredient,
       ];
-      _myIngredients = [...prevIngredients, newIngredient];
-      notifyListeners();
-      // 서버와 통신이 종료되면 원래의 데이터를 바꿔끼움.
       SchedulerBinding.instance.addPostFrameCallback((_) {
         final context = GlobalVariable.naviagatorState.currentContext!;
         Navigator.of(context).pop();
@@ -71,6 +85,49 @@ class IngredientViewModelImpl extends ChangeNotifier
       // 선택 재료 초기화 및 화면 갱신
       cancel();
     } on Exception catch (e) {
+      throw Exception("재료 생성 에러");
+    }
+  }
+
+  @override
+  Future<void> updateIngredient() async {
+    // 선택한 재료가 없으면 return;
+    if (_selectedIngredient == null) {
+      return;
+    }
+    try {
+      final updatedIngredient =
+          _selectedIngredient!.copy(name: _ingredientName);
+      print(updatedIngredient);
+      // 선택한 재료를 타겟으로 설정
+      // 기존 냉장고 재료 목록에서 해당 재료를 찾아 수정
+      _myIngredients = _myIngredients.map((ingredient) {
+        if (ingredient.id == updatedIngredient.id) {
+          return updatedIngredient;
+        } else {
+          return ingredient;
+        }
+      }).toList();
+
+      notifyListeners();
+
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        final context = GlobalVariable.naviagatorState.currentContext!;
+        Navigator.of(context).pop();
+      });
+      // Api를 통해 재료 수정
+      final result =
+          await ingredientRepository.updateIngredient(updatedIngredient);
+
+      _myIngredients = _myIngredients.map((ingredient) {
+        if (ingredient.id == result.id) {
+          return result;
+        } else {
+          return ingredient;
+        }
+      }).toList();
+      notifyListeners();
+    } catch (e) {
       throw Exception(e.toString());
     }
   }
@@ -93,6 +150,13 @@ class IngredientViewModelImpl extends ChangeNotifier
         category: ingredient.category,
         isFreezed: _isFreezed);
     _selectedIngredient = newIngredient;
+    notifyListeners();
+  }
+
+  @override
+  void selectPrevIngredient(Ingredient prevIngredient) {
+    _selectedIngredient = prevIngredient;
+    _isFreezed = prevIngredient.isFreezed;
     notifyListeners();
   }
 
@@ -137,9 +201,13 @@ abstract class IngredientViewModel {
 
   void createNewIngredient();
 
+  void updateIngredient();
+
   void deleteIngredient(Ingredient ingredient);
 
   void selectIngredient(BasicIngredient ingredient);
+
+  void selectPrevIngredient(Ingredient prevIngredient);
 
   void cancel();
 
