@@ -41,10 +41,11 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
     final diff = (end.difference(now).inHours / 24).ceil();
 
     return Padding(
+      key: const Key("Ingredient Edit Bottom Sheet Top"),
       padding: const EdgeInsets.only(top: 50),
       child: Column(children: [
         Text(
-          "소비기한이 $diff 일 남았어요!",
+          "소비기한이 $diff일 남았어요!",
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
@@ -60,6 +61,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
     final ratio = MediaQuery.of(context).devicePixelRatio;
     final line = 800 / ratio;
     return Padding(
+      key: const Key("Ingredient Edit Bottom Sheet Middle"),
       padding: const EdgeInsets.only(top: 20.0),
       child: Stack(
         alignment: Alignment.center,
@@ -96,6 +98,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
     final height = 130 / ratio;
     final width = height * (10 / 3);
     return Padding(
+      key: const Key("Ingredient Edit Bottom Sheet Bottom"),
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: SafeArea(
         bottom: true,
