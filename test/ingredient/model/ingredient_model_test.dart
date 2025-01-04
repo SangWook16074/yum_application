@@ -57,6 +57,7 @@ void main() {
       );
       final json = ingredient.toJson();
       expect(json, {
+        "id": null,
         "name": "egg",
         "isFreezed": false,
         "category": "egg",

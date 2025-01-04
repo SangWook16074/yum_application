@@ -104,6 +104,28 @@ main() {
       expect(selectIngredient.isFreezed, false);
     });
 
+    test("updateIngredient메소드를 통해서 기존의 재료정보를 수정할 수 있다.", () async {
+      when(ingredientRepository.updateIngredient(any)).thenAnswer(
+        (_) async => Ingredient(
+          id: 1,
+          name: "updated",
+          category: IngredientCategory.egg,
+          isFreezed: true,
+          startAt: DateTime(2024, 12, 2),
+          endAt: DateTime(2024, 12, 30),
+        ),
+      );
+
+      final prevIngredient = ingredientViewModel.myFreezedIngredients.first;
+
+      ingredientViewModel.selectPrevIngredient(prevIngredient);
+      ingredientViewModel.updateIngredientName("updated");
+      await ingredientViewModel.updateIngredient();
+      final currIngredient = ingredientViewModel.myFreezedIngredients.first;
+      expect(ingredientViewModel.myFreezedIngredients.length, 3);
+      expect(currIngredient.name, "updated");
+    });
+
     test("toggleIsFreezed메소드를 이용해서 재료의 냉장 냉동 여부를 바꿀 수 있다.", () {
       final newIngredient = BasicIngredient(
         name: "egg",

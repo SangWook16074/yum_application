@@ -32,6 +32,7 @@ class Ingredient extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "isFreezed": isFreezed,
         "category": category.name,

@@ -118,7 +118,7 @@ class IngredientViewModelImpl extends ChangeNotifier
       // Api를 통해 재료 수정
       final result =
           await ingredientRepository.updateIngredient(updatedIngredient);
-
+      print(result);
       _myIngredients = _myIngredients.map((ingredient) {
         if (ingredient.id == result.id) {
           return result;

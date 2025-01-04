@@ -81,12 +81,17 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   @override
   void didUpdateWidget(covariant RefreginatorContainer oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.children == widget.children) {
+      return;
+    }
+
     if (oldWidget.children.length != widget.children.length) {
       _tabController.dispose();
-      _items = convertTo3D(widget.children);
+
       _totalPage = ((widget.children.length) / (4 * widget.rowCount)).ceil();
       _tabController = TabController(length: _totalPage, vsync: this);
     }
+    _items = convertTo3D(widget.children);
   }
 
   @override

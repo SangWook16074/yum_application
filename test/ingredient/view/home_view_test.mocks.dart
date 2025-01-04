@@ -77,6 +77,30 @@ class MockIngredientRepository extends _i1.Mock
       ) as _i4.Future<_i2.Ingredient>);
 
   @override
+  _i4.Future<_i2.Ingredient> updateIngredient(_i2.Ingredient? ingredient) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateIngredient,
+          [ingredient],
+        ),
+        returnValue: _i4.Future<_i2.Ingredient>.value(_FakeIngredient_0(
+          this,
+          Invocation.method(
+            #updateIngredient,
+            [ingredient],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Ingredient>.value(_FakeIngredient_0(
+          this,
+          Invocation.method(
+            #updateIngredient,
+            [ingredient],
+          ),
+        )),
+      ) as _i4.Future<_i2.Ingredient>);
+
+  @override
   _i4.Future<List<_i5.IngredientCategory>> getMyFavoriteIngredient() =>
       (super.noSuchMethod(
         Invocation.method(
@@ -89,6 +113,16 @@ class MockIngredientRepository extends _i1.Mock
             _i4.Future<List<_i5.IngredientCategory>>.value(
                 <_i5.IngredientCategory>[]),
       ) as _i4.Future<List<_i5.IngredientCategory>>);
+
+  @override
+  _i4.Future<void> deleteIngredient(int? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteIngredient,
+          [id],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   _i4.Future<void> createNewFavoriteIngredient(

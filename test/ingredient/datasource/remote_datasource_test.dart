@@ -20,7 +20,7 @@ void main() async {
       remoteDatasource =
           RemoteDatasourceImpl(apiClient: apiClient, baseUrl: baseUrl);
     });
-    test("http 요청이 성공하면 사용자의 재료 데이터를 반환한다", () async {
+    test("'/api/ingredients' GET요청이 성공하면 사용자의 재료 데이터를 반환한다", () async {
       when(apiClient.get(Uri.parse("$baseUrl/api/ingredients")))
           .thenAnswer((_) async => http.Response('''
           [
@@ -41,7 +41,7 @@ void main() async {
       expect(result.length, 1);
     });
 
-    test("http 요청이 성공하면 사용자의 생성한 재료 데이터를 반환한다", () async {
+    test("'/api/ingredients' POST요청이 성공하면 사용자의 생성한 재료 데이터를 반환한다", () async {
       final testBody = {
         "name": "egg",
         "isFreezed": false,
@@ -65,6 +65,39 @@ void main() async {
 
       final result = await remoteDatasource.createNewIngredient(testBody);
       verify(apiClient.post(
+        Uri.parse("$baseUrl/api/ingredients"),
+        body: jsonEncode(testBody),
+        headers: {"Content-Type": "application/json"},
+      )).called(1);
+      expect(result["name"], "egg");
+    });
+
+    test("'/api/ingredients PUT 요청이 성공하면 갱신된 재료 데이터를 반환한다.'", () async {
+      final testBody = {
+        "id": 1,
+        "name": "egg",
+        "isFreezed": false,
+        "category": "egg",
+        "startAt": "2024-11-12",
+        "endAt": "2024-11-17"
+      };
+
+      when(apiClient.put(
+        Uri.parse("$baseUrl/api/ingredients"),
+        body: jsonEncode(testBody),
+        headers: {"Content-Type": "application/json"},
+      )).thenAnswer((_) async => http.Response('''
+            {
+              "name" : "egg", 
+              "isFreezed" : false, 
+              "category": "egg",
+              "startAt" : "2024-11-12", 
+              "endAt": "2024-11-17"
+            }
+''', 200));
+
+      final result = await remoteDatasource.updateIngredient(testBody);
+      verify(apiClient.put(
         Uri.parse("$baseUrl/api/ingredients"),
         body: jsonEncode(testBody),
         headers: {"Content-Type": "application/json"},

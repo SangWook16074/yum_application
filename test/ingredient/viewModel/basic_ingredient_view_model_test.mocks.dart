@@ -103,6 +103,40 @@ class MockIngredientRepositoryImpl extends _i1.Mock
       ) as _i5.Future<_i3.Ingredient>);
 
   @override
+  _i5.Future<_i3.Ingredient> updateIngredient(_i3.Ingredient? ingredient) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateIngredient,
+          [ingredient],
+        ),
+        returnValue: _i5.Future<_i3.Ingredient>.value(_FakeIngredient_1(
+          this,
+          Invocation.method(
+            #updateIngredient,
+            [ingredient],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i3.Ingredient>.value(_FakeIngredient_1(
+          this,
+          Invocation.method(
+            #updateIngredient,
+            [ingredient],
+          ),
+        )),
+      ) as _i5.Future<_i3.Ingredient>);
+
+  @override
+  _i5.Future<void> deleteIngredient(int? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteIngredient,
+          [id],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
   _i5.Future<List<_i6.IngredientCategory>> getMyFavoriteIngredient() =>
       (super.noSuchMethod(
         Invocation.method(
