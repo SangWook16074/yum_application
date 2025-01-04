@@ -49,7 +49,7 @@ class IngredientViewModelImpl extends ChangeNotifier
     try {
       final result = await ingredientRepository.getMyIngredient();
       _myIngredients.clear();
-      _myIngredients = result;
+      _myIngredients.addAll(result);
       notifyListeners();
     } on Exception catch (e) {
       // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
