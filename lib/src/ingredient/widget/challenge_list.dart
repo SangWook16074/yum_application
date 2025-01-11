@@ -23,7 +23,6 @@ class ChallengeList extends StatelessWidget {
           color: const Color(0xffffffff),
           borderRadius: BorderRadius.circular(16),
         ),
-        width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -36,11 +35,12 @@ class ChallengeList extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSecondaryContainer,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Image.asset(
-                  imagePath,
-                  width: 70,
-                  height: 70,
-                  fit: BoxFit.contain,
+                child: Center(
+                  child: SizedBox(
+                    width: 68,
+                    height: 68,
+                    child: Image.asset(imagePath),
+                  ),
                 ),
               ),
             ),
@@ -72,7 +72,10 @@ class ChallengeList extends StatelessWidget {
                         Expanded(
                           child: Text(
                             title,
-                            style: Theme.of(context).textTheme.titleMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(letterSpacing: 0.0),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -100,7 +103,10 @@ class ChallengeList extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
                     child: Text(
                       subtitle,
-                      style: Theme.of(context).textTheme.labelSmall,
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelSmall
+                          ?.copyWith(letterSpacing: 0.0),
                     ),
                   ),
                 ],

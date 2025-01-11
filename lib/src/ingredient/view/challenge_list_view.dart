@@ -15,7 +15,7 @@ class _ChallengeListViewState extends State<ChallengeListView> {
     {
       "title": "레시피 등록 도전!",
       "subtitle": "챌린지를 시작해주세요.",
-      "image": "assets/images/Recipe.png"
+      "image": "assets/images/recipe.png"
     },
     {
       "title": "레시피 리뷰 작성 도전!",
@@ -35,7 +35,7 @@ class _ChallengeListViewState extends State<ChallengeListView> {
     {
       "title": "레시피 연속 사용 횟수 도전!",
       "subtitle": "000님 외 142명이 도전 중",
-      "image": "assets/images/Group.png"
+      "image": "assets/images/group.png"
     },
   ];
 
