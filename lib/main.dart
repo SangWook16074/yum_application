@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/app_config.dart';
+import 'package:yum_application/src/ingredient/view/challenge_detail_view.dart';
 import 'package:yum_application/src/ingredient/view/challenge_list_view.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/util/app_theme.dart';
@@ -22,9 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: GlobalVariable.naviagatorState,
-      theme: light,
-      home: const ChallengeListView(),
-    );
+        navigatorKey: GlobalVariable.naviagatorState,
+        theme: light,
+        home: const HomeView());
   }
 }

@@ -41,6 +41,12 @@ ThemeData get light => ThemeData(
             fontWeight: FontWeight.w500,
             fontFamily: "Pretendard",
             color: Color(0xff000000)),
+        titleSmall: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            fontFamily: "Pretendard",
+            color: Color(0xff111111)),
         displayLarge: TextStyle(
             letterSpacing: 0.0,
             fontSize: 24,

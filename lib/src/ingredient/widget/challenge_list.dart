@@ -88,7 +88,7 @@ class ChallengeList extends StatelessWidget {
                               color: Theme.of(context)
                                   .colorScheme
                                   .onSecondaryContainer,
-                              size: 20,
+                              size: 24,
                             ),
                             padding: EdgeInsets.zero,
                             splashColor: Colors.transparent,
