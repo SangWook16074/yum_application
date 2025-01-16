@@ -25,6 +25,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         navigatorKey: GlobalVariable.naviagatorState,
         theme: light,
-        home: const HomeView());
+        home: const ChallengeListView());
   }
 }

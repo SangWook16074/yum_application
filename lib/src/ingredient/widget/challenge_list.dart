@@ -4,13 +4,11 @@ class ChallengeList extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imagePath;
-  final bool isRecommended;
 
   const ChallengeList({
     required this.title,
     required this.subtitle,
     required this.imagePath,
-    this.isRecommended = false,
     super.key,
   });
 
@@ -53,22 +51,6 @@ class ChallengeList extends StatelessWidget {
                         const EdgeInsets.only(left: 20, top: 20, bottom: 35),
                     child: Row(
                       children: [
-                        if (isRecommended)
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                "최초",
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ),
-                          ),
                         Expanded(
                           child: Text(
                             title,
