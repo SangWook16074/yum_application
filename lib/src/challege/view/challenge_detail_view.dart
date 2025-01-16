@@ -38,7 +38,7 @@ class ChallengeDetailView extends StatelessWidget {
           children: [
             _header(context),
             _body(context),
-            _bottom(context),
+            _bottom(),
             SingleButton(
               text: "레시피 등록하러 가기",
               onTap: () {},
@@ -108,23 +108,25 @@ Widget _body(BuildContext context) => Padding(
       ),
     );
 
-Widget _bottom(BuildContext context) => Padding(
+Widget _bottom() => Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, bottom: 32),
-      child: Container(
-        width: double.infinity,
-        height: 171,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "레시피 리뷰 작성 발자취",
-              style: Theme.of(context).textTheme.titleSmall,
-            )
-          ],
-        ),
-      ),
+      child: Builder(builder: (context) {
+        return Container(
+          width: double.infinity,
+          height: 171,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "레시피 리뷰 작성 발자취",
+                style: Theme.of(context).textTheme.titleSmall,
+              )
+            ],
+          ),
+        );
+      }),
     );

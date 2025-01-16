@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yum_application/src/common/image_widget.dart';
 
 class ChallengeList extends StatelessWidget {
   final String title;
@@ -35,10 +36,9 @@ class ChallengeList extends StatelessWidget {
                 ),
                 child: Center(
                   child: SizedBox(
-                    width: 68,
-                    height: 68,
-                    child: Image.asset(imagePath),
-                  ),
+                      width: 68,
+                      height: 68,
+                      child: ImageWidget(path: imagePath)),
                 ),
               ),
             ),
