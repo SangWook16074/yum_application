@@ -4,8 +4,6 @@ import 'package:yum_application/src/common/date_picker_widget.dart';
 import 'package:yum_application/src/common/scroll_date_dialog.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_sheet.dart';
-import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/select_ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
@@ -34,7 +32,10 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
         backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
         leading: GestureDetector(
-          onTap: Navigator.of(context).pop,
+          onTap: () {
+            _ingredientViewModel.cancel();
+            Navigator.of(context).pop();
+          },
           child: const Icon(
             Icons.arrow_back_ios,
           ),

@@ -35,7 +35,10 @@ void main() {
       await tester.pumpWidget(widget);
       final now = DateTime.now();
       final diff = (ingredient.endAt.difference(now).inHours / 24).ceil();
-      expect(find.bySemanticsLabel("소비기한이 $diff일 남았어요!"), findsOneWidget);
+      expect(
+          find.bySemanticsLabel(
+              (diff >= 0) ? "소비기한이 $diff일 남았어요!" : "소비기한이 ${-diff}일 지났어요!"),
+          findsOneWidget);
     });
 
     testWidgets("재료의 생산일과 유통기한이 잘 랜더링 된다.", (WidgetTester tester) async {

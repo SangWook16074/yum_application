@@ -110,6 +110,8 @@ class IngredientAddView extends StatelessWidget {
             height: 44,
             child: Builder(builder: (context) {
               return TextField(
+                onChanged: Provider.of<IngredientViewModelImpl>(context)
+                    .updateIngredientName,
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

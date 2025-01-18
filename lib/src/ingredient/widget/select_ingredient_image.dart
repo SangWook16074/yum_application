@@ -15,7 +15,7 @@ class SelectIngredientImage extends StatefulWidget {
 
 class _SelectIngredientImageState extends State<SelectIngredientImage>
     with TickerProviderStateMixin {
-  late final AnimationController _backgroundAnimationController;
+  late AnimationController _backgroundAnimationController;
   late final AnimationController _foregroundAnimationController;
   late final Animation<double> _backgroundAnimation;
   late final Animation<double> _foregroundAnimation;
@@ -23,11 +23,13 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
   @override
   void initState() {
     _backgroundAnimationController = AnimationController(
-        duration: const Duration(milliseconds: 200), vsync: this);
+        duration: const Duration(milliseconds: 700), vsync: this);
     _foregroundAnimationController = AnimationController(
         duration: const Duration(milliseconds: 200), vsync: this);
     _backgroundAnimation = CurvedAnimation(
-        parent: _backgroundAnimationController, curve: Curves.fastOutSlowIn);
+        parent: _backgroundAnimationController,
+        curve: Curves.elasticOut,
+        reverseCurve: Curves.fastOutSlowIn);
     _foregroundAnimation = CurvedAnimation(
         parent: _foregroundAnimationController, curve: Curves.fastOutSlowIn);
     super.initState();
@@ -40,11 +42,15 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
       return;
     }
     if (widget.ingredient!.isFreezed) {
+      _backgroundAnimationController.duration =
+          const Duration(milliseconds: 700);
       _backgroundAnimationController.forward().then((_) {
         _foregroundAnimationController.forward();
       });
     } else {
       _foregroundAnimationController.reverse().then((_) {
+        _backgroundAnimationController.duration =
+            const Duration(milliseconds: 200);
         _backgroundAnimationController.reverse();
       });
     }
@@ -67,8 +73,8 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
               ScaleTransition(
                 scale: _backgroundAnimation,
                 child: ImageWidget(
-                  path: "assets/images/freezed_background.png",
-                  width: widget.width + 70,
+                  path: IceImage.background,
+                  width: widget.width + 200,
                 ),
               ),
               _icon(),
@@ -77,8 +83,8 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
                 child: Opacity(
                   opacity: 0.5,
                   child: ImageWidget(
-                    path: "assets/images/freezed_foreground.png",
-                    width: widget.width + 70,
+                    path: IceImage.background,
+                    width: widget.width + 200,
                   ),
                 ),
               ),
@@ -101,4 +107,9 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
         path: widget.ingredient!.category.imagePath,
         width: widget.width,
       );
+}
+
+final class IceImage {
+  static String get background => "assets/images/ice_background.png";
+  static String get foreground => "assets/images/ice_foreground.png";
 }
