@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/common/image_widget.dart';
+import 'package:yum_application/src/ingredient/widget/select_ingredient_image.dart';
 
 class IngredientImage extends StatelessWidget {
   final bool isFreezed;
@@ -24,14 +25,14 @@ class IngredientImage extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           ImageWidget(
-            path: "assets/images/freezed_background.png",
+            path: IceImage.background,
             width: width + 30,
           ),
           _icon(),
           Opacity(
             opacity: 0.6,
             child: ImageWidget(
-              path: "assets/images/freezed_foreground.png",
+              path: IceImage.foreground,
               width: width + 30,
             ),
           )
