@@ -1,5 +1,7 @@
+import 'dart:isolate';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
@@ -221,24 +223,15 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
                   ));
         },
         child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Column(
-            children: [
-              Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: IngredientImage(
-                    path: item.category.imagePath,
-                    isFreezed: item.isFreezed,
+            padding: const EdgeInsets.all(2.0),
+            child: (item.name.length < 6)
+                ? RefreginatorItem(
+                    item: item,
+                  )
+                : AnimatedRefreginatorItem(
+                    item: item,
+                    width: MediaQuery.of(context).size.width / 6,
                   )),
-              Builder(builder: (context) {
-                return Text(
-                  item.name,
-                  style: Theme.of(context).textTheme.displaySmall,
-                );
-              })
-            ],
-          ),
-        ),
       );
 
   Widget _generateEmtpy() {
@@ -289,4 +282,110 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
                 padding: const EdgeInsets.all(8.0),
               ),
       );
+}
+
+class AnimatedRefreginatorItem extends StatefulWidget {
+  final Ingredient item;
+  final double width;
+  const AnimatedRefreginatorItem(
+      {super.key, required this.item, required this.width});
+
+  @override
+  State<AnimatedRefreginatorItem> createState() =>
+      _AnimatedRefreginatorItemState();
+}
+
+class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
+    with SingleTickerProviderStateMixin {
+  late final ScrollController _scrollController;
+  bool _scrolling = false;
+  @override
+  void initState() {
+    _scrollController = ScrollController()..addListener(_scrollTextAnimation);
+    // _scrollController.addListener(_scrollTextAnimation);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController
+          .animateTo(_scrollController.position.maxScrollExtent,
+              duration: const Duration(seconds: 2), curve: Curves.linear)
+          .then((_) {
+        _scrollController.jumpTo(0);
+      });
+    });
+
+    super.initState();
+  }
+
+  _scrollTextAnimation() async {
+    if (_scrollController.offset < _scrollController.position.maxScrollExtent &&
+        !_scrolling) {
+      _scrolling = true;
+      print("시작");
+      _scrollController
+          .animateTo(_scrollController.position.maxScrollExtent,
+              duration: const Duration(seconds: 2), curve: Curves.linear)
+          .then((_) {
+        _scrolling = false;
+      });
+    } else if (_scrollController.offset ==
+        _scrollController.position.maxScrollExtent) {
+      print("초기화");
+      _scrollController.jumpTo(0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: IngredientImage(
+              path: widget.item.category.imagePath,
+              isFreezed: widget.item.isFreezed,
+            )),
+        SizedBox(
+          width: widget.width,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: _scrollController,
+            child: Text(
+              widget.item.name * 2,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class RefreginatorItem extends StatelessWidget {
+  final Ingredient item;
+
+  const RefreginatorItem({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: IngredientImage(
+              path: item.category.imagePath,
+              isFreezed: item.isFreezed,
+            )),
+        Text(
+          item.name,
+          style: Theme.of(context).textTheme.displaySmall,
+        )
+      ],
+    );
+  }
 }
