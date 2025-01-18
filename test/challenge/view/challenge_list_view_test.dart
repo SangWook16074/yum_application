@@ -6,7 +6,7 @@ import 'package:yum_application/src/data/ingredient/repository/ingredient_reposi
 import 'package:yum_application/src/challege/view/challenge_list_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import '../../common/mock_navigator_observer.dart';
-import 'home_view_test.mocks.dart';
+import '../../ingredient/view/home_view_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<IngredientRepository>()])
 void main() {
@@ -27,7 +27,7 @@ void main() {
     );
   });
 
-  group("Challenge List View Initialization Tests", () {
+  group("Challenge List View 랜더링 테스트", () {
     testWidgets(
         "Challenge List View에는 title, subtitle, image를 가진 Challenge List가 랜더링 된다.",
         (WidgetTester tester) async {
