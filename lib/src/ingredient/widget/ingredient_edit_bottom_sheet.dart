@@ -45,7 +45,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
       padding: const EdgeInsets.only(top: 50),
       child: Column(children: [
         Text(
-          "소비기한이 $diff일 남았어요!",
+          (diff >= 0) ? "소비기한이 $diff일 남았어요!" : "소비기한이 ${-diff}일 지났어요!",
           style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),

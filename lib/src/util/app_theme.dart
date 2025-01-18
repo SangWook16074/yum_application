@@ -4,6 +4,7 @@ ThemeData get light => ThemeData(
     scaffoldBackgroundColor: const Color(0xffE8EEF2),
     useMaterial3: false,
     textTheme: const TextTheme(
+<<<<<<< HEAD
       titleLarge: TextStyle(
         color: Color(0xffEBEAE6),
         fontFamily: "PartialSansKR",
@@ -23,10 +24,75 @@ ThemeData get light => ThemeData(
           fontFamily: "Pretendard",
           color: Color(0xff000000)),
       headlineSmall: TextStyle(
+=======
+        bodyLarge: TextStyle(
+          color: Color(0xffEBEAE6),
+          fontFamily: "PartialSansKR",
+          fontSize: 64,
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          letterSpacing: 0.0,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          fontFamily: "Pretendard",
+          color: Color(0xff686868),
+        ),
+        headlineLarge: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 32,
+            fontWeight: FontWeight.w700,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        headlineMedium: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        titleLarge: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        titleMedium: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        displayLarge: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 24,
+            fontWeight: FontWeight.w400,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        displayMedium: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        displaySmall: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        labelLarge: TextStyle(
+            letterSpacing: 0.0,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            fontFamily: "Pretendard",
+            color: Color(0xff000000)),
+        labelMedium: TextStyle(
+>>>>>>> c52b55fbdab9cec27c888408a2483ec5db411cf9
           letterSpacing: 0.0,
           fontSize: 20,
           fontWeight: FontWeight.w500,
           fontFamily: "Pretendard",
+<<<<<<< HEAD
           color: Color(0xff000000)),
       bodyLarge: TextStyle(
           letterSpacing: 0.0,
@@ -35,12 +101,23 @@ ThemeData get light => ThemeData(
           fontFamily: "Pretendard",
           color: Color(0xffFFFFFF)),
       bodyMedium: TextStyle(
+=======
+          color: Color(0xffFFFFFF),
+        ),
+        labelSmall: TextStyle(
+>>>>>>> c52b55fbdab9cec27c888408a2483ec5db411cf9
           letterSpacing: 0.0,
           fontSize: 16,
           fontWeight: FontWeight.w400,
           fontFamily: "Pretendard",
+<<<<<<< HEAD
           color: Color(0xff000000)),
       bodySmall: TextStyle(
+=======
+          color: Color(0xffA2A2A2),
+        ),
+        bodyMedium: TextStyle(
+>>>>>>> c52b55fbdab9cec27c888408a2483ec5db411cf9
           letterSpacing: 0.0,
           fontSize: 16,
           fontWeight: FontWeight.w400,
