@@ -3,26 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/date_picker_widget.dart';
 import 'package:yum_application/src/common/scroll_date_dialog.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_sheet.dart';
-import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
+import 'package:yum_application/src/ingredient/widget/select_ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
-class IngredientAddView extends StatefulWidget {
+class IngredientAddView extends StatelessWidget {
   const IngredientAddView({super.key});
-
-  @override
-  State<IngredientAddView> createState() => _IngredientAddViewState();
-}
-
-class _IngredientAddViewState extends State<IngredientAddView> {
-  late final IngredientViewModelImpl _ingredientViewModel;
-
-  @override
-  void initState() {
-    _ingredientViewModel =
-        Provider.of<IngredientViewModelImpl>(context, listen: false);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +15,18 @@ class _IngredientAddViewState extends State<IngredientAddView> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        leading: GestureDetector(
-          onTap: Navigator.of(context).pop,
-          child: const Icon(
-            Icons.arrow_back_ios,
-          ),
-        ),
+        leading: Builder(builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              Provider.of<IngredientViewModelImpl>(context, listen: false)
+                  .cancel();
+              Navigator.of(context).pop();
+            },
+            child: const Icon(
+              Icons.arrow_back_ios,
+            ),
+          );
+        }),
         elevation: 0.0,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.0))),
@@ -50,32 +41,15 @@ class _IngredientAddViewState extends State<IngredientAddView> {
               child: Center(
                 child: Consumer<IngredientViewModelImpl>(
                     builder: (context, provider, child) {
-                  return (provider.selectedIngredient == null)
-                      ? GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                                backgroundColor: Colors.red,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(32.0))),
-                                context: context,
-                                builder: (context) =>
-                                    const IngredientAddBottomSheet());
-                          },
-                          child: Text("+ 아이콘",
-                              style: Theme.of(context).textTheme.bodyLarge))
-                      : GestureDetector(
-                          onTap: () {
-                            Provider.of<IngredientViewModelImpl>(context,
-                                    listen: false)
-                                .cancel();
-                          },
-                          child: IngredientImage(
-                              width: 300,
-                              isFreezed: provider.selectedIngredient!.isFreezed,
-                              path: provider
-                                  .selectedIngredient!.category.imagePath),
-                        );
+                  return GestureDetector(
+                    onTap: () {
+                      provider.cancel();
+                    },
+                    child: SelectIngredientImage(
+                      ingredient: provider.selectedIngredient,
+                      width: 300,
+                    ),
+                  );
                 }),
               ),
             )),
@@ -93,21 +67,24 @@ class _IngredientAddViewState extends State<IngredientAddView> {
     );
   }
 
+  /// 냉동 또는 냉장 여부를 토글하는 버튼 위젯
   Widget _toggle() => Align(
         alignment: Alignment.bottomRight,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              "냉동",
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
+            Builder(builder: (context) {
+              return Text(
+                "냉동",
+                style: Theme.of(context).textTheme.displayMedium,
+              );
+            }),
             Consumer<IngredientViewModelImpl>(
                 builder: (context, provider, child) {
               return Switch.adaptive(
                 value: provider.isFreezed,
                 onChanged: provider.toggleIsFreezed,
-                activeColor: Theme.of(context).colorScheme.primary,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveThumbColor: Colors.grey,
               );
             })
@@ -119,29 +96,35 @@ class _IngredientAddViewState extends State<IngredientAddView> {
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
           padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-          child: Text(
-            "재료 이름",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          child: Builder(builder: (context) {
+            return Text(
+              "재료 이름",
+              style: Theme.of(context).textTheme.titleMedium,
+            );
+          }),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 10.0),
           child: SizedBox(
             width: 155,
             height: 44,
-            child: TextField(
-              decoration: InputDecoration(
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+            child: Builder(builder: (context) {
+              return TextField(
+                onChanged: Provider.of<IngredientViewModelImpl>(context)
+                    .updateIngredientName,
+                decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
-              ),
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
+                style: Theme.of(context).textTheme.displaySmall,
+              );
+            }),
           ),
         ),
         Row(
@@ -152,10 +135,12 @@ class _IngredientAddViewState extends State<IngredientAddView> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-                  child: Text(
-                    "구매 날짜",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  child: Builder(builder: (context) {
+                    return Text(
+                      "구매 날짜",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    );
+                  }),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
@@ -174,20 +159,20 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                                         top: Radius.circular(32.0))),
                                 context: context,
                                 builder: (context) => ScrollDateDialog(
-                                      onStartAtComp:
-                                          _ingredientViewModel.updateStartAt,
-                                      onEndAtComp:
-                                          _ingredientViewModel.updateEndAt,
+                                      onStartAtComp: provider.updateStartAt,
+                                      onEndAtComp: provider.updateEndAt,
                                     ));
                           },
                         );
                       }),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          "~",
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
+                        child: Builder(builder: (context) {
+                          return Text(
+                            "~",
+                            style: Theme.of(context).textTheme.displayLarge,
+                          );
+                        }),
                       ),
                     ],
                   ),
@@ -199,10 +184,12 @@ class _IngredientAddViewState extends State<IngredientAddView> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    "소비기한",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  child: Builder(builder: (context) {
+                    return Text(
+                      "소비기한",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    );
+                  }),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -222,10 +209,8 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                                 context: context,
                                 builder: (context) => ScrollDateDialog(
                                       initialStatus: false,
-                                      onStartAtComp:
-                                          _ingredientViewModel.updateStartAt,
-                                      onEndAtComp:
-                                          _ingredientViewModel.updateEndAt,
+                                      onStartAtComp: provider.updateStartAt,
+                                      onEndAtComp: provider.updateEndAt,
                                     ));
                           },
                         );
@@ -234,10 +219,12 @@ class _IngredientAddViewState extends State<IngredientAddView> {
                         opacity: 0.0,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Text(
-                            "~",
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
+                          child: Builder(builder: (context) {
+                            return Text(
+                              "~",
+                              style: Theme.of(context).textTheme.displayMedium,
+                            );
+                          }),
                         ),
                       ),
                     ],
@@ -251,8 +238,13 @@ class _IngredientAddViewState extends State<IngredientAddView> {
 
   Widget _button() => Padding(
       padding: const EdgeInsets.only(top: 24.0, bottom: 40.0),
-      child: SingleButton(
-        text: "등록하기",
-        onTap: _ingredientViewModel.createNewIngredient,
-      ));
+      child: Builder(builder: (context) {
+        return SingleButton(
+          text: "등록하기",
+          onTap: () {
+            Provider.of<IngredientViewModelImpl>(context, listen: false)
+                .createNewIngredient();
+          },
+        );
+      }));
 }

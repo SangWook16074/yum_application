@@ -52,4 +52,59 @@ class MockRemoteDatasource extends _i1.Mock implements _i2.RemoteDatasource {
         returnValue:
             _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
       ) as _i3.Future<Map<String, dynamic>>);
+
+  @override
+  _i3.Future<Map<String, dynamic>> updateIngredient(
+          Map<String, dynamic>? json) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateIngredient,
+          [json],
+        ),
+        returnValue:
+            _i3.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i3.Future<Map<String, dynamic>>);
+
+  @override
+  _i3.Future<List<Map<String, dynamic>>> getMyFavoriteIngredient() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMyFavoriteIngredient,
+          [],
+        ),
+        returnValue: _i3.Future<List<Map<String, dynamic>>>.value(
+            <Map<String, dynamic>>[]),
+      ) as _i3.Future<List<Map<String, dynamic>>>);
+
+  @override
+  _i3.Future<void> deleteIngredient(int? id) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteIngredient,
+          [id],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> createNewFavoriteIngredient(Map<String, dynamic>? json) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createNewFavoriteIngredient,
+          [json],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> deleteFavoriteIngredient(Map<String, dynamic>? json) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteFavoriteIngredient,
+          [json],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
 }

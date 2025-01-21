@@ -1,8 +1,11 @@
+import 'dart:isolate';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/page_indicator.dart';
 
 class RefreginatorContainer extends StatefulWidget {
@@ -21,12 +24,12 @@ class RefreginatorContainer extends StatefulWidget {
 }
 
 class _RefreginatorContainerState extends State<RefreginatorContainer>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   int _pageIndex = 0;
-  late final List<List<List<dynamic>>> _items;
-  late final int _totalPage;
-  late final PageController _pageController;
-  late final TabController _tabController;
+  late List<List<List<dynamic>>> _items;
+  late int _totalPage;
+  late PageController _pageController;
+  late TabController _tabController;
 
   void _handlePageViewChanged(int currentPageIndex) {
     _tabController.index = currentPageIndex;
@@ -70,12 +73,27 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 
   @override
   void initState() {
-    _totalPage = widget.children.length ~/ (4 * widget.rowCount) + 1;
+    _items = convertTo3D(widget.children);
+    _totalPage = ((widget.children.length) / (4 * widget.rowCount)).ceil();
     _pageController = PageController();
     _tabController = TabController(length: _totalPage, vsync: this);
-    _items = convertTo3D(widget.children);
-
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant RefreginatorContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.children == widget.children) {
+      return;
+    }
+
+    if (oldWidget.children.length != widget.children.length) {
+      _tabController.dispose();
+
+      _totalPage = ((widget.children.length) / (4 * widget.rowCount)).ceil();
+      _tabController = TabController(length: _totalPage, vsync: this);
+    }
+    _items = convertTo3D(widget.children);
   }
 
   @override
@@ -87,10 +105,10 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final containerHeight =
+        widget.rowCount > 0 ? widget.rowCount.toDouble() * 120 : 120.0;
     return Container(
-      constraints: BoxConstraints(maxHeight: widget.rowCount * 115),
-      height: height * 0.13 * widget.rowCount,
+      constraints: BoxConstraints(maxHeight: containerHeight),
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -106,7 +124,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
   }
 
   Widget _displayPageView() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 30.0),
         child: PageView(
             key: const Key("Ingredient Page View"),
             controller: _pageController,
@@ -114,15 +132,19 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
             children: List.generate(
               _items.length,
               (index) => Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 20.0, top: 20.0, left: 8, right: 8),
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: List.generate(widget.rowCount, (jndex) {
+                padding:
+                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                child: Wrap(
+                  alignment: WrapAlignment.start,
+                  runSpacing: 8.0,
+                  children: List.generate(
+                    widget.rowCount,
+                    (jndex) {
                       final rowItem = _items[index][jndex];
                       return _displayItemRow(rowItem);
-                    })),
+                    },
+                  ),
+                ),
               ),
             )),
       );
@@ -174,7 +196,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
         alignment: Alignment.bottomCenter,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(row.length, (index) => row[index]),
@@ -201,19 +223,15 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
                   ));
         },
         child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Column(
-            children: [
-              Padding(padding: const EdgeInsets.all(2.0), child: item.image),
-              Builder(builder: (context) {
-                return Text(
-                  item.name,
-                  style: Theme.of(context).textTheme.displaySmall,
-                );
-              })
-            ],
-          ),
-        ),
+            padding: const EdgeInsets.all(2.0),
+            child: (item.name.length < 6)
+                ? RefreginatorItem(
+                    item: item,
+                  )
+                : AnimatedRefreginatorItem(
+                    item: item,
+                    width: MediaQuery.of(context).size.width / 6,
+                  )),
       );
 
   Widget _generateEmtpy() {
@@ -241,7 +259,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     return Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -260,6 +278,114 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
                 currentPageIndex: _pageIndex,
                 onUpdateCurrentPageIndex: _updateCurrentPageIndex,
               )
-            : Container(),
+            : Container(
+                padding: const EdgeInsets.all(8.0),
+              ),
       );
+}
+
+class AnimatedRefreginatorItem extends StatefulWidget {
+  final Ingredient item;
+  final double width;
+  const AnimatedRefreginatorItem(
+      {super.key, required this.item, required this.width});
+
+  @override
+  State<AnimatedRefreginatorItem> createState() =>
+      _AnimatedRefreginatorItemState();
+}
+
+class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
+    with SingleTickerProviderStateMixin {
+  late final ScrollController _scrollController;
+  bool _scrolling = false;
+  @override
+  void initState() {
+    _scrollController = ScrollController()..addListener(_scrollTextAnimation);
+    // _scrollController.addListener(_scrollTextAnimation);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController
+          .animateTo(_scrollController.position.maxScrollExtent,
+              duration: const Duration(seconds: 2), curve: Curves.linear)
+          .then((_) {
+        _scrollController.jumpTo(0);
+      });
+    });
+
+    super.initState();
+  }
+
+  _scrollTextAnimation() async {
+    if (_scrollController.offset < _scrollController.position.maxScrollExtent &&
+        !_scrolling) {
+      _scrolling = true;
+      print("시작");
+      _scrollController
+          .animateTo(_scrollController.position.maxScrollExtent,
+              duration: const Duration(seconds: 2), curve: Curves.linear)
+          .then((_) {
+        _scrolling = false;
+      });
+    } else if (_scrollController.offset ==
+        _scrollController.position.maxScrollExtent) {
+      print("초기화");
+      _scrollController.jumpTo(0);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: IngredientImage(
+              path: widget.item.category.imagePath,
+              isFreezed: widget.item.isFreezed,
+            )),
+        SizedBox(
+          width: widget.width,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: _scrollController,
+            child: Text(
+              widget.item.name * 2,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class RefreginatorItem extends StatelessWidget {
+  final Ingredient item;
+
+  const RefreginatorItem({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: IngredientImage(
+              path: item.category.imagePath,
+              isFreezed: item.isFreezed,
+            )),
+        Text(
+          item.name,
+          style: Theme.of(context).textTheme.displaySmall,
+        )
+      ],
+    );
+  }
 }

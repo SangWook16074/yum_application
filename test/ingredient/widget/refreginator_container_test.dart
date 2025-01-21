@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/refreginator_container.dart';
@@ -34,7 +35,6 @@ void main() {
             name: "egg",
             category: IngredientCategory.egg,
             isFreezed: false,
-            isFavorite: false,
             startAt: DateTime.now(),
             endAt: DateTime.now()),
       );
@@ -52,7 +52,6 @@ void main() {
             name: "egg",
             category: IngredientCategory.egg,
             isFreezed: false,
-            isFavorite: false,
             startAt: DateTime.now(),
             endAt: DateTime.now()),
       ];
@@ -72,7 +71,6 @@ void main() {
             name: "egg",
             category: IngredientCategory.egg,
             isFreezed: false,
-            isFavorite: false,
             startAt: DateTime.now(),
             endAt: DateTime.now()),
       );

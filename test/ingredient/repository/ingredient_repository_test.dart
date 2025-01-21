@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 
@@ -37,13 +38,12 @@ void main() {
       expect(first.id, 1);
       expect(first.name, "egg");
       expect(first.isFreezed, false);
-      expect(first.isFavorite, false);
       expect(first.category, IngredientCategory.egg);
       expect(first.startAt, DateTime(2024, 11, 12));
       expect(first.endAt, DateTime(2024, 11, 17));
     });
 
-    test("getAllIngredient 요청이 성공하면 Ingredient가 반환된다", () async {
+    test("createIngredient 요청이 성공하면 Ingredient가 반환된다", () async {
       final Ingredient ingredient = Ingredient(
           name: "egg",
           category: IngredientCategory.egg,
@@ -67,7 +67,6 @@ void main() {
       expect(result, isA<Ingredient>());
       expect(result.name, "egg");
       expect(result.isFreezed, false);
-      expect(result.isFavorite, false);
       expect(result.category, IngredientCategory.egg);
       expect(result.startAt, DateTime(2024, 11, 12));
       expect(result.endAt, DateTime(2024, 11, 17));

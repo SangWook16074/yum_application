@@ -84,10 +84,12 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
 
   Widget _header() {
     return Row(
+      key: const Key("header"),
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
           child: ElevatedButton(
+            key: const Key("Scroll Date Dialog 구매날짜 버튼"),
             style: ElevatedButton.styleFrom(
               backgroundColor: selectedButton
                   ? Theme.of(context).colorScheme.secondary
@@ -117,6 +119,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
         Padding(
           padding: const EdgeInsets.only(left: 4, top: 20, bottom: 10),
           child: ElevatedButton(
+            key: const Key("Scroll Date Dialog 소비기한 버튼"),
             style: ElevatedButton.styleFrom(
               backgroundColor: !selectedButton
                   ? Theme.of(context).colorScheme.secondary
@@ -149,6 +152,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
 
   Widget _body() {
     return Expanded(
+      key: const Key("body"),
       child: Stack(
         children: [
           Center(
@@ -171,6 +175,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
 
   Widget _yearDate() {
     return Expanded(
+      key: const Key("year date"),
       child: Container(
         color: Colors.transparent,
         child: ListWheelScrollView(
@@ -209,6 +214,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
 
   Widget _monthDate() {
     return Expanded(
+      key: const Key("month date"),
       child: Container(
         color: Colors.transparent,
         child: ListWheelScrollView(
@@ -247,6 +253,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
 
   Widget _dayDate() {
     return Expanded(
+      key: const Key("day date"),
       child: Container(
         color: Colors.transparent,
         child: ListWheelScrollView(
@@ -284,6 +291,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
 
   Widget _bottom() {
     return Padding(
+      key: const Key("bottom"),
       padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

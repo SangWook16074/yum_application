@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
-class IngredientTile extends StatefulWidget {
-  final Ingredient ingredient;
-
+class IngredientTile extends StatelessWidget {
+  final BasicIngredient ingredient;
+  final void Function()? onTap;
   const IngredientTile({
     super.key,
     required this.ingredient,
+    required this.onTap,
   });
-
-  @override
-  State<IngredientTile> createState() => _IngredientTileState();
-}
-
-class _IngredientTileState extends State<IngredientTile> {
-  void _toggle() {
-    setState(() {
-      widget.ingredient.updateIsFavorite();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +27,8 @@ class _IngredientTileState extends State<IngredientTile> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              widget.ingredient.image,
-              Text(widget.ingredient.name,
+              IngredientImage(path: ingredient.category.imagePath),
+              Text(ingredient.name,
                   style: Theme.of(context).textTheme.displaySmall)
             ],
           ),
@@ -45,8 +36,8 @@ class _IngredientTileState extends State<IngredientTile> {
             top: 2.0,
             right: 2.0,
             child: GestureDetector(
-                onTap: _toggle,
-                child: (widget.ingredient.isFavorite)
+                onTap: onTap,
+                child: (ingredient.isFavorite)
                     ? const Icon(
                         Icons.favorite,
                         color: Color(0xffF5713E),
