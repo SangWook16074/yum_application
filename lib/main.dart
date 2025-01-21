@@ -3,6 +3,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/app_config.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
+import 'package:yum_application/src/recipe/view/recipe_%20register_view.dart';
+import 'package:yum_application/src/recipe/view/recipe_detail_view.dart';
+import 'package:yum_application/src/recipe/view/recipe_view.dart';
 import 'package:yum_application/src/util/app_theme.dart';
 
 void main() async {
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: light,
-      home: const HomeView(),
+      home: RecipeDetailView(),
     );
   }
 }

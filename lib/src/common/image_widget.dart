@@ -15,3 +15,7 @@ class ImageWidget extends StatelessWidget {
         ));
   }
 }
+
+class ImagePath {
+  static String get fab => "/assets/images/floating.png";
+}
