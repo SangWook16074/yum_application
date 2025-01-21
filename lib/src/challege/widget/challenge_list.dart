@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:yum_application/src/common/image_widget.dart';
 
-class ChallengeList extends StatelessWidget {
+class ChallengeRow extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imagePath;
-  final bool isRecommended;
+  final void Function() onTap;
 
-  const ChallengeList({
+  // 추후에 확인을 위한 로직 작성이 필요함.
+  final bool isFirst;
+
+  const ChallengeRow({
     required this.title,
     required this.subtitle,
     required this.imagePath,
-    this.isRecommended = false,
+    required this.onTap,
+    this.isFirst = false,
     super.key,
   });
 
@@ -37,10 +42,9 @@ class ChallengeList extends StatelessWidget {
                 ),
                 child: Center(
                   child: SizedBox(
-                    width: 68,
-                    height: 68,
-                    child: Image.asset(imagePath),
-                  ),
+                      width: 68,
+                      height: 68,
+                      child: ImageWidget(path: imagePath)),
                 ),
               ),
             ),
@@ -53,42 +57,37 @@ class ChallengeList extends StatelessWidget {
                         const EdgeInsets.only(left: 20, top: 20, bottom: 35),
                     child: Row(
                       children: [
-                        if (isRecommended)
+                        if (isFirst)
                           Padding(
                             padding: const EdgeInsets.only(right: 8),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 6),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                "최초",
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 7, horizontal: 9),
+                                child: Text("최초",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineSmall),
                               ),
                             ),
                           ),
                         Expanded(
-                          child: Text(
-                            title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(letterSpacing: 0.0),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          child: Text(title,
+                              style: Theme.of(context).textTheme.titleMedium),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: onTap,
                             icon: Icon(
                               Icons.arrow_forward_ios,
                               color: Theme.of(context)
                                   .colorScheme
                                   .onSecondaryContainer,
-                              size: 20,
+                              size: 24,
                             ),
                             padding: EdgeInsets.zero,
                             splashColor: Colors.transparent,
@@ -103,10 +102,9 @@ class ChallengeList extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
                     child: Text(
                       subtitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelSmall
-                          ?.copyWith(letterSpacing: 0.0),
+                      style: isFirst
+                          ? Theme.of(context).textTheme.bodySmall
+                          : Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
                 ],
