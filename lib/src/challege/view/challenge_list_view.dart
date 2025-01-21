@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/challege/widget/challenge_detail_view.dart';
 import 'package:yum_application/src/common/image_widget.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/challege/widget/challenge_list.dart';
+import 'package:yum_application/src/challege/widget/challenge_row.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
 class ChallengeListView extends StatelessWidget {
@@ -58,7 +58,7 @@ Widget _header() {
                   children: [
                     Text(
                       "단계마다 비밀 식재료를 획득해요\n식재료를 모아 요리를 완성해보세요",
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.labelMedium,
                     ),
                     SizedBox(
                       width: 48,
@@ -107,7 +107,7 @@ Widget _challenges() {
             width: double.infinity,
             child: Text(
               "챌린지 리스트",
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
         ),
