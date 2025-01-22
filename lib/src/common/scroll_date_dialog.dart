@@ -109,8 +109,8 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
             child: Text(
               "구매날짜",
               style: selectedButton
-                  ? Theme.of(context).textTheme.bodyMedium
-                  : Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  ? Theme.of(context).textTheme.bodySmall
+                  : Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: const Color(0xffA2A2A2),
                       ),
             ),
@@ -139,8 +139,8 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
             child: Text(
               "소비기한",
               style: !selectedButton
-                  ? Theme.of(context).textTheme.bodyMedium
-                  : Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  ? Theme.of(context).textTheme.bodySmall
+                  : Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: const Color(0xffA2A2A2),
                       ),
             ),
@@ -201,8 +201,8 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
                 child: Text(
                   '${2000 + index}년',
                   style: isSelected
-                      ? Theme.of(context).textTheme.labelLarge
-                      : Theme.of(context).textTheme.labelSmall,
+                      ? Theme.of(context).textTheme.headlineSmall
+                      : Theme.of(context).textTheme.labelMedium,
                 ),
               );
             },
@@ -240,8 +240,8 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
                 child: Text(
                   '${index + 1}월',
                   style: isSelected
-                      ? Theme.of(context).textTheme.labelLarge
-                      : Theme.of(context).textTheme.labelSmall,
+                      ? Theme.of(context).textTheme.headlineSmall
+                      : Theme.of(context).textTheme.labelMedium,
                 ),
               );
             },
@@ -278,8 +278,8 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
                 child: Text(
                   '${index + 1}일',
                   style: isSelected
-                      ? Theme.of(context).textTheme.labelLarge
-                      : Theme.of(context).textTheme.labelSmall,
+                      ? Theme.of(context).textTheme.headlineSmall
+                      : Theme.of(context).textTheme.labelMedium,
                 ),
               );
             },
@@ -316,7 +316,7 @@ class _ScrollDateDialogState extends State<ScrollDateDialog> {
               },
         child: Text(
           "선택하기",
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),
     );

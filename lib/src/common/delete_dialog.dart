@@ -12,7 +12,7 @@ class DeleteDialog extends StatelessWidget {
       title: Center(
         child: Text(
           '정말 삭제하시겠습니까?',
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
       actions: [
@@ -38,7 +38,7 @@ class DeleteDialog extends StatelessWidget {
                       onPressed: () => Navigator.of(context).pop(),
                       child: Text(
                         '취소',
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -57,7 +57,7 @@ class DeleteDialog extends StatelessWidget {
                     },
                     child: Text(
                       "삭제",
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),

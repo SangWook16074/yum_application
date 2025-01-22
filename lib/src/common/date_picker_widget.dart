@@ -26,21 +26,21 @@ class DatePickerWidget extends StatelessWidget {
           children: [
             Text(
               (time != null) ? "${time!.year}" : "년",
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
             VerticalDivider(
               color: Theme.of(context).colorScheme.surfaceContainer,
             ),
             Text(
               (time != null) ? "${time!.month}" : "월",
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
             VerticalDivider(
               color: Theme.of(context).colorScheme.surfaceContainer,
             ),
             Text(
               (time != null) ? "${time!.day}" : "일",
-              style: Theme.of(context).textTheme.labelSmall,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
             const Icon(
               Icons.arrow_drop_down,

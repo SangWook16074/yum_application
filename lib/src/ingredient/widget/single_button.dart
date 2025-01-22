@@ -19,7 +19,7 @@ class SingleButton extends StatelessWidget {
         onPressed: onTap,
         child: Text(
           text,
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
       ),
