@@ -17,12 +17,21 @@ class App extends StatelessWidget {
 
   Widget _body() => Consumer<AppViewModel>(builder: (context, provider, child) {
         return IndexedStack(
+          key: const Key("app view body"),
           index: provider.pageIndex,
           children: [
-            Container(),
-            const HomeView(),
-            Container(),
-            Container(),
+            Container(
+              key: const Key("app view recipe view"),
+            ),
+            const HomeView(
+              key: Key("app view ingredient view"),
+            ),
+            Container(
+              key: const Key("app view challenge view"),
+            ),
+            Container(
+              key: const Key("app view mypage view"),
+            ),
           ],
         );
       });
@@ -30,6 +39,7 @@ class App extends StatelessWidget {
   Widget _bottomNav() =>
       Consumer<AppViewModel>(builder: (context, provider, child) {
         return BottomNavigationBar(
+            key: const Key("app view bottom nav"),
             type: BottomNavigationBarType.fixed,
             onTap: provider.changeIndex,
             currentIndex: provider.pageIndex,
