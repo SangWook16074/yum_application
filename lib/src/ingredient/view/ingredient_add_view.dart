@@ -76,7 +76,7 @@ class IngredientAddView extends StatelessWidget {
             Builder(builder: (context) {
               return Text(
                 "냉동",
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               );
             }),
             Consumer<IngredientViewModelImpl>(
@@ -99,7 +99,7 @@ class IngredientAddView extends StatelessWidget {
           child: Builder(builder: (context) {
             return Text(
               "재료 이름",
-              style: Theme.of(context).textTheme.titleMedium,
+              style: Theme.of(context).textTheme.headlineSmall,
             );
           }),
         ),
@@ -122,7 +122,7 @@ class IngredientAddView extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: Theme.of(context).textTheme.displaySmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               );
             }),
           ),
@@ -138,7 +138,7 @@ class IngredientAddView extends StatelessWidget {
                   child: Builder(builder: (context) {
                     return Text(
                       "구매 날짜",
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     );
                   }),
                 ),
@@ -170,7 +170,7 @@ class IngredientAddView extends StatelessWidget {
                         child: Builder(builder: (context) {
                           return Text(
                             "~",
-                            style: Theme.of(context).textTheme.displayLarge,
+                            style: Theme.of(context).textTheme.headlineMedium,
                           );
                         }),
                       ),
@@ -187,7 +187,7 @@ class IngredientAddView extends StatelessWidget {
                   child: Builder(builder: (context) {
                     return Text(
                       "소비기한",
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     );
                   }),
                 ),
@@ -222,7 +222,7 @@ class IngredientAddView extends StatelessWidget {
                           child: Builder(builder: (context) {
                             return Text(
                               "~",
-                              style: Theme.of(context).textTheme.displayMedium,
+                              style: Theme.of(context).textTheme.headlineSmall,
                             );
                           }),
                         ),

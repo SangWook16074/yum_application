@@ -28,4 +28,9 @@ class ImagePath {
   static String get challengeOn => "assets/images/bottom_nav_challenge_on.png";
   static String get mypageOff => "assets/images/bottom_nav_mypage_off.png";
   static String get mypageOn => "assets/images/bottom_nav_mypage_on.png";
+  static String get recipeResister => "assets/images/recipe.png";
+  static String get recipeReview => "assets/images/chef.png";
+  static String get recipeRecommendation => "assets/images/like.png";
+  static String get recipeUses => "assets/images/wok.png";
+  static String get consecutiveUses => "assets/images/group.png";
 }

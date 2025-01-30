@@ -100,7 +100,8 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
                   context: context,
                   builder: (context) => const IngredientAddBottomSheet());
             },
-            child: Text("+ 아이콘", style: Theme.of(context).textTheme.bodyLarge));
+            child:
+                Text("+ 아이콘", style: Theme.of(context).textTheme.titleLarge));
   }
 
   Widget _icon() => ImageWidget(

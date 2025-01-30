@@ -80,7 +80,7 @@ class IngredientAddBottomSheet extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),

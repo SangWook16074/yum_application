@@ -29,7 +29,7 @@ class IngredientTile extends StatelessWidget {
             children: [
               IngredientImage(path: ingredient.category.imagePath),
               Text(ingredient.name,
-                  style: Theme.of(context).textTheme.displaySmall)
+                  style: Theme.of(context).textTheme.bodyMedium)
             ],
           ),
           Positioned(

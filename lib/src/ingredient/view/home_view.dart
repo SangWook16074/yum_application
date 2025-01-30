@@ -36,6 +36,7 @@ class HomeView extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 8.0),
       child: Builder(builder: (context) {
         return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "나의 냉장고",
