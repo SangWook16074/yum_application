@@ -46,7 +46,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
       child: Column(children: [
         Text(
           (diff >= 0) ? "소비기한이 $diff일 남았어요!" : "소비기한이 ${-diff}일 지났어요!",
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
         Text(
@@ -84,7 +84,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
               Padding(
                 padding: const EdgeInsets.only(top: 23.3),
                 child: Text(widget.ingredient.name,
-                    style: Theme.of(context).textTheme.titleLarge),
+                    style: Theme.of(context).textTheme.bodyMedium),
               )
             ],
           )
@@ -123,7 +123,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
               },
               child: Text(
                 "수정하기",
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             Padding(
@@ -151,7 +151,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
                   "삭제하기",
                   style: Theme.of(context)
                       .textTheme
-                      .titleMedium
+                      .bodyLarge
                       ?.copyWith(color: Colors.white),
                 ),
               ),

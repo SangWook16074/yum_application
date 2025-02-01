@@ -88,7 +88,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
           children: [
             Text(
               "냉동",
-              style: Theme.of(context).textTheme.displayMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             Consumer<IngredientViewModelImpl>(
                 builder: (context, provider, child) {
@@ -109,7 +109,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
           padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
           child: Text(
             "재료 이름",
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
         Padding(
@@ -131,7 +131,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         ),
@@ -145,7 +145,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                   padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
                   child: Text(
                     "구매 날짜",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
                 Padding(
@@ -177,7 +177,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           "~",
-                          style: Theme.of(context).textTheme.displayLarge,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),
                     ],
@@ -192,7 +192,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
                     "소비기한",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
                 Padding(
@@ -227,7 +227,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: Text(
                             "~",
-                            style: Theme.of(context).textTheme.displayMedium,
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ),
                       ),

@@ -172,7 +172,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
         fit: BoxFit.scaleDown,
         child: Text(
           randomString,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleLarge,
           overflow: TextOverflow.clip,
         ),
       ),
@@ -263,7 +263,8 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.label, style: Theme.of(context).textTheme.labelLarge),
+              Text(widget.label,
+                  style: Theme.of(context).textTheme.headlineSmall),
             ],
           ),
         ));
@@ -357,7 +358,7 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
             controller: _scrollController,
             child: Text(
               widget.item.name * 2,
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         )
@@ -383,7 +384,7 @@ class RefreginatorItem extends StatelessWidget {
             )),
         Text(
           item.name,
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.bodyMedium,
         )
       ],
     );
