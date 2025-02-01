@@ -62,10 +62,10 @@ class IngredientViewModelImpl extends ChangeNotifier
     if (_selectedIngredient == null) {
       return;
     }
-    print(_selectedIngredient);
+
     try {
       // 선택한 재료를 타겟으로 설정
-      final newIngredient = selectedIngredient!;
+      final newIngredient = selectedIngredient!.copy(name: _ingredientName);
       final prevIngredients = _myIngredients;
       _myIngredients = [
         ...prevIngredients,
