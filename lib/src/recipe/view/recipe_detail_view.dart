@@ -13,7 +13,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       body: SafeArea(
         child: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
@@ -32,7 +32,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
   }
 
   SliverAppBar _appbar() => SliverAppBar.large(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
@@ -78,7 +78,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                       ),
                       Text(
                         "25 분",
-                        style: Theme.of(context).textTheme.displaySmall,
+                        style: Theme.of(context).textTheme.labelLarge,
                       )
                     ],
                   ),
@@ -89,7 +89,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                             left: 20, right: 10, bottom: 20, top: 20),
                         child: Text(
                           "리뷰(0,000)",
-                          style: Theme.of(context).textTheme.displayMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -99,7 +99,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                           onTap: () {},
                           child: Text(
                             "전체보기",
-                            style: Theme.of(context).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ),
                       ),
@@ -136,7 +136,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       "레시피 정보 한눈에 보기",
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
                 ],
@@ -149,7 +149,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
               child: Container(
                 width: 350,
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     borderRadius: BorderRadius.circular(12)),
                 child: Column(
                   children: [
@@ -164,12 +164,12 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                             ),
                             child: Text(
                               "재료",
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ),
                           Text(
                             "1.5 인분 기준",
-                            style: Theme.of(context).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.labelMedium,
                           )
                         ],
                       ),
@@ -180,18 +180,18 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                         children: [
                           Text(
                             "토마토 3 개 ",
-                            style: Theme.of(context).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Text(
                               "양파 1/2 개 ",
-                              style: Theme.of(context).textTheme.displaySmall,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ),
                           Text(
                             "버섯 1 개 ",
-                            style: Theme.of(context).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           )
                         ],
                       ),
@@ -205,12 +205,12 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                             padding: const EdgeInsets.only(right: 10),
                             child: Text(
                               "소금 한 꼬집",
-                              style: Theme.of(context).textTheme.displaySmall,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ),
                           Text(
                             "간장 1 스푼",
-                            style: Theme.of(context).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           )
                         ],
                       ),
@@ -232,7 +232,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
           children: [
             Text(
               "요리 방법",
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.left,
             ),
             Padding(
@@ -240,7 +240,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
               child: Container(
                 width: 350,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Padding(
@@ -252,7 +252,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
                           "Step 1",
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
                       Padding(
@@ -291,7 +291,7 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(
                           "오늘은 생토마토가 없어서 홀토마토를 사용했어요.^^ 요거 한 통 다 들어갔네요. 전체 스프의 양은 8인분 정도??",
-                          style: Theme.of(context).textTheme.displaySmall,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     ],
@@ -324,14 +324,14 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
                     "Step 2",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
                     "호주산 국거리감인데 400그램이네요. 여기에 밀가루 넣고 뒤적뒤적... 요 방법은 원래는 스튜 만들 때 사용하기도 하지만... 스프가 넘 맑은 게 싫을 경우 살짝 걸쭉한 게 좋다면 요렇게 시작하시면 좋아요. 그리고 저는 스프의 감자를 별로 좋아하지않아서 넣지 않거든요. 그래서 밀가루옷을 입혀 준답니다. 살짝 걸쭉하라고요. 감자를 많이 넣는",
-                    style: Theme.of(context).textTheme.displaySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],

@@ -45,7 +45,7 @@ class _StepperViewState extends State<StepperView> {
         padding: const EdgeInsets.only(top: 24.0, bottom: 10.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(MediaQuery.of(context).size.width - 20, 40),
+            fixedSize: Size(MediaQuery.of(context).size.width - 35, 40),
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0)),

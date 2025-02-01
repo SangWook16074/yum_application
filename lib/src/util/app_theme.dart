@@ -61,7 +61,6 @@ ThemeData get light => ThemeData(
       ),
       labelSmall: TextStyle(
         letterSpacing: 0.0,
-        height: 13,
         fontSize: 14,
         fontWeight: FontWeight.w400,
         fontFamily: "Pretendard",

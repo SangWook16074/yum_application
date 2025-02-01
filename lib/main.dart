@@ -28,6 +28,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         navigatorKey: GlobalVariable.naviagatorState,
         theme: light,
-        home: const ChallengeListView());
+        home: const RecipeRegisterView());
   }
 }

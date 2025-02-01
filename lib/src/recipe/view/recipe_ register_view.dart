@@ -50,7 +50,7 @@ class _RecipeRegisterViewState extends State<RecipeRegisterView> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey)),
                   ),
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ],
             ),
