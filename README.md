@@ -1,5 +1,6 @@
 # 자취얌! 프로젝트
 자취 생활을 위한 냉장고 재료 관리와 맞춤 레시피 추천 앱
+Figma URL : [https://www.figma.com/design/1zLYTQZGQLmy9fFyN43GO4/%EC%9E%90%EC%B7%A8%EC%83%9D_%EB%83%89%EC%9E%A5%EA%B3%A0_%EB%A0%88%EC%8B%9C%ED%94%BC_%EC%95%B1?node-id=1074-1172&p=f&t=zhckIejN168EJhOC-0](https://www.figma.com/design/1zLYTQZGQLmy9fFyN43GO4/%EC%9E%90%EC%B7%A8%EC%83%9D_%EB%83%89%EC%9E%A5%EA%B3%A0_%EB%A0%88%EC%8B%9C%ED%94%BC_%EC%95%B1?node-id=1074-1172&p=f&t=zhckIejN168EJhOC-0)
 
 ## 개발기간
 2024.09 - 현재 (진행률 : 70%)
