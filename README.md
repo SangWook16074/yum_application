@@ -1,16 +1,15 @@
-# yum_application
+# 자취얌! 프로젝트
+자취 생활을 위한 냉장고 재료 관리와 맞춤 레시피 추천 앱
 
-A new Flutter project.
+## 개발기간
+2024.09 - 현재 (진행률 : 70%)
 
-## Getting Started
+## 참여 인원 소개
+PL : 한상욱 \
+Front - End : 한상욱, 이준호, 윤채림 \
+Back - End : 김정우, 한상욱 \
+UI/UX Design : 강은지, 강주은
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 기술 스택
+Flutter / Provider / http \
+Spring / Spring Boot / MySQL / Elasticsearch / AWS
