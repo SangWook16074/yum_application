@@ -13,6 +13,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<IngredientViewModelImpl>(
         builder: (context, provider, child) {
+      if (provider.status == Status.error) {
+        return _error();
+      }
       return Stack(
         children: [
           Scaffold(
@@ -108,4 +111,19 @@ class HomeView extends StatelessWidget {
           child: CircularProgressIndicator.adaptive(),
         )
       ];
+
+  Widget _error() => const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.error),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("에러가 발생했습니다!"),
+              )
+            ],
+          ),
+        ),
+      );
 }
