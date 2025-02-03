@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
-import 'dart:ui' as _i7;
+import 'dart:async' as _i6;
+import 'dart:ui' as _i8;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:yum_application/src/common/enums/status.dart' as _i4;
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart'
-    as _i6;
+    as _i7;
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
-    as _i4;
+    as _i5;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart'
@@ -59,18 +60,50 @@ class MockIngredientViewModelImpl extends _i1.Mock
       ) as _i2.IngredientRepository);
 
   @override
-  List<_i4.Ingredient> get myFreezedIngredients => (super.noSuchMethod(
-        Invocation.getter(#myFreezedIngredients),
-        returnValue: <_i4.Ingredient>[],
-        returnValueForMissingStub: <_i4.Ingredient>[],
-      ) as List<_i4.Ingredient>);
+  _i4.Status get status => (super.noSuchMethod(
+        Invocation.getter(#status),
+        returnValue: _i4.Status.init,
+        returnValueForMissingStub: _i4.Status.init,
+      ) as _i4.Status);
 
   @override
-  List<_i4.Ingredient> get myUnfreezedIngredients => (super.noSuchMethod(
+  set status(_i4.Status? _status) => super.noSuchMethod(
+        Invocation.setter(
+          #status,
+          _status,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  bool get isWarningFilterOn => (super.noSuchMethod(
+        Invocation.getter(#isWarningFilterOn),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  set isWarningFilterOn(bool? _isWarningFilterOn) => super.noSuchMethod(
+        Invocation.setter(
+          #isWarningFilterOn,
+          _isWarningFilterOn,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  List<_i5.Ingredient> get myFreezedIngredients => (super.noSuchMethod(
+        Invocation.getter(#myFreezedIngredients),
+        returnValue: <_i5.Ingredient>[],
+        returnValueForMissingStub: <_i5.Ingredient>[],
+      ) as List<_i5.Ingredient>);
+
+  @override
+  List<_i5.Ingredient> get myUnfreezedIngredients => (super.noSuchMethod(
         Invocation.getter(#myUnfreezedIngredients),
-        returnValue: <_i4.Ingredient>[],
-        returnValueForMissingStub: <_i4.Ingredient>[],
-      ) as List<_i4.Ingredient>);
+        returnValue: <_i5.Ingredient>[],
+        returnValueForMissingStub: <_i5.Ingredient>[],
+      ) as List<_i5.Ingredient>);
 
   @override
   bool get isFreezed => (super.noSuchMethod(
@@ -87,6 +120,25 @@ class MockIngredientViewModelImpl extends _i1.Mock
       ) as bool);
 
   @override
+  _i6.Future<void> fetchData() => (super.noSuchMethod(
+        Invocation.method(
+          #fetchData,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  void toggleWarning(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #toggleWarning,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void updateIngredientName(String? newName) => super.noSuchMethod(
         Invocation.method(
           #updateIngredientName,
@@ -96,37 +148,27 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  _i5.Future<void> fetchData() => (super.noSuchMethod(
-        Invocation.method(
-          #fetchData,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
-
-  @override
-  _i5.Future<void> createNewIngredient() => (super.noSuchMethod(
+  _i6.Future<void> createNewIngredient() => (super.noSuchMethod(
         Invocation.method(
           #createNewIngredient,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  _i5.Future<void> updateIngredient() => (super.noSuchMethod(
+  _i6.Future<void> updateIngredient() => (super.noSuchMethod(
         Invocation.method(
           #updateIngredient,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  void deleteIngredient(_i4.Ingredient? ingredient) => super.noSuchMethod(
+  void deleteIngredient(_i5.Ingredient? ingredient) => super.noSuchMethod(
         Invocation.method(
           #deleteIngredient,
           [ingredient],
@@ -135,7 +177,7 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  void selectIngredient(_i6.BasicIngredient? ingredient) => super.noSuchMethod(
+  void selectIngredient(_i7.BasicIngredient? ingredient) => super.noSuchMethod(
         Invocation.method(
           #selectIngredient,
           [ingredient],
@@ -144,7 +186,7 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  void selectPrevIngredient(_i4.Ingredient? prevIngredient) =>
+  void selectPrevIngredient(_i5.Ingredient? prevIngredient) =>
       super.noSuchMethod(
         Invocation.method(
           #selectPrevIngredient,
@@ -190,7 +232,7 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
@@ -199,7 +241,7 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
