@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:yum_application/src/common/enums/status.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
@@ -8,9 +9,46 @@ import 'package:yum_application/src/util/global_variable.dart';
 class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
+
+  // 연결 상태
+  Status status = Status.init;
+
+  // 냉장고 식재료 데이터
   List<Ingredient> _myIngredients = List.empty(growable: true);
+
   IngredientViewModelImpl({required this.ingredientRepository}) {
     fetchData();
+  }
+
+  @override
+  Future<void> fetchData() async {
+    status = Status.loading;
+    notifyListeners();
+    try {
+      final result = await ingredientRepository.getMyIngredient();
+      _myIngredients.clear();
+      _myIngredients.addAll(result);
+      status = Status.loaded;
+    } on Exception catch (e) {
+      // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
+      status = Status.error;
+      rethrow;
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  /// [isWaringFilterOn]이 활성화되면,
+  /// 냉장고 재료 중 기간이 임박한 재료만 필터링하게 됩니다.
+  /// 그렇지 않은 경우에는 전체 재료를 반환합니다.
+  bool isWarningFilterOn = false;
+
+  /// [isWarningFilterOn]은 이 메소드를 통해서 값을 변경할 수 있습니다.
+  @override
+  toggleWarning(bool value) {
+    isWarningFilterOn = value;
+
+    notifyListeners();
   }
 
   String _ingredientName = "";
@@ -20,18 +58,24 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   /// 나의 냉동 재료 getter
+  /// [isWarningFilterOn]이 활성화되면 기간이 임박한
+  /// 냉동 식재료만을 반환합니다.
   @override
   List<Ingredient> get myFreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == true)
+        .where((ingredient) => !isWarningFilterOn || ingredient.isWarning)
         .toList();
   }
 
   /// 나의 냉장 재료 getter
+  /// /// [isWarningFilterOn]이 활성화되면 기간이 임박한
+  /// 냉장 식재료만을 반환합니다.
   @override
   List<Ingredient> get myUnfreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == false)
+        .where((ingredient) => !isWarningFilterOn || ingredient.isWarning)
         .toList();
   }
 
@@ -44,28 +88,15 @@ class IngredientViewModelImpl extends ChangeNotifier
   bool get isFreezed => _isFreezed;
 
   @override
-  Future<void> fetchData() async {
-    try {
-      final result = await ingredientRepository.getMyIngredient();
-      _myIngredients.clear();
-      _myIngredients.addAll(result);
-      notifyListeners();
-    } on Exception catch (e) {
-      // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
-      throw Exception("재료 불러오기 에러");
-    }
-  }
-
-  @override
   Future<void> createNewIngredient() async {
     // 선택한 재료가 없으면 return;
     if (_selectedIngredient == null) {
       return;
     }
-    print(_selectedIngredient);
+
     try {
       // 선택한 재료를 타겟으로 설정
-      final newIngredient = selectedIngredient!;
+      final newIngredient = selectedIngredient!.copy(name: _ingredientName);
       final prevIngredients = _myIngredients;
       _myIngredients = [
         ...prevIngredients,
@@ -215,4 +246,6 @@ abstract class IngredientViewModel {
   void updateStartAt(DateTime startAt);
 
   void updateEndAt(DateTime endAt);
+
+  void toggleWarning(bool value);
 }

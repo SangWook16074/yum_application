@@ -27,7 +27,10 @@ class IngredientTile extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IngredientImage(path: ingredient.category.imagePath),
+              IngredientImage(
+                path: ingredient.category.imagePath,
+                isWarning: false,
+              ),
               Text(ingredient.name,
                   style: Theme.of(context).textTheme.bodyMedium)
             ],
