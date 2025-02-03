@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/enums/status.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_filter_check_box.dart';
 
 import 'package:yum_application/src/ingredient/widget/refreginator_container.dart';
 
@@ -29,6 +30,7 @@ class HomeView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     _header(),
+                    _toggleWarning(),
                     _freezer(),
                     _fridge(),
                   ],
@@ -124,6 +126,22 @@ class HomeView extends StatelessWidget {
               )
             ],
           ),
+        ),
+      );
+
+  Widget _toggleWarning() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Consumer<IngredientViewModelImpl>(
+                builder: (context, provider, child) {
+              return IngredientFilterCheckBox(
+                  value: provider.isWarningFilterOn,
+                  label: "기간 임박",
+                  onChanged: provider.toggleWarning);
+            })
+          ],
         ),
       );
 }

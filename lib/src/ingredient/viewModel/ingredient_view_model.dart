@@ -32,10 +32,23 @@ class IngredientViewModelImpl extends ChangeNotifier
     } on Exception catch (e) {
       // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
       status = Status.error;
-      throw Exception("재료 불러오기 에러");
+      rethrow;
     } finally {
       notifyListeners();
     }
+  }
+
+  /// [isWaringFilterOn]이 활성화되면,
+  /// 냉장고 재료 중 기간이 임박한 재료만 필터링하게 됩니다.
+  /// 그렇지 않은 경우에는 전체 재료를 반환합니다.
+  bool isWarningFilterOn = false;
+
+  /// [isWarningFilterOn]은 이 메소드를 통해서 값을 변경할 수 있습니다.
+  @override
+  toggleWarning(bool value) {
+    isWarningFilterOn = value;
+
+    notifyListeners();
   }
 
   String _ingredientName = "";
@@ -227,4 +240,6 @@ abstract class IngredientViewModel {
   void updateStartAt(DateTime startAt);
 
   void updateEndAt(DateTime endAt);
+
+  void toggleWarning(bool value);
 }
