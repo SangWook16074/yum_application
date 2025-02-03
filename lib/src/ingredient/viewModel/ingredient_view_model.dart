@@ -58,18 +58,24 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   /// 나의 냉동 재료 getter
+  /// [isWarningFilterOn]이 활성화되면 기간이 임박한
+  /// 냉동 식재료만을 반환합니다.
   @override
   List<Ingredient> get myFreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == true)
+        .where((ingredient) => !isWarningFilterOn || ingredient.isWarning)
         .toList();
   }
 
   /// 나의 냉장 재료 getter
+  /// /// [isWarningFilterOn]이 활성화되면 기간이 임박한
+  /// 냉장 식재료만을 반환합니다.
   @override
   List<Ingredient> get myUnfreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == false)
+        .where((ingredient) => !isWarningFilterOn || ingredient.isWarning)
         .toList();
   }
 

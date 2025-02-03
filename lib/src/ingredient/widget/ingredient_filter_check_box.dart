@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// [value] 로 초기 위젯의 상태값을 지정할 수 있습니다.
+/// [label]을 지정하면 위젯의 label을 [CheckBoxWidget] 오른쪽에 배치할 수 있습니다.
+/// [onChanged]는 [value]값을 변경할 수 있도록 동작하는 메소드를 전달할 수 있습니다.
 class IngredientFilterCheckBox extends StatefulWidget {
-  /// [value] 로 초기 위젯의 상태값을 지정할 수 있습니다.
   final bool value;
-
-  /// [label]을 지정하면 위젯의 label을 [CheckBoxWidget] 오른쪽에 배치할 수 있습니다.
   final String label;
-
-  /// [onChanged]는 [value]값을 변경할 수 있도록 동작하는 메소드를 전달할 수 있습니다.
   final ValueSetter<bool> onChanged;
   const IngredientFilterCheckBox(
       {super.key,
