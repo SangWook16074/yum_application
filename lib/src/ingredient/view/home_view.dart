@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yum_application/src/common/enums/status.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
@@ -10,24 +11,32 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: _fab(),
-      body: SafeArea(
-        top: true,
-        bottom: false,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _header(),
-              _freezer(),
-              _fridge(),
-            ],
+    return Consumer<IngredientViewModelImpl>(
+        builder: (context, provider, child) {
+      return Stack(
+        children: [
+          Scaffold(
+            floatingActionButton: _fab(),
+            body: SafeArea(
+              top: true,
+              bottom: false,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _header(),
+                    _freezer(),
+                    _fridge(),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+          if (provider.status == Status.loading) ..._loading(),
+        ],
+      );
+    });
   }
 
   Widget _header() {
@@ -89,4 +98,14 @@ class HomeView extends StatelessWidget {
           ),
         );
       });
+
+  List<Widget> _loading() => [
+        ModalBarrier(
+          color: Colors.black.withOpacity(0.2),
+          dismissible: false,
+        ),
+        const Center(
+          child: CircularProgressIndicator.adaptive(),
+        )
+      ];
 }

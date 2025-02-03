@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:yum_application/src/common/enums/status.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
@@ -8,9 +9,33 @@ import 'package:yum_application/src/util/global_variable.dart';
 class IngredientViewModelImpl extends ChangeNotifier
     implements IngredientViewModel {
   final IngredientRepository ingredientRepository;
+
+  // 연결 상태
+  Status status = Status.init;
+
+  // 냉장고 식재료 데이터
   List<Ingredient> _myIngredients = List.empty(growable: true);
+
   IngredientViewModelImpl({required this.ingredientRepository}) {
     fetchData();
+  }
+
+  @override
+  Future<void> fetchData() async {
+    status = Status.loading;
+    notifyListeners();
+    try {
+      final result = await ingredientRepository.getMyIngredient();
+      _myIngredients.clear();
+      _myIngredients.addAll(result);
+      status = Status.loaded;
+    } on Exception catch (e) {
+      // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
+      status = Status.error;
+      throw Exception("재료 불러오기 에러");
+    } finally {
+      notifyListeners();
+    }
   }
 
   String _ingredientName = "";
@@ -42,19 +67,6 @@ class IngredientViewModelImpl extends ChangeNotifier
 
   bool _isFreezed = false;
   bool get isFreezed => _isFreezed;
-
-  @override
-  Future<void> fetchData() async {
-    try {
-      final result = await ingredientRepository.getMyIngredient();
-      _myIngredients.clear();
-      _myIngredients.addAll(result);
-      notifyListeners();
-    } on Exception catch (e) {
-      // 예를 들어, 에러상황에서는 토스트 메시지를 띄워서 사용자에게 알림을 보냄.
-      throw Exception("재료 불러오기 에러");
-    }
-  }
 
   @override
   Future<void> createNewIngredient() async {
