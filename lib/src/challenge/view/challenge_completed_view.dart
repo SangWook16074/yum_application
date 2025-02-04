@@ -42,7 +42,7 @@ class ChallengeCompletedView extends StatelessWidget {
   Widget _header() {
     return SliverAppBar(
       toolbarHeight: 140,
-      floating: true,
+      floating: false,
       pinned: false,
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -149,6 +149,75 @@ Widget _body1() {
 
 Widget _body2() {
   return SliverToBoxAdapter(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Builder(builder: (context) {
+        return Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 10),
+                child: Text(
+                  "강은주123 님의 순위는?",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    width: 110,
+                    height: 141,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    width: 110,
+                    height: 141,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 110,
+                  height: 141,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Container(
+                width: double.infinity,
+                height: 141,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
+    ),
+  );
+}
+
+Widget _body3() {
+  return SliverToBoxAdapter(
     child: Builder(builder: (context) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -162,15 +231,8 @@ Widget _body2() {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "강은주123 님의 순위는?",
+                      "오늘의 챌린지",
                       style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "전체보기",
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
                     )
                   ],
                 ),
@@ -188,57 +250,5 @@ Widget _body2() {
         ),
       );
     }),
-  );
-}
-
-Widget _body3() {
-  return SliverToBoxAdapter(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Builder(builder: (context) {
-        return Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 10),
-                child: Text(
-                  "나의 챌린지 현황",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 450,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 450,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 450,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      }),
-    ),
   );
 }
