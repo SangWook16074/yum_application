@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/challenge/view/challenge_case_view.dart';
+import 'package:yum_application/src/app/viewModel/app_view_model.dart';
+import 'package:yum_application/src/challenge/view/challenge_completed_view.dart';
 import 'package:yum_application/src/challenge/widget/challenge_detail_view.dart';
 import 'package:yum_application/src/common/image_widget.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
@@ -53,66 +54,76 @@ Widget _header() {
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
     // expandedHeight: 300,
-    title: Column(
-      children: [
-        Builder(
-          builder: (context) {
-            return Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: Theme.of(context).colorScheme.tertiary))),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "단계마다 비밀 식재료를 획득해요\n식재료를 모아 요리를 완성해보세요",
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: Image.asset(
-                        "assets/images/trophy.png",
-                        fit: BoxFit.contain,
+    flexibleSpace: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          Builder(
+            builder: (context) {
+              return Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                            color: Theme.of(context).colorScheme.tertiary))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "단계마다 비밀 식재료를 획득해요\n식재료를 모아 요리를 완성해보세요",
+                        style: Theme.of(context).textTheme.labelMedium,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Builder(builder: (context) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: const Text("도전하기"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ChallengeCaseView(),
+                      SizedBox(
+                        width: 48,
+                        height: 48,
+                        child: Image.asset(
+                          "assets/images/trophy.png",
+                          fit: BoxFit.contain,
+                        ),
                       ),
-                    );
-                  },
-                  child: const Text("보관함"),
+                    ],
+                  ),
                 ),
-              ],
-            );
-          }),
-        )
-      ],
+              );
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50),
+            child: Builder(builder: (context) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ChallengeListView()),
+                      );
+                    },
+                    child: const Text("도전하기"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const ChallengeCompletedView()),
+                      );
+                    },
+                    child: const Text("보관함"),
+                  ),
+                ],
+              );
+            }),
+          )
+        ],
+      ),
     ),
   );
 }
