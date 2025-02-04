@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/main.dart';
 import 'package:yum_application/src/recipe/view/recipe_%20register_view.dart';
+import 'package:yum_application/src/recipe/view/recipe_detail_view.dart';
 
 class RecipeView extends StatelessWidget {
   const RecipeView({super.key});
@@ -123,7 +124,7 @@ class RecipeView extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Icon(Icons.close),
               ],
@@ -183,7 +184,12 @@ class RecipeView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RecipeDetailView()));
+                },
                 child: Container(
                   height: 190,
                   decoration: BoxDecoration(
@@ -259,17 +265,20 @@ class RecipeView extends StatelessWidget {
         );
       });
 
-  Widget _floating() => FloatingActionButton(
-        onPressed: () {
-          RecipeRegisterView();
-        },
-        backgroundColor: Color(0xffFFB300),
-        child: Image.asset(
-          'assets/images/floating.png',
-          width: 33,
-          height: 28,
-        ),
-      );
+  Widget _floating() => Builder(builder: (context) {
+        return FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RecipeRegisterView()));
+          },
+          backgroundColor: Color(0xffFFB300),
+          child: Image.asset(
+            'assets/images/floating.png',
+            width: 33,
+            height: 28,
+          ),
+        );
+      });
 
   Widget _ingredientKeyword(String text) => Padding(
         padding: const EdgeInsets.only(

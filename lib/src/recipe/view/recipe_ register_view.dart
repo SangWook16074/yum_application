@@ -30,7 +30,7 @@ class _RecipeRegisterViewState extends State<RecipeRegisterView> {
         ),
         elevation: 0.0,
         title: Text(
-          "레시피 등록하기",
+          "레시피 등록",
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
