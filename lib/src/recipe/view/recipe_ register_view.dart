@@ -73,6 +73,7 @@ class _RecipeRegisterViewState extends State<RecipeRegisterView> {
       );
 
   Widget _buttion() => SingleButton(
+        key: Key("recipe register view button view"),
         text: "등록하기",
         onTap: () {},
       );

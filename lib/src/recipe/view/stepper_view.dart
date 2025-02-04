@@ -48,7 +48,7 @@ class _StepperViewState extends State<StepperView> {
             fixedSize: Size(MediaQuery.of(context).size.width - 35, 40),
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0)),
+                borderRadius: BorderRadius.circular(20.0)),
           ),
           onPressed: _generateRecipeStepper,
           child: Icon(

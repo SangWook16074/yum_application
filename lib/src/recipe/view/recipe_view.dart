@@ -68,7 +68,7 @@ class RecipeView extends StatelessWidget {
           child: TextField(
               decoration: InputDecoration(
             hintText: "검색어를 입력해 주세요.",
-            hintStyle: Theme.of(context).textTheme.labelSmall,
+            hintStyle: Theme.of(context).textTheme.labelMedium,
             border: InputBorder.none,
             suffixIcon: Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
           )),
@@ -122,7 +122,7 @@ class RecipeView extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
                 Icon(Icons.close),
               ],
@@ -159,7 +159,7 @@ class RecipeView extends StatelessWidget {
                   children: [
                     Text(
                       "추천순",
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                     Icon(
                       Icons.arrow_drop_down,
