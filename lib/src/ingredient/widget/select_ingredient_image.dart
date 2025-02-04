@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/common/image_widget.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_sheet.dart';
 

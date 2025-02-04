@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/common/basic_bottom_sheet.dart';
+import 'package:yum_application/src/common/widgets/basic_bottom_sheet.dart';
 
 class ScrollDateDialog extends StatefulWidget {
   final ValueSetter<DateTime> onStartAtComp;
