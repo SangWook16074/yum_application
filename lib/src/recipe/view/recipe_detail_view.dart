@@ -23,7 +23,6 @@ class _RecipeDetailViewState extends State<RecipeDetailView> {
               _recipeInformation(),
               _firstStep(),
               _secondStep(),
-              _secondStep(),
             ],
           ),
         ),

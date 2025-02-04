@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/main.dart';
+import 'package:yum_application/src/recipe/view/recipe_%20register_view.dart';
+import 'package:yum_application/src/recipe/view/recipe_detail_view.dart';
 
 class RecipeView extends StatelessWidget {
   const RecipeView({super.key});
@@ -37,7 +39,7 @@ class RecipeView extends StatelessWidget {
               ),
               elevation: 0,
               title: Text(
-                "딱맞는 레시피",
+                "레시피 찾기",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               bottom: PreferredSize(
@@ -67,7 +69,7 @@ class RecipeView extends StatelessWidget {
               color: Color(0xffF3F3F3)),
           child: TextField(
               decoration: InputDecoration(
-            hintText: "검색어를 입력해 주세요.",
+            hintText: " 검색어를 입력해 주세요.",
             hintStyle: Theme.of(context).textTheme.labelMedium,
             border: InputBorder.none,
             suffixIcon: Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
@@ -122,7 +124,7 @@ class RecipeView extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Icon(Icons.close),
               ],
@@ -157,12 +159,15 @@ class RecipeView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "추천순",
-                      style: Theme.of(context).textTheme.labelSmall,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        "추천순",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
                     ),
                     Icon(
-                      Icons.arrow_drop_down,
+                      Icons.arrow_drop_down_sharp,
                       color: Colors.white,
                     )
                   ],
@@ -179,7 +184,12 @@ class RecipeView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RecipeDetailView()));
+                },
                 child: Container(
                   height: 190,
                   decoration: BoxDecoration(
@@ -205,7 +215,8 @@ class RecipeView extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Text(
                                 "토마토 스프",
-                                style: Theme.of(context).textTheme.labelLarge,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                               ),
                             ),
                             Padding(
@@ -254,15 +265,20 @@ class RecipeView extends StatelessWidget {
         );
       });
 
-  Widget _floating() => FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Color(0xffFFB300),
-        child: Image.asset(
-          'assets/images/floating.png',
-          width: 33,
-          height: 28,
-        ),
-      );
+  Widget _floating() => Builder(builder: (context) {
+        return FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => RecipeRegisterView()));
+          },
+          backgroundColor: Color(0xffFFB300),
+          child: Image.asset(
+            'assets/images/floating.png',
+            width: 33,
+            height: 28,
+          ),
+        );
+      });
 
   Widget _ingredientKeyword(String text) => Padding(
         padding: const EdgeInsets.only(
@@ -274,15 +290,14 @@ class RecipeView extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.transparent,
-                border: Border.all(color: Color(0xff362703))),
+                color: Color.fromARGB(15, 58, 57, 57)),
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),
