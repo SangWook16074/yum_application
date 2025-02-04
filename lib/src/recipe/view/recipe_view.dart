@@ -67,13 +67,17 @@ class RecipeView extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
               color: Color(0xffF3F3F3)),
-          child: TextField(
-              decoration: InputDecoration(
-            hintText: " 검색어를 입력해 주세요.",
-            hintStyle: Theme.of(context).textTheme.labelMedium,
-            border: InputBorder.none,
-            suffixIcon: Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
-          )),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 14),
+            child: TextField(
+                decoration: InputDecoration(
+              hintText: "검색어를 입력해 주세요.",
+              hintStyle: Theme.of(context).textTheme.labelMedium,
+              border: InputBorder.none,
+              suffixIcon:
+                  Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
+            )),
+          ),
         );
       });
 
