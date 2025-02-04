@@ -17,6 +17,7 @@ class ImageWidget extends StatelessWidget {
 }
 
 class ImagePath {
+  static String get fab => "/assets/images/floating.png";
   static String get recipeOff => "assets/images/bottom_nav_recipe_off.png";
   static String get recipeOn => "assets/images/bottom_nav_recipe_on.png";
   static String get ingredientOff =>
