@@ -1,7 +1,4 @@
-import 'dart:isolate';
 import 'dart:math';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
@@ -350,6 +347,7 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
             child: IngredientImage(
               path: widget.item.category.imagePath,
               isFreezed: widget.item.isFreezed,
+              isWarning: widget.item.isWarning,
             )),
         SizedBox(
           width: widget.width,
@@ -381,6 +379,7 @@ class RefreginatorItem extends StatelessWidget {
             child: IngredientImage(
               path: item.category.imagePath,
               isFreezed: item.isFreezed,
+              isWarning: item.isWarning,
             )),
         Text(
           item.name,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yum_application/src/common/enums/status.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_filter_check_box.dart';
 
 import 'package:yum_application/src/ingredient/widget/refreginator_container.dart';
 
@@ -10,24 +12,36 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: _fab(),
-      body: SafeArea(
-        top: true,
-        bottom: false,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _header(),
-              _freezer(),
-              _fridge(),
-            ],
+    return Consumer<IngredientViewModelImpl>(
+        builder: (context, provider, child) {
+      if (provider.status == Status.error) {
+        return _error();
+      }
+      return Stack(
+        children: [
+          Scaffold(
+            floatingActionButton: _fab(),
+            body: SafeArea(
+              top: true,
+              bottom: false,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _header(),
+                    _toggleWarning(),
+                    _freezer(),
+                    _fridge(),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+          if (provider.status == Status.loading) ..._loading(),
+        ],
+      );
+    });
   }
 
   Widget _header() {
@@ -89,4 +103,45 @@ class HomeView extends StatelessWidget {
           ),
         );
       });
+
+  List<Widget> _loading() => [
+        ModalBarrier(
+          color: Colors.black.withOpacity(0.2),
+          dismissible: false,
+        ),
+        const Center(
+          child: CircularProgressIndicator.adaptive(),
+        )
+      ];
+
+  Widget _error() => const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.error),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("에러가 발생했습니다!"),
+              )
+            ],
+          ),
+        ),
+      );
+
+  Widget _toggleWarning() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Consumer<IngredientViewModelImpl>(
+                builder: (context, provider, child) {
+              return IngredientFilterCheckBox(
+                  value: provider.isWarningFilterOn,
+                  label: "기간 임박",
+                  onChanged: provider.toggleWarning);
+            })
+          ],
+        ),
+      );
 }

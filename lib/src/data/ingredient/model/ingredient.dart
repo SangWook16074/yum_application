@@ -20,6 +20,17 @@ class Ingredient extends Equatable {
   })  : startAt = startAt ?? DateTime.now(),
         endAt = endAt ?? DateTime.now();
 
+  bool get isWarning {
+    final now = DateTime.now();
+    final th = DateTime(now.year, now.month, now.day);
+    final diff = endAt.difference(th).inDays;
+    if (diff <= 3) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
       id: json["id"],

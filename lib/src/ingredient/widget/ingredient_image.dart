@@ -5,21 +5,27 @@ import 'package:yum_application/src/ingredient/widget/select_ingredient_image.da
 class IngredientImage extends StatelessWidget {
   final bool isFreezed;
   final String path;
+  final bool isWarning;
   final double width;
   const IngredientImage(
       {super.key,
       this.isFreezed = false,
       required this.path,
-      this.width = 110});
+      this.width = 110,
+      required this.isWarning});
 
   @override
   Widget build(BuildContext context) {
-    if (isFreezed) {
-      return _freezedIcon();
-    } else {
-      return _icon();
-    }
+    return _renderIcon();
   }
+
+  Widget _renderIcon() => Stack(
+        alignment: Alignment.topRight,
+        children: [
+          (isFreezed) ? _freezedIcon() : _icon(),
+          if (isWarning) _warning(),
+        ],
+      );
 
   Widget _freezedIcon() => Stack(
         alignment: Alignment.center,
@@ -42,5 +48,11 @@ class IngredientImage extends StatelessWidget {
   Widget _icon() => ImageWidget(
         path: path,
         width: width,
+      );
+
+  Widget _warning() => const Icon(
+        Icons.error,
+        color: Color(0xffff3700),
+        size: 20,
       );
 }

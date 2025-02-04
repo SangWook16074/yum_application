@@ -1,16 +1,18 @@
-# yum_application
+# 자취얌! 프로젝트
+자취 생활을 위한 냉장고 재료 관리와 맞춤 레시피 추천 앱 \
+Figma URL : [https://www.figma.com/design/1zLYTQZGQLmy9fFyN43GO4/%EC%9E%90%EC%B7%A8%EC%83%9D_%EB%83%89%EC%9E%A5%EA%B3%A0_%EB%A0%88%EC%8B%9C%ED%94%BC_%EC%95%B1?node-id=1074-1172&p=f&t=zhckIejN168EJhOC-0](https://www.figma.com/design/1zLYTQZGQLmy9fFyN43GO4/%EC%9E%90%EC%B7%A8%EC%83%9D_%EB%83%89%EC%9E%A5%EA%B3%A0_%EB%A0%88%EC%8B%9C%ED%94%BC_%EC%95%B1?node-id=1074-1172&p=f&t=zhckIejN168EJhOC-0)
 
-A new Flutter project.
+## 프로젝트 기간
+- 2024.09 - 현재 (진행률 : 70%) : 총 프로젝트 기간
+- 2024.09 - 2024.10 : 주제 및 아이디어 회의
+- 2024.10 - 2024.10 : ERD 및 프로젝트 개발 시작
 
-## Getting Started
+## 참여 인원 소개
+PL : 한상욱 \
+Front - End : 한상욱, 이준호, 윤채림 \
+Back - End : 김정우, 한상욱 \
+UI/UX Design : 강은지, 강주은
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 기술 스택
+Flutter / Provider / http \
+Spring / Spring Boot / MySQL / Elasticsearch / AWS

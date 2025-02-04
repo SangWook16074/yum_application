@@ -80,6 +80,7 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
                 path: widget.ingredient.category.imagePath,
                 width: 300,
                 isFreezed: widget.ingredient.isFreezed,
+                isWarning: false,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 23.3),
