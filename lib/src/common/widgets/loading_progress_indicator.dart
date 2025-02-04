@@ -91,7 +91,7 @@ class IndicatorPainter extends CustomPainter {
     canvas.drawPath(path, paint);
 
     // Point Rect 렌더링
-    final pointPaint = Paint()..color = const Color.fromARGB(255, 10, 9, 6);
+    final pointPaint = Paint()..color = const Color(0xffffb300);
     canvas.drawOval(pointRect, pointPaint);
   }
 
