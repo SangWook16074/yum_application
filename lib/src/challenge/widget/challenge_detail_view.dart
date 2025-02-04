@@ -52,7 +52,7 @@ PreferredSizeWidget _appBar() {
 Widget _header(String imagePath) => Builder(builder: (context) {
       return SliverAppBar(
         toolbarHeight: 220,
-        floating: false,
+        floating: true,
         pinned: false,
         backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
