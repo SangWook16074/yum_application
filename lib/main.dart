@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/app/page/app_page.dart';
 import 'package:yum_application/src/app/config/app_config.dart';
+import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_%20register_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_detail_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_view.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: GlobalVariable.naviagatorState,
       theme: light,
-      home: const RecipeRegisterView(),
+      home: const AppPage(),
     );
   }
 }
