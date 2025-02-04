@@ -193,7 +193,10 @@ Widget _bottom() {
                 ),
                 itemCount: 12,
                 itemBuilder: (context, index) {
-                  return ImageWidget(path: "assets/sample_$index.png");
+                  return const Padding(
+                    padding: EdgeInsets.all(12),
+                    child: ImageWidget(path: "assets/images/reward.png"),
+                  );
                 },
               ),
             ],
