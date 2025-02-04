@@ -84,6 +84,9 @@ class IngredientViewModelImpl extends ChangeNotifier
   @override
   Ingredient? get selectedIngredient => _selectedIngredient;
 
+  bool _notInfinity = true;
+  bool get notINF => _notInfinity;
+
   bool _isFreezed = false;
   bool get isFreezed => _isFreezed;
 
@@ -201,6 +204,15 @@ class IngredientViewModelImpl extends ChangeNotifier
     _isFreezed = value;
     if (_selectedIngredient != null) {
       _selectedIngredient = _selectedIngredient!.copy(isFreezed: _isFreezed);
+    }
+    notifyListeners();
+  }
+
+  void toggleNotInfinity(bool value) {
+    _notInfinity = value;
+    // print(_notInfinity);
+    if (_selectedIngredient != null && !_notInfinity) {
+      _selectedIngredient = _selectedIngredient!.copy(endAt: null);
     }
     notifyListeners();
   }

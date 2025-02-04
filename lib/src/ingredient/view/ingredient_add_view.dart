@@ -80,14 +80,15 @@ class IngredientAddView extends StatelessWidget {
               );
             }),
             Consumer<IngredientViewModelImpl>(
-                builder: (context, provider, child) {
-              return Switch.adaptive(
-                value: provider.isFreezed,
-                onChanged: provider.toggleIsFreezed,
-                activeColor: Theme.of(context).colorScheme.secondary,
-                inactiveThumbColor: Colors.grey,
-              );
-            })
+              builder: (context, provider, child) {
+                return Switch.adaptive(
+                  value: provider.isFreezed,
+                  onChanged: provider.toggleIsFreezed,
+                  activeColor: Theme.of(context).colorScheme.secondary,
+                  inactiveThumbColor: Colors.grey,
+                );
+              },
+            ),
           ],
         ),
       );
@@ -182,14 +183,33 @@ class IngredientAddView extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Builder(builder: (context) {
-                    return Text(
-                      "소비기한",
-                      style: Theme.of(context).textTheme.headlineSmall,
+                Builder(
+                  builder: (context) {
+                    return SizedBox(
+                      height: 30,
+                      child: Row(
+                        children: [
+                          Text(
+                            "소비기한",
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                          Consumer<IngredientViewModelImpl>(
+                            builder: (context, provider, child) {
+                              return Switch(
+                                // value: false,
+                                value: provider.notINF &&
+                                    provider.selectedIngredient != null,
+                                onChanged: provider.toggleNotInfinity,
+                                activeColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                inactiveThumbColor: Colors.grey,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     );
-                  }),
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -197,34 +217,57 @@ class IngredientAddView extends StatelessWidget {
                     children: [
                       Consumer<IngredientViewModelImpl>(
                           builder: (context, provider, child) {
+                        // if (provider.notInfinity) {
                         return DatePickerWidget(
                           time: provider.selectedIngredient?.endAt,
+                          notINF: provider.notINF,
                           onTap: () {
                             showModalBottomSheet(
-                                isDismissible: false,
-                                backgroundColor: Colors.transparent,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(32.0))),
-                                context: context,
-                                builder: (context) => ScrollDateDialog(
-                                      initialStatus: false,
-                                      onStartAtComp: provider.updateStartAt,
-                                      onEndAtComp: provider.updateEndAt,
-                                    ));
+                              isDismissible: false,
+                              backgroundColor: Colors.transparent,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(32.0))),
+                              context: context,
+                              builder: (context) => ScrollDateDialog(
+                                  initialStatus: false,
+                                  onStartAtComp: provider.updateStartAt,
+                                  onEndAtComp: provider.updateEndAt),
+                            );
                           },
                         );
+                        // }
+                        // return Container(
+                        //   padding: const EdgeInsets.only(
+                        //       top: 10.0, bottom: 10.0, right: 16.0),
+                        //   height: 40,
+                        //   width: 163,
+                        //   decoration: BoxDecoration(
+                        //     color: Theme.of(context)
+                        //         .colorScheme
+                        //         .onPrimaryContainer,
+                        //     borderRadius: BorderRadius.circular(12),
+                        //   ),
+                        //   child: Center(
+                        //       child: Text(
+                        //     "무제한",
+                        //     style: Theme.of(context).textTheme.labelSmall,
+                        //   )),
+                        // );
                       }),
                       Opacity(
                         opacity: 0.0,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Builder(builder: (context) {
-                            return Text(
-                              "~",
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            );
-                          }),
+                          child: Builder(
+                            builder: (context) {
+                              return Text(
+                                "~",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],

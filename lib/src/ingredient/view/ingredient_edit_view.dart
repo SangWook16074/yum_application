@@ -188,12 +188,33 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    "소비기한",
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
+                Builder(
+                  builder: (context) {
+                    return SizedBox(
+                      height: 30,
+                      child: Row(
+                        children: [
+                          Text(
+                            "소비기한",
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                          Consumer<IngredientViewModelImpl>(
+                            builder: (context, provider, child) {
+                              return Switch(
+                                // value: false,
+                                value: provider.notINF &&
+                                    provider.selectedIngredient != null,
+                                onChanged: provider.toggleNotInfinity,
+                                activeColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                inactiveThumbColor: Colors.grey,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -201,23 +222,23 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                     children: [
                       Consumer<IngredientViewModelImpl>(
                           builder: (context, provider, child) {
+                        // if (provider.notInfinity) {
                         return DatePickerWidget(
                           time: provider.selectedIngredient?.endAt,
+                          notINF: provider.notINF,
                           onTap: () {
                             showModalBottomSheet(
-                                isDismissible: false,
-                                backgroundColor: Colors.transparent,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(32.0))),
-                                context: context,
-                                builder: (context) => ScrollDateDialog(
-                                      initialStatus: false,
-                                      onStartAtComp:
-                                          _ingredientViewModel.updateStartAt,
-                                      onEndAtComp:
-                                          _ingredientViewModel.updateEndAt,
-                                    ));
+                              isDismissible: false,
+                              backgroundColor: Colors.transparent,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(32.0))),
+                              context: context,
+                              builder: (context) => ScrollDateDialog(
+                                  initialStatus: false,
+                                  onStartAtComp: provider.updateStartAt,
+                                  onEndAtComp: provider.updateEndAt),
+                            );
                           },
                         );
                       }),

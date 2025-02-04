@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/challenge/view/challenge_case_view.dart';
 import 'package:yum_application/src/challenge/widget/challenge_detail_view.dart';
 import 'package:yum_application/src/common/image_widget.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/challenge/widget/challenge_row.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
-class ChallengeListView extends StatelessWidget {
-  const ChallengeListView({super.key});
+class ChallengeCaseView extends StatelessWidget {
+  const ChallengeCaseView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,6 @@ class ChallengeListView extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               _header(),
-              _challenges(),
             ],
           ),
         ));
@@ -90,27 +88,19 @@ Widget _header() {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Builder(builder: (context) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: const Text("도전하기"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const ChallengeCaseView(),
-                      ),
-                    );
-                  },
-                  child: const Text("보관함"),
-                ),
-              ],
-            );
-          }),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text("도전하기"),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text("보관함"),
+              ),
+            ],
+          ),
         )
       ],
     ),

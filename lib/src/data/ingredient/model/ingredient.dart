@@ -54,6 +54,7 @@ class Ingredient extends Equatable {
   Ingredient copy({
     String? name,
     bool? isFreezed,
+    bool? notInfinity,
     IngredientCategory? category,
     DateTime? startAt,
     DateTime? endAt,

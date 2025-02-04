@@ -68,15 +68,14 @@ class ChallengeRow extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 7, horizontal: 9),
                                 child: Text("최초",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall),
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall),
                               ),
                             ),
                           ),
                         Expanded(
                           child: Text(title,
-                              style: Theme.of(context).textTheme.titleMedium),
+                              style: Theme.of(context).textTheme.headlineSmall),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
@@ -100,12 +99,8 @@ class ChallengeRow extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 20),
-                    child: Text(
-                      subtitle,
-                      style: isFirst
-                          ? Theme.of(context).textTheme.bodySmall
-                          : Theme.of(context).textTheme.labelSmall,
-                    ),
+                    child: Text(subtitle,
+                        style: Theme.of(context).textTheme.labelMedium),
                   ),
                 ],
               ),
