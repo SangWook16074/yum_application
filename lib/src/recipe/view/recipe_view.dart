@@ -69,7 +69,9 @@ class RecipeView extends StatelessWidget {
               color: const Color(0xffF3F3F3)),
           child: TextField(
               decoration: InputDecoration(
-            hintText: " 검색어를 입력해 주세요.",
+            hintText: "검색어를 입력해 주세요.",
+            contentPadding:
+                EdgeInsetsDirectional.symmetric(vertical: 10, horizontal: 10),
             hintStyle: Theme.of(context).textTheme.labelMedium,
             border: InputBorder.none,
             suffixIcon:
