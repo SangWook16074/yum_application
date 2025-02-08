@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: GlobalVariable.naviagatorState,
       theme: light,
-      home: const Scaffold(body: Center(child: LoadingProgressIndicator())),
+      home: const AppPage(),
     );
   }
 }

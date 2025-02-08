@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 enum Page { recipe, ingredient, challenge, mypage }
 
 class AppViewModel extends ChangeNotifier {
-  int _index = 1;
+  int _index = 0;
 
   int get pageIndex => _index;
 
