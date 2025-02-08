@@ -14,6 +14,7 @@ class App extends StatelessWidget {
     return Scaffold(
       body: _body(),
       bottomNavigationBar: _bottomNav(),
+      floatingActionButton: _fab(),
     );
   }
 
@@ -77,5 +78,21 @@ class App extends StatelessWidget {
                   activeIcon: ImageWidget(path: ImagePath.mypageOn, width: 100),
                   label: "마이 페이지"),
             ]);
+      });
+
+  Widget _fab() => Consumer<AppViewModel>(builder: (context, provider, child) {
+        if (provider.pageIndex < 2) {
+          return FloatingActionButton(
+              key: const Key("fab"),
+              foregroundColor: const Color(0xffffffff),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              onPressed: provider.routeTo,
+              child: ImageWidget(
+                path: provider.fabImage,
+                width: 90,
+              ));
+        } else {
+          return Container();
+        }
       });
 }
