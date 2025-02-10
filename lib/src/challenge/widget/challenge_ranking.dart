@@ -63,7 +63,6 @@ Widget _bottom() {
     child: Builder(builder: (context) {
       return Container(
         width: double.infinity,
-        height: 180,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimaryContainer,
           borderRadius: BorderRadius.circular(20),
@@ -75,9 +74,12 @@ Widget _bottom() {
               _rank(),
               _rank(),
               _rank(),
-              Text(
-                "강은주123 님은 자취얌 사용자 중 상위 32%이에요!",
-                style: Theme.of(context).textTheme.bodyMedium,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Text(
+                  "강은주123 님은 자취얌 사용자 중 상위 32%이에요!",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
             ],
           ),
@@ -98,17 +100,9 @@ Widget _rank() {
             "46",
             style: Theme.of(context).textTheme.labelSmall,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 8),
-            child: SizedBox(
-              width: 24,
-              height: 24,
-              child: Image.asset(
-                "assets/images/beer.png,",
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
+          const Padding(
+              padding: EdgeInsets.only(left: 10, right: 8),
+              child: Icon(Icons.circle)),
           Text(
             "data",
             style: Theme.of(context).textTheme.labelSmall,
