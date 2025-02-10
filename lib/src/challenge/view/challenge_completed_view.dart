@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/view/challenge_list_view.dart';
+import 'package:yum_application/src/challenge/widget/challenge_calendar.dart';
+import 'package:yum_application/src/challenge/widget/challenge_ranking.dart';
 
 class ChallengeCompletedView extends StatefulWidget {
   const ChallengeCompletedView({super.key});
@@ -19,9 +21,8 @@ class _ChallengeCompletedViewState extends State<ChallengeCompletedView> {
           child: CustomScrollView(
             slivers: [
               _header(),
-              _body1(),
-              _body2(),
-              _body3(),
+              _mychallenge(),
+              _challengeCompleted(),
             ],
           ),
         ));
@@ -52,7 +53,6 @@ class _ChallengeCompletedViewState extends State<ChallengeCompletedView> {
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-      // expandedHeight: 300,
       flexibleSpace: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -127,7 +127,7 @@ class _ChallengeCompletedViewState extends State<ChallengeCompletedView> {
   }
 }
 
-Widget _body1() {
+Widget _mychallenge() {
   PageController pageController =
       PageController(initialPage: 1000, viewportFraction: 0.7);
   List<String> images = [
@@ -156,7 +156,9 @@ Widget _body1() {
             ),
           ),
           SizedBox(
-            height: 350, // 컨테이너 크기
+            width: double.infinity,
+            height: 200, // 컨테이너 크기
+
             child: PageView.builder(
               controller: pageController,
               itemBuilder: (context, index) {
@@ -174,14 +176,21 @@ Widget _body1() {
                     }
 
                     return Center(
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 0),
-                        width: 300 * scale, // 중앙일 때 커짐
+                      child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            image: AssetImage(images[actualIndex]),
-                            fit: BoxFit.contain,
+                            color: Theme.of(context).colorScheme.secondary,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20))),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 0),
+                          width: 300 * scale, // 중앙일 때 커짐
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: AssetImage(images[actualIndex]),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -197,108 +206,13 @@ Widget _body1() {
   );
 }
 
-Widget _body2() {
-  return SliverToBoxAdapter(
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Builder(builder: (context) {
-        return Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 10),
-                child: Text(
-                  "강은주123 님의 순위는?",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    width: 110,
-                    height: 141,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    width: 110,
-                    height: 141,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 110,
-                  height: 141,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                width: double.infinity,
-                height: 141,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-          ],
-        );
-      }),
+Widget _challengeCompleted() {
+  return const SliverToBoxAdapter(
+    child: Column(
+      children: [
+        ChallengeRanking(),
+        ChallengeCalendar(),
+      ],
     ),
-  );
-}
-
-Widget _body3() {
-  return SliverToBoxAdapter(
-    child: Builder(builder: (context) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "오늘의 챌린지",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 450,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ],
-        ),
-      );
-    }),
   );
 }

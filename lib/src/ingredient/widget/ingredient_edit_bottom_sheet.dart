@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/common/basic_bottom_sheet.dart';
-import 'package:yum_application/src/common/delete_dialog.dart';
+import 'package:yum_application/src/common/widgets/basic_bottom_sheet.dart';
+import 'package:yum_application/src/common/widgets/delete_dialog.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_edit_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/enums/status.dart';
+import 'package:yum_application/src/common/widgets/loading_progress_indicator.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_filter_check_box.dart';
@@ -106,11 +107,11 @@ class HomeView extends StatelessWidget {
 
   List<Widget> _loading() => [
         ModalBarrier(
-          color: Colors.black.withOpacity(0.2),
+          color: Colors.white.withOpacity(0.2),
           dismissible: false,
         ),
         const Center(
-          child: CircularProgressIndicator.adaptive(),
+          child: LoadingProgressIndicator(),
         )
       ];
 
