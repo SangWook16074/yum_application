@@ -7,12 +7,29 @@ class IngredientImage extends StatelessWidget {
   final String path;
   final bool isWarning;
   final double width;
+  final double space;
   const IngredientImage(
       {super.key,
       this.isFreezed = false,
       required this.path,
       this.width = 110,
+      this.space = 30,
       required this.isWarning});
+
+  factory IngredientImage.select({
+    required bool isFreezed,
+    required String path,
+    required bool isWarning,
+    required double width,
+  }) {
+    return IngredientImage(
+      isFreezed: isFreezed,
+      path: path,
+      isWarning: isWarning,
+      width: width,
+      space: 150,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +49,14 @@ class IngredientImage extends StatelessWidget {
         children: [
           ImageWidget(
             path: IceImage.background,
-            width: width + 30,
+            width: width + space,
           ),
           _icon(),
           Opacity(
             opacity: 0.6,
             child: ImageWidget(
               path: IceImage.foreground,
-              width: width + 30,
+              width: width + space,
             ),
           )
         ],

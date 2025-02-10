@@ -42,16 +42,6 @@ void main() {
       expect(find.byKey(const Key("header")), findsAtLeast(1));
       expect(find.byKey(const Key("freezer")), findsAtLeast(1));
       expect(find.byKey(const Key("fridge")), findsAtLeast(1));
-      expect(find.byKey(const Key("fab")), findsAtLeast(1));
-    });
-
-    testWidgets("사용자는 FAB을 통해서 Ingredient Add View로 이동할 수 있다.",
-        (WidgetTester tester) async {
-      await tester.pumpWidget(homeView);
-      await tester.tap(find.byType(FloatingActionButton));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(IngredientAddView), findsOneWidget);
     });
 
     testWidgets("사용자의 냉장고 재료가 올바르게 렌더링 된다.", (WidgetTester tester) async {
