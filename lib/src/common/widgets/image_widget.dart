@@ -34,4 +34,6 @@ class ImagePath {
   static String get recipeRecommendation => "assets/images/like.png";
   static String get recipeUses => "assets/images/wok.png";
   static String get consecutiveUses => "assets/images/group.png";
+  static String get fabAdd => "assets/images/fab_add_icon.png";
+  static String get fabWrite => "assets/images/fab_write_icon.png";
 }

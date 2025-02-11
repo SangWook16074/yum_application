@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
       return Stack(
         children: [
           Scaffold(
-            floatingActionButton: _fab(),
+            // floatingActionButton: _fab(),
             body: SafeArea(
               top: true,
               bottom: false,
