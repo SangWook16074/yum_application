@@ -22,9 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: GlobalVariable.naviagatorState,
-      theme: light,
-      home: const Scaffold(body: Center(child: LoadingProgressIndicator())),
-    );
+        navigatorKey: GlobalVariable.naviagatorState,
+        theme: light,
+        home: const AppPage());
   }
 }
