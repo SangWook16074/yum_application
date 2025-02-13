@@ -10,6 +10,12 @@ ThemeData get light => ThemeData(
           fontSize: 64,
           fontWeight: FontWeight.w800,
         ),
+        titleMedium: TextStyle(
+          color: Color(0xffFFFFFF),
+          fontFamily: "Pretendard",
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+        ),
         headlineLarge: TextStyle(
             letterSpacing: 0.0,
             fontSize: 32,

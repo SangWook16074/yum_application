@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/view/challenge_list_view.dart';
 import 'package:yum_application/src/challenge/widget/challenge_calendar.dart';
+import 'package:yum_application/src/challenge/widget/challenge_carousel.dart';
 import 'package:yum_application/src/challenge/widget/challenge_ranking.dart';
 import 'package:yum_application/src/challenge/widget/challenge_reward_card.dart';
 
@@ -131,7 +132,7 @@ Widget _challengeCompleted() {
   return const SliverToBoxAdapter(
     child: Column(
       children: [
-        ChallengeRewardCard(),
+        ChallengeCarousel(),
         ChallengeRanking(),
         ChallengeCalendar(),
       ],
