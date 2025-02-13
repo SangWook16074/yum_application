@@ -7,8 +7,8 @@ void main() {
     setUp(() {
       viewModel = AppViewModel();
     });
-    test("초기 index 는 1이다.", () {
-      expect(viewModel.pageIndex, 1);
+    test("초기 index 는 0이다.", () {
+      expect(viewModel.pageIndex, 0);
     });
 
     test("changeIndex 메소드를 통해서 pageIndex를 바꿀 수 있다.", () {

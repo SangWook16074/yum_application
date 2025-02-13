@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/main.dart';
+import 'package:yum_application/src/recipe/view/recipe_%20register_view.dart';
+import 'package:yum_application/src/recipe/view/recipe_detail_view.dart';
 
 class RecipeView extends StatelessWidget {
   const RecipeView({super.key});
@@ -8,7 +10,7 @@ class RecipeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      floatingActionButton: _floating(),
+      // floatingActionButton: _floating(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SingleChildScrollView(
         child: Column(
@@ -37,14 +39,14 @@ class RecipeView extends StatelessWidget {
               ),
               elevation: 0,
               title: Text(
-                "딱맞는 레시피",
+                "레시피 찾기",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(172),
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 22.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 22.0),
                   child: Column(
                     children: [
                       _search(),
@@ -64,13 +66,16 @@ class RecipeView extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: Color(0xffF3F3F3)),
+              color: const Color(0xffF3F3F3)),
           child: TextField(
               decoration: InputDecoration(
             hintText: "검색어를 입력해 주세요.",
+            contentPadding:
+                EdgeInsetsDirectional.symmetric(vertical: 10, horizontal: 10),
             hintStyle: Theme.of(context).textTheme.labelMedium,
             border: InputBorder.none,
-            suffixIcon: Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
+            suffixIcon:
+                const Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
           )),
         );
       });
@@ -79,7 +84,7 @@ class RecipeView extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 20.0, bottom: 10),
             ),
             Text(
@@ -111,20 +116,20 @@ class RecipeView extends StatelessWidget {
         ),
         child: Builder(builder: (context) {
           return Container(
-            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.transparent,
-                border: Border.all(color: Color(0xff362703))),
+                border: Border.all(color: const Color(0xff362703))),
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Icon(Icons.close),
+                const Icon(Icons.close),
               ],
             ),
           );
@@ -135,7 +140,7 @@ class RecipeView extends StatelessWidget {
         padding: const EdgeInsets.only(left: 50.0, top: 7),
         child: GestureDetector(
           onTap: () {},
-          child: Icon(
+          child: const Icon(
             Icons.add_circle,
             size: 40,
           ),
@@ -153,16 +158,19 @@ class RecipeView extends StatelessWidget {
                 height: 34,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Color(0xff362703)),
+                    color: const Color(0xff362703)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "추천순",
-                      style: Theme.of(context).textTheme.labelSmall,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        "추천순",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
                     ),
-                    Icon(
-                      Icons.arrow_drop_down,
+                    const Icon(
+                      Icons.arrow_drop_down_sharp,
                       color: Colors.white,
                     )
                   ],
@@ -179,7 +187,12 @@ class RecipeView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RecipeDetailView()));
+                },
                 child: Container(
                   height: 190,
                   decoration: BoxDecoration(
@@ -193,7 +206,7 @@ class RecipeView extends StatelessWidget {
                           width: 154,
                           height: 150,
                           decoration: BoxDecoration(
-                              color: Color((0xFFEEEEEE)),
+                              color: const Color((0xFFEEEEEE)),
                               borderRadius: BorderRadius.circular(16)),
                         ),
                       ),
@@ -205,7 +218,8 @@ class RecipeView extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 20, left: 20),
                               child: Text(
                                 "토마토 스프",
-                                style: Theme.of(context).textTheme.labelLarge,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
                               ),
                             ),
                             Padding(
@@ -254,15 +268,22 @@ class RecipeView extends StatelessWidget {
         );
       });
 
-  Widget _floating() => FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Color(0xffFFB300),
-        child: Image.asset(
-          'assets/images/floating.png',
-          width: 33,
-          height: 28,
-        ),
-      );
+  Widget _floating() => Builder(builder: (context) {
+        return FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RecipeRegisterView()));
+          },
+          backgroundColor: const Color(0xffFFB300),
+          child: Image.asset(
+            'assets/images/floating.png',
+            width: 33,
+            height: 28,
+          ),
+        );
+      });
 
   Widget _ingredientKeyword(String text) => Padding(
         padding: const EdgeInsets.only(
@@ -271,18 +292,17 @@ class RecipeView extends StatelessWidget {
         child: Builder(builder: (context) {
           return Container(
             height: 26,
-            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.transparent,
-                border: Border.all(color: Color(0xff362703))),
+                color: const Color.fromARGB(15, 58, 57, 57)),
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   text,
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),
