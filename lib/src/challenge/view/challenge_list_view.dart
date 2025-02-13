@@ -47,7 +47,7 @@ PreferredSizeWidget _appBar() {
 Widget _header() {
   return SliverAppBar(
     toolbarHeight: 140,
-    floating: true,
+    floating: false,
     pinned: false,
     backgroundColor: Colors.white,
     shape: const RoundedRectangleBorder(
