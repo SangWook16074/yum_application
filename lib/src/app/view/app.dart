@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/app/viewModel/app_view_model.dart';
 import 'package:yum_application/src/challenge/view/challenge_view.dart';
-import 'package:yum_application/src/challenge/widget/challenge_list_view.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_view.dart';

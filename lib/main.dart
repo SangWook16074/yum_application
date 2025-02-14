@@ -3,8 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/app/page/app_page.dart';
 import 'package:yum_application/src/app/config/app_config.dart';
-import 'package:yum_application/src/challenge/view/challenge_view.dart';
-import 'package:yum_application/src/common/widgets/loading_progress_indicator.dart';
 import 'package:yum_application/src/util/app_theme.dart';
 import 'package:yum_application/src/util/global_variable.dart';
 

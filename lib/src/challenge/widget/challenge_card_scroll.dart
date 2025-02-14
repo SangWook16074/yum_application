@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/widget/challenge_reward_card.dart';
 
-class ChallengeCarousel extends StatefulWidget {
-  const ChallengeCarousel({super.key});
+class ChallengeCardScroll extends StatefulWidget {
+  const ChallengeCardScroll({super.key});
 
   @override
-  _ChallengeCarouselState createState() => _ChallengeCarouselState();
+  _ChallengeCardScrollState createState() => _ChallengeCardScrollState();
 }
 
-class _ChallengeCarouselState extends State<ChallengeCarousel> {
+class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
   final PageController _pageController = PageController(
     viewportFraction: 0.7,
     initialPage: 1,

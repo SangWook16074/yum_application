@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/challenge/widget/challenge_completed_view.dart';
-import 'package:yum_application/src/challenge/widget/challenge_list_view.dart';
+import 'package:yum_application/src/challenge/widget/challenge_storage_box.dart';
+import 'package:yum_application/src/challenge/widget/challenge_list.dart';
 
 class ChallengeView extends StatelessWidget {
   const ChallengeView({super.key});
@@ -79,8 +79,8 @@ class ChallengeView extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           sliver: SliverToBoxAdapter(
                             child: name == '도전하기'
-                                ? const ChallengeListView() // 도전하기 탭에서만 ChallengeListView
-                                : const ChallengeCompletedView(), // 보관함 탭에서만 ChallengeCompletedView
+                                ? const ChallengeList() // 도전하기 탭에서만 ChallengeListView
+                                : const ChallengeStorageBox(), // 보관함 탭에서만 ChallengeCompletedView
                           ),
                         ),
                       ],

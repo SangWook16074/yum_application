@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:yum_application/src/app/viewModel/app_view_model.dart';
-import 'package:yum_application/src/challenge/widget/challenge_completed_view.dart';
 import 'package:yum_application/src/challenge/widget/challenge_detail_view.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/challenge/widget/challenge_row.dart';
-import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
-class ChallengeListView extends StatelessWidget {
-  const ChallengeListView({super.key});
+class ChallengeList extends StatelessWidget {
+  const ChallengeList({super.key});
 
   @override
   Widget build(BuildContext context) {
