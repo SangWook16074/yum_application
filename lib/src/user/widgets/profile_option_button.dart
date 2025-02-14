@@ -10,8 +10,6 @@ class ProfileOptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 106,
-      height: 106,
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
       decoration: BoxDecoration(
           color: const Color(0xfff2f2f2),
@@ -31,7 +29,7 @@ class ProfileOptionButton extends StatelessWidget {
         padding: const EdgeInsets.all(2.0),
         child: ImageWidget(
           path: ImagePath.recipeOn,
-          width: 90,
+          width: 100,
         ),
       );
 

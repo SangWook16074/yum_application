@@ -68,12 +68,24 @@ class MyInfoView extends StatelessWidget {
   Widget _options() => const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ProfileOptionButton(
-              key: Key("my-info-view-recipe-button"), label: "레시피", count: 3),
-          ProfileOptionButton(
-              key: Key("my-info-view-review-button"), label: "리뷰", count: 3),
-          ProfileOptionButton(
-              key: Key("my-info-view-like-button"), label: "좋아요", count: 3),
+          Expanded(
+            child: ProfileOptionButton(
+                key: Key("my-info-view-recipe-button"), label: "레시피", count: 3),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Expanded(
+            child: ProfileOptionButton(
+                key: Key("my-info-view-review-button"), label: "리뷰", count: 3),
+          ),
+          SizedBox(
+            width: 16,
+          ),
+          Expanded(
+            child: ProfileOptionButton(
+                key: Key("my-info-view-like-button"), label: "좋아요", count: 3),
+          ),
         ],
       );
 }
