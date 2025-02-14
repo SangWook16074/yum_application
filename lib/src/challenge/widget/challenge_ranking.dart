@@ -50,9 +50,18 @@ Widget _body() {
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      _mcontainer(),
-      _mcontainer(),
-      _mcontainer(),
+      Flexible(
+        fit: FlexFit.tight,
+        child: _rankingContainer(),
+      ),
+      Flexible(
+        fit: FlexFit.tight,
+        child: _rankingContainer(),
+      ),
+      Flexible(
+        fit: FlexFit.tight,
+        child: _rankingContainer(),
+      ),
     ],
   );
 }
@@ -113,12 +122,11 @@ Widget _rank() {
   );
 }
 
-Widget _mcontainer() {
+Widget _rankingContainer() {
   return Builder(builder: (context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
-        width: 100,
         height: 110,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimaryContainer,
