@@ -47,17 +47,21 @@ class ChallengeCalendar extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  currentMonth,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 40),
+                  child: Text(
+                    currentMonth,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
                 GridView.builder(
+                  padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 7,
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
                   ),
                   itemCount: 7 + daysInMonth + startWeekday,
                   itemBuilder: (context, index) {
