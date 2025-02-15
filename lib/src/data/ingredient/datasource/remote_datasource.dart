@@ -9,6 +9,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   RemoteDatasourceImpl({required this.apiClient, required this.baseUrl});
 
   /// 나의 냉장고 재료 조회 Api
+  ///
+  /// statusCode == 200인 경우에 나의 냉장고 재료 데이터를 반환합니다.
   @override
   Future<List<Map<String, dynamic>>> getMyIngredient() async {
     return apiClient
@@ -24,6 +26,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 
   /// 나의 재료 생성 Api
+  ///
+  /// statusCode == 201인 경우에 새로운 재료를 생성합니다.
   @override
   Future<Map<String, dynamic>> createNewIngredient(
       Map<String, dynamic> json) async {
@@ -42,6 +46,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 
   /// 나의 냉장고 재료 수정하기 Api
+  ///
+  /// statusCode == 200인 경우에 기존의 재료를 갱신할 수 있습니다.
   @override
   Future<Map<String, dynamic>> updateIngredient(
       Map<String, dynamic> json) async {
@@ -62,6 +68,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 
   /// 나의 냉장고 재료 삭제 Api
+  ///
+  /// statusCode == 204인 경우에 재료를 삭제할 수 있습니다.
   @override
   Future<void> deleteIngredient(int id) {
     return apiClient
@@ -76,6 +84,8 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 
   /// 나의 즐겨찾기 재료 불러오기 Api
+  ///
+  /// statusCode == 200인 경우에 나의 즐겨찾기 재료를 가져옵니다.
   @override
   Future<List<Map<String, dynamic>>> getMyFavoriteIngredient() {
     return apiClient
@@ -90,6 +100,9 @@ class RemoteDatasourceImpl implements RemoteDatasource {
     });
   }
 
+  /// 나의 즐겨찾기 재료 생성 Api
+  ///
+  /// statusCode == 200인 경우에 새로운 즐겨찾기 재료를 생성합니다.
   @override
   Future<void> createNewFavoriteIngredient(Map<String, dynamic> json) {
     return apiClient.post(
@@ -105,6 +118,9 @@ class RemoteDatasourceImpl implements RemoteDatasource {
     });
   }
 
+  /// 나의 즐겨찾기 재료 삭제 Api
+  ///
+  /// statusCode == 200인 경우에 즐겨찾기 재료를 삭제합니다.
   @override
   Future<void> deleteFavoriteIngredient(Map<String, dynamic> json) {
     return apiClient.delete(
