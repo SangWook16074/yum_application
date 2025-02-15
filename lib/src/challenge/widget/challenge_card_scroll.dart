@@ -82,7 +82,7 @@ class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
           width: double.infinity,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: null,
+            itemCount: 5,
             itemBuilder: (context, index) {
               int cardIndex = index % _cards.length;
 

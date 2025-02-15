@@ -5,6 +5,7 @@ import 'package:yum_application/src/challenge/view/challenge_view.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_view.dart';
+import 'package:yum_application/src/user/view/mypage_view.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,18 +23,18 @@ class App extends StatelessWidget {
         return IndexedStack(
           key: const Key("app view body"),
           index: provider.pageIndex,
-          children: [
-            const HomeView(
+          children: const [
+            HomeView(
               key: Key("app view ingredient view"),
             ),
-            const RecipeView(
+            RecipeView(
               key: Key("app view recipe view"),
             ),
-            const ChallengeView(
+            ChallengeView(
               key: Key("app view challenge view"),
             ),
-            Container(
-              key: const Key("app view mypage view"),
+            MyPageView(
+              key: Key("app view mypage view"),
             ),
           ],
         );
