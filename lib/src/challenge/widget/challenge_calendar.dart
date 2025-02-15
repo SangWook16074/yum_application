@@ -26,7 +26,6 @@ class ChallengeCalendar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: double.infinity,
@@ -46,6 +45,7 @@ class ChallengeCalendar extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   currentMonth,
@@ -56,7 +56,7 @@ class ChallengeCalendar extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 7,
-                    mainAxisSpacing: 10,
+                    mainAxisSpacing: 5,
                     crossAxisSpacing: 5,
                   ),
                   itemCount: 7 + daysInMonth + startWeekday,
@@ -91,7 +91,7 @@ class ChallengeCalendar extends StatelessWidget {
                       return Container(
                         decoration: BoxDecoration(
                           color: isToday
-                              ? Colors.white
+                              ? Theme.of(context).colorScheme.onPrimaryContainer
                               : dayCompletion[dayIndex]
                                   ? Theme.of(context)
                                       .colorScheme

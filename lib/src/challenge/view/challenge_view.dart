@@ -29,9 +29,20 @@ class ChallengeView extends StatelessWidget {
                   elevation: 0,
                   expandedHeight: 180.0,
                   forceElevated: innerBoxIsScrolled,
-                  bottom: TabBar(
-                    labelStyle: Theme.of(context).textTheme.headlineSmall,
-                    tabs: tabs.map((String name) => Tab(text: name)).toList(),
+                  bottom: PreferredSize(
+                    preferredSize: AppBar().preferredSize,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                          bottom: Radius.circular(20.0)),
+                      child: TabBar(
+                        indicator: const BoxDecoration(),
+                        labelStyle: Theme.of(context).textTheme.headlineSmall,
+                        unselectedLabelStyle:
+                            Theme.of(context).textTheme.labelLarge,
+                        tabs:
+                            tabs.map((String name) => Tab(text: name)).toList(),
+                      ),
+                    ),
                   ),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Padding(
@@ -79,8 +90,8 @@ class ChallengeView extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           sliver: SliverToBoxAdapter(
                             child: name == '도전하기'
-                                ? const ChallengeList() // 도전하기 탭에서만 ChallengeListView
-                                : const ChallengeStorageBox(), // 보관함 탭에서만 ChallengeCompletedView
+                                ? _challenges() // 도전하기 탭에서만 ChallengeListView
+                                : _challengesStorageView(), // 보관함 탭에서만 ChallengeCompletedView
                           ),
                         ),
                       ],
@@ -94,4 +105,8 @@ class ChallengeView extends StatelessWidget {
       ),
     );
   }
+
+  Widget _challenges() => const ChallengeList();
+
+  Widget _challengesStorageView() => const ChallengeStorageBox();
 }

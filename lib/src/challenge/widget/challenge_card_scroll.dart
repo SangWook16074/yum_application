@@ -11,9 +11,10 @@ class ChallengeCardScroll extends StatefulWidget {
 class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
   final PageController _pageController = PageController(
     viewportFraction: 0.7,
-    initialPage: 1,
+    initialPage: 0,
   );
-  double _currentPage = 1.0;
+
+  double _currentPage = 0.0;
 
   final List<Widget> _cards = [
     const ChallengeRewardCard(
@@ -83,10 +84,10 @@ class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
             controller: _pageController,
             itemCount: null,
             itemBuilder: (context, index) {
-              double scale =
-                  (1 - ((_currentPage - index).abs() * 0.2)).clamp(0.8, 1.0);
-
               int cardIndex = index % _cards.length;
+
+              double scale =
+                  (1 - ((_currentPage - index).abs() * 0.3)).clamp(0.8, 1.0);
 
               return Transform.scale(
                 scale: scale,
