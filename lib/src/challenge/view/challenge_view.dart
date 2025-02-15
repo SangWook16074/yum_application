@@ -9,7 +9,6 @@ class ChallengeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> tabs = <String>['도전하기', '보관함'];
     return DefaultTabController(
-      key: const Key("app view challenge view"),
       length: tabs.length,
       child: Scaffold(
         body: NestedScrollView(
