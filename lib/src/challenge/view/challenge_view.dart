@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/challenge/widget/challenge_storage_box.dart';
 import 'package:yum_application/src/challenge/widget/challenge_list.dart';
+import 'package:yum_application/src/challenge/widget/challenge_storage_box.dart';
 
 class ChallengeView extends StatelessWidget {
   const ChallengeView({super.key});
