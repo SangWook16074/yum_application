@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 ThemeData get light => ThemeData(
-<<<<<<< HEAD
       scaffoldBackgroundColor: const Color(0xffF3F3F3),
       useMaterial3: false,
       textTheme: const TextTheme(
@@ -13,21 +12,6 @@ ThemeData get light => ThemeData(
         ),
         titleMedium: TextStyle(
           color: Color(0xffFFFFFF),
-=======
-    scaffoldBackgroundColor: const Color(0xffF3F3F3),
-    useMaterial3: false,
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(
-        color: Color(0xffEBEAE6),
-        fontFamily: "PartialSansKR",
-        fontSize: 64,
-        fontWeight: FontWeight.w800,
-      ),
-      headlineLarge: TextStyle(
-          letterSpacing: 0.0,
-          fontSize: 32,
-          fontWeight: FontWeight.w700,
->>>>>>> 47f42df15ef8725b71f95e9f25acc448c3b30ed9
           fontFamily: "Pretendard",
           fontSize: 24,
           fontWeight: FontWeight.w700,
