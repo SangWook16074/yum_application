@@ -40,6 +40,10 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     _pageController.jumpToPage(index);
   }
 
+  /// 전달받은 아이템을 3차원 배열로 전환하는 convert 메소드
+  ///
+  /// 위젯에 전달된 children에 대하여 3차원 배열로 변환합니다.
+  /// 만약 정해진만큼 공간을 차지하지 못하면, empty가 채워집니다.
   List<List<List<dynamic>>> convertTo3D(List<Ingredient> children) {
     final oneDArray = children.map((i) => _buildItem(i)).toList();
     int groupSize = widget.rowCount * 4;
@@ -318,7 +322,6 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
     if (_scrollController.offset < _scrollController.position.maxScrollExtent &&
         !_scrolling) {
       _scrolling = true;
-      print("시작");
       _scrollController
           .animateTo(_scrollController.position.maxScrollExtent,
               duration: const Duration(seconds: 2), curve: Curves.linear)
@@ -327,7 +330,6 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
       });
     } else if (_scrollController.offset ==
         _scrollController.position.maxScrollExtent) {
-      print("초기화");
       _scrollController.jumpTo(0);
     }
   }
