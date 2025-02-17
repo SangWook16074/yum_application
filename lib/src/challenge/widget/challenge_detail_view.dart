@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
 class ChallengeDetailView extends StatelessWidget {
@@ -52,7 +50,7 @@ PreferredSizeWidget _appBar() {
 Widget _header(String imagePath) => Builder(builder: (context) {
       return SliverAppBar(
         toolbarHeight: 220,
-        floating: false,
+        floating: true,
         pinned: false,
         backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(

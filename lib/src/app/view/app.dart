@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/app/viewModel/app_view_model.dart';
-import 'package:yum_application/src/challenge/view/challenge_list_view.dart';
+import 'package:yum_application/src/challenge/view/challenge_view.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_view.dart';
@@ -30,7 +30,7 @@ class App extends StatelessWidget {
             RecipeView(
               key: Key("app view recipe view"),
             ),
-            ChallengeListView(
+            ChallengeView(
               key: Key("app view challenge view"),
             ),
             MyPageView(
