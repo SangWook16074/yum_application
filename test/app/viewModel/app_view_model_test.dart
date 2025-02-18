@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/app/viewModel/app_view_model.dart';
+import 'package:yum_application/src/domain/app/viewModel/app_view_model.dart';
 
 void main() {
   late AppViewModel viewModel;

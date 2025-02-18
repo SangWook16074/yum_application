@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/app/page/app_page.dart';
+import 'package:yum_application/src/domain/app/page/app_page.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
 import 'app_ui_test.mocks.dart';
@@ -12,7 +12,8 @@ void main() {
   late IngredientViewModelImpl ingredientViewModel;
   late Widget widget;
   group("App UI Test", () {
-    ingredientViewModel = MockIngredientViewModelImpl();
+    ingredientViewModel =
+        MockIngredientViewModelImpl() as IngredientViewModelImpl;
     setUpAll(() {
       widget = ChangeNotifierProvider(
         create: (context) => ingredientViewModel,

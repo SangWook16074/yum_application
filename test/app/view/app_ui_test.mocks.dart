@@ -106,6 +106,13 @@ class MockIngredientViewModelImpl extends _i1.Mock
       ) as List<_i5.Ingredient>);
 
   @override
+  bool get notINF => (super.noSuchMethod(
+        Invocation.getter(#notINF),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
   bool get isFreezed => (super.noSuchMethod(
         Invocation.getter(#isFreezed),
         returnValue: false,
@@ -208,6 +215,15 @@ class MockIngredientViewModelImpl extends _i1.Mock
   void toggleIsFreezed(bool? value) => super.noSuchMethod(
         Invocation.method(
           #toggleIsFreezed,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void toggleNotInfinity(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #toggleNotInfinity,
           [value],
         ),
         returnValueForMissingStub: null,
