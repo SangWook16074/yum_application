@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/challenge/widget/challenge_storage_box.dart';
 import 'package:yum_application/src/challenge/widget/challenge_list.dart';
+import 'package:yum_application/src/challenge/widget/challenge_storage_box.dart';
 
 // Challenge View로 바텀 네비게이션에서 선택했을때 보이는 가장 초기 화면.
 

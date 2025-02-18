@@ -30,6 +30,7 @@ class IngredientRepositoryImpl implements IngredientRepository {
         .then((response) => Ingredient.fromJson(response));
   }
 
+  /// 나의 재료 삭제 Api
   @override
   Future<void> deleteIngredient(int id) {
     return remoteDatasource.deleteIngredient(id);
@@ -42,11 +43,13 @@ class IngredientRepositoryImpl implements IngredientRepository {
         response.map((json) => IngredientCategory.fromJson(json)).toList());
   }
 
+  /// 나의 즐겨찾기 재료 생성 Api
   @override
   Future<void> createNewFavoriteIngredient(IngredientCategory category) {
     return remoteDatasource.createNewFavoriteIngredient(category.toJson());
   }
 
+  /// 나의 즐겨찾기 재료 삭제 Api
   @override
   Future<void> deleteFavoriteIngredient(IngredientCategory category) {
     return remoteDatasource.deleteFavoriteIngredient(category.toJson());

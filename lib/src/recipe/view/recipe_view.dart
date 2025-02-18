@@ -3,8 +3,15 @@ import 'package:yum_application/main.dart';
 import 'package:yum_application/src/recipe/view/recipe_%20register_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_detail_view.dart';
 
-class RecipeView extends StatelessWidget {
+class RecipeView extends StatefulWidget {
   const RecipeView({super.key});
+
+  @override
+  State<RecipeView> createState() => _RecipeViewState();
+}
+
+class _RecipeViewState extends State<RecipeView> {
+  List<String> ingredients = ["남은 음식", "양파", "버섯"];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class RecipeView extends StatelessWidget {
   }
 
   PreferredSizeWidget _appBar() => PreferredSize(
-        preferredSize: Size.fromHeight(AppBar().preferredSize.height + 172),
+        preferredSize: Size.fromHeight(AppBar().preferredSize.height + 182),
         child: Builder(builder: (context) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
@@ -89,7 +96,7 @@ class RecipeView extends StatelessWidget {
             ),
             Text(
               "사망 직전! 먹어서 구해 주세요!!",
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.left,
             ),
             Row(
@@ -129,7 +136,14 @@ class RecipeView extends StatelessWidget {
                   text,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                const Icon(Icons.close),
+                // GestureDetector(
+                //   onTap: () {
+                //     setState(() {
+                //       ingredients.remove(text);
+                //     });
+                //   },
+                // ),
+                Icon(Icons.close),
               ],
             ),
           );
