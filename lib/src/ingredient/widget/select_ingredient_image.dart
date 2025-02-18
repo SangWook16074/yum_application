@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/common/image_widget.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_sheet.dart';
 
@@ -22,13 +22,16 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
 
   @override
   void initState() {
+    // 얼음 에니메이션 컨트롤러
     _backgroundAnimationController = AnimationController(
-        duration: const Duration(milliseconds: 700), vsync: this);
+        duration: const Duration(milliseconds: 200), vsync: this);
     _foregroundAnimationController = AnimationController(
         duration: const Duration(milliseconds: 200), vsync: this);
+
+    // 얼음 애니메이션
     _backgroundAnimation = CurvedAnimation(
         parent: _backgroundAnimationController,
-        curve: Curves.elasticOut,
+        curve: Curves.easeOutBack,
         reverseCurve: Curves.fastOutSlowIn);
     _foregroundAnimation = CurvedAnimation(
         parent: _foregroundAnimationController, curve: Curves.fastOutSlowIn);
@@ -37,20 +40,19 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
 
   @override
   void didUpdateWidget(covariant SelectIngredientImage oldWidget) {
-    if ((widget.ingredient == null && oldWidget.ingredient == null) ||
-        (widget.ingredient == null && oldWidget.ingredient != null)) {
+    /// 이전 위젯과 다른 재료를 선택한 경우에는 애니메이션이 발생하지 않음.
+    if (widget.ingredient == oldWidget.ingredient) {
       return;
     }
-    if (widget.ingredient!.isFreezed) {
-      _backgroundAnimationController.duration =
-          const Duration(milliseconds: 700);
+
+    /// isFreezed의 옵셔널 체이닝을 통해서 null 방지 -> false 부여
+    final isFreezed = widget.ingredient?.isFreezed ?? false;
+    if (isFreezed) {
       _backgroundAnimationController.forward().then((_) {
         _foregroundAnimationController.forward();
       });
     } else {
       _foregroundAnimationController.reverse().then((_) {
-        _backgroundAnimationController.duration =
-            const Duration(milliseconds: 200);
         _backgroundAnimationController.reverse();
       });
     }
@@ -110,7 +112,9 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
       );
 }
 
-final class IceImage {
+/// [IceImage]는 [SelectIngredientImage]에서 사용되는
+/// 얼음 백그라운드와 포어그라운드 이미지 path의 String getter 확장입니다.
+extension IceImage on ImagePath {
   static String get background => "assets/images/ice_background.png";
   static String get foreground => "assets/images/ice_foreground.png";
 }

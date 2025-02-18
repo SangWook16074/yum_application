@@ -17,7 +17,7 @@ class _RecipeViewState extends State<RecipeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      floatingActionButton: _floating(),
+      // floatingActionButton: _floating(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SingleChildScrollView(
         child: Column(
@@ -52,8 +52,8 @@ class _RecipeViewState extends State<RecipeView> {
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(172),
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 22.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 22.0),
                   child: Column(
                     children: [
                       _search(),
@@ -73,7 +73,7 @@ class _RecipeViewState extends State<RecipeView> {
           height: 40,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12.0),
-              color: Color(0xffF3F3F3)),
+              color: const Color(0xffF3F3F3)),
           child: TextField(
               decoration: InputDecoration(
             hintText: "검색어를 입력해 주세요.",
@@ -81,7 +81,8 @@ class _RecipeViewState extends State<RecipeView> {
                 EdgeInsetsDirectional.symmetric(vertical: 10, horizontal: 10),
             hintStyle: Theme.of(context).textTheme.labelMedium,
             border: InputBorder.none,
-            suffixIcon: Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
+            suffixIcon:
+                const Icon(Icons.search, size: 24, color: Color(0xff2A2A2A)),
           )),
         );
       });
@@ -90,7 +91,7 @@ class _RecipeViewState extends State<RecipeView> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 20.0, bottom: 10),
             ),
             Text(
@@ -122,11 +123,11 @@ class _RecipeViewState extends State<RecipeView> {
         ),
         child: Builder(builder: (context) {
           return Container(
-            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.transparent,
-                border: Border.all(color: Color(0xff362703))),
+                border: Border.all(color: const Color(0xff362703))),
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +154,7 @@ class _RecipeViewState extends State<RecipeView> {
         padding: const EdgeInsets.only(left: 50.0, top: 7),
         child: GestureDetector(
           onTap: () {},
-          child: Icon(
+          child: const Icon(
             Icons.add_circle,
             size: 40,
           ),
@@ -171,7 +172,7 @@ class _RecipeViewState extends State<RecipeView> {
                 height: 34,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Color(0xff362703)),
+                    color: const Color(0xff362703)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -182,7 +183,7 @@ class _RecipeViewState extends State<RecipeView> {
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down_sharp,
                       color: Colors.white,
                     )
@@ -204,7 +205,7 @@ class _RecipeViewState extends State<RecipeView> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => RecipeDetailView()));
+                          builder: (context) => const RecipeDetailView()));
                 },
                 child: Container(
                   height: 190,
@@ -219,7 +220,7 @@ class _RecipeViewState extends State<RecipeView> {
                           width: 154,
                           height: 150,
                           decoration: BoxDecoration(
-                              color: Color((0xFFEEEEEE)),
+                              color: const Color((0xFFEEEEEE)),
                               borderRadius: BorderRadius.circular(16)),
                         ),
                       ),
@@ -284,10 +285,12 @@ class _RecipeViewState extends State<RecipeView> {
   Widget _floating() => Builder(builder: (context) {
         return FloatingActionButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => RecipeRegisterView()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const RecipeRegisterView()));
           },
-          backgroundColor: Color(0xffFFB300),
+          backgroundColor: const Color(0xffFFB300),
           child: Image.asset(
             'assets/images/floating.png',
             width: 33,
@@ -303,10 +306,10 @@ class _RecipeViewState extends State<RecipeView> {
         child: Builder(builder: (context) {
           return Container(
             height: 26,
-            padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color.fromARGB(15, 58, 57, 57)),
+                color: const Color.fromARGB(15, 58, 57, 57)),
             alignment: Alignment.center,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

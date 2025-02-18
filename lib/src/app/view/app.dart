@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/app/viewModel/app_view_model.dart';
-import 'package:yum_application/src/challenge/view/challenge_list_view.dart';
-import 'package:yum_application/src/common/image_widget.dart';
+import 'package:yum_application/src/challenge/view/challenge_view.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/recipe/view/recipe_view.dart';
+import 'package:yum_application/src/user/view/mypage_view.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,6 +15,7 @@ class App extends StatelessWidget {
     return Scaffold(
       body: _body(),
       bottomNavigationBar: _bottomNav(),
+      floatingActionButton: _fab(),
     );
   }
 
@@ -21,18 +23,18 @@ class App extends StatelessWidget {
         return IndexedStack(
           key: const Key("app view body"),
           index: provider.pageIndex,
-          children: [
-            RecipeView(
-              key: const Key("app view recipe view"),
-            ),
-            const HomeView(
+          children: const [
+            HomeView(
               key: Key("app view ingredient view"),
             ),
-            const ChallengeListView(
+            RecipeView(
+              key: Key("app view recipe view"),
+            ),
+            ChallengeView(
               key: Key("app view challenge view"),
             ),
-            Container(
-              key: const Key("app view mypage view"),
+            MyPageView(
+              key: Key("app view mypage view"),
             ),
           ],
         );
@@ -52,6 +54,12 @@ class App extends StatelessWidget {
             unselectedFontSize: 10,
             items: [
               BottomNavigationBarItem(
+                  key: const Key("bottom nav ingredient"),
+                  icon: ImageWidget(path: ImagePath.ingredientOff, width: 100),
+                  activeIcon:
+                      ImageWidget(path: ImagePath.ingredientOn, width: 100),
+                  label: "나의 냉장고"),
+              BottomNavigationBarItem(
                   key: const Key("bottom nav recipe"),
                   icon: ImageWidget(
                     path: ImagePath.recipeOff,
@@ -59,12 +67,6 @@ class App extends StatelessWidget {
                   ),
                   activeIcon: ImageWidget(path: ImagePath.recipeOn, width: 100),
                   label: "레시피"),
-              BottomNavigationBarItem(
-                  key: const Key("bottom nav ingredient"),
-                  icon: ImageWidget(path: ImagePath.ingredientOff, width: 100),
-                  activeIcon:
-                      ImageWidget(path: ImagePath.ingredientOn, width: 100),
-                  label: "나의 냉장고"),
               BottomNavigationBarItem(
                   key: const Key("bottom nav challenge"),
                   icon: ImageWidget(path: ImagePath.challengeOff, width: 100),
@@ -77,5 +79,21 @@ class App extends StatelessWidget {
                   activeIcon: ImageWidget(path: ImagePath.mypageOn, width: 100),
                   label: "마이 페이지"),
             ]);
+      });
+
+  Widget _fab() => Consumer<AppViewModel>(builder: (context, provider, child) {
+        if (provider.pageIndex < 2) {
+          return FloatingActionButton(
+              key: const Key("fab"),
+              foregroundColor: const Color(0xffffffff),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              onPressed: provider.routeTo,
+              child: ImageWidget(
+                path: provider.fabImage,
+                width: 90,
+              ));
+        } else {
+          return Container();
+        }
       });
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/common/basic_bottom_sheet.dart';
-import 'package:yum_application/src/common/delete_dialog.dart';
+import 'package:yum_application/src/common/widgets/basic_bottom_sheet.dart';
+import 'package:yum_application/src/common/widgets/delete_dialog.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/ingredient/view/ingredient_edit_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
@@ -72,22 +72,19 @@ class _IngredientEditBottomSheetState extends State<IngredientEditBottomSheet> {
                 startAt: widget.ingredient.startAt,
                 endAt: widget.ingredient.endAt),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IngredientImage(
-                path: widget.ingredient.category.imagePath,
-                width: 300,
-                isFreezed: widget.ingredient.isFreezed,
-                isWarning: false,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 23.3),
-                child: Text(widget.ingredient.name,
-                    style: Theme.of(context).textTheme.bodyMedium),
-              )
-            ],
+          IngredientImage.select(
+            isFreezed: widget.ingredient.isFreezed,
+            path: widget.ingredient.category.imagePath,
+            isWarning: false,
+            width: 250,
+          ),
+          Positioned(
+            bottom: 40,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 23.3),
+              child: Text(widget.ingredient.name,
+                  style: Theme.of(context).textTheme.bodyMedium),
+            ),
           )
         ],
       ),
