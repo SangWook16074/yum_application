@@ -3,6 +3,9 @@ import 'package:yum_application/src/challenge/widget/challenge_detail_view.dart'
 import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/challenge/widget/challenge_row.dart';
 
+// Challenge List ( 도전하기 )
+// 사용자가 수행해야 할 5개의 항목을 리스트로 보여줌.
+
 class ChallengeList extends StatelessWidget {
   const ChallengeList({super.key});
 
@@ -22,6 +25,7 @@ class ChallengeList extends StatelessWidget {
               ),
             ),
           ),
+          // 위젯을 사용하여 각각의 항목을 생성해줌.
           ChallengeRow(
             key: const Key("Recipe registration"),
             title: "레시피 등록",

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/widget/challenge_reward_card.dart';
 
+// Challenge Storage ( 보관함 )
+// 나의 챌린지 부분 Challenge Reward Card를 보여주는 Scroll의 기능을 구성해줌.
+
 class ChallengeCardScroll extends StatefulWidget {
   const ChallengeCardScroll({super.key});
 
@@ -85,7 +88,7 @@ class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
             itemCount: 5,
             itemBuilder: (context, index) {
               int cardIndex = index % _cards.length;
-
+              // 중앙에 있는 Reward Card는 더 커지도록 설정.
               double scale =
                   (1 - ((_currentPage - index).abs() * 0.3)).clamp(0.8, 1.0);
 
