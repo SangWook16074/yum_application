@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+// Challenge Storage ( 보관함 )
+// 사용자가 Check List를 정해진 횟수만큼 수행했다면 Reward Card를 제공.
+// 사용자가 받을 카드의 정보를 생성.
+
 class ChallengeRewardCard extends StatelessWidget {
   final String title;
   final String subTitle;
@@ -24,6 +28,7 @@ class ChallengeRewardCard extends StatelessWidget {
     );
   }
 
+// Card의 메인 부분을 생성.
   Widget _body(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -36,6 +41,7 @@ class ChallengeRewardCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
+          // 메인 이미지
           Image.asset(
             imagePath,
             height: 344,
@@ -51,6 +57,7 @@ class ChallengeRewardCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
+                  // 이미지의 밑 부분 그라데이션 생성.
                   colors: [
                     Color.fromARGB(0, 255, 255, 255),
                     Color(0xffFFB300),
@@ -59,6 +66,7 @@ class ChallengeRewardCard extends StatelessWidget {
               ),
             ),
           ),
+          // 이미지 버튼 생성.
           Positioned(
             bottom: 8,
             left: 8,
@@ -97,6 +105,7 @@ class ChallengeRewardCard extends StatelessWidget {
     );
   }
 
+// Card의 흰 부분을 생성.
   Widget _bottom(BuildContext context) {
     return Container(
       width: double.infinity,

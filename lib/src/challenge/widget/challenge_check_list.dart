@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/widget/stack_container.dart';
 
+// Challenge Storage ( 보관함 )
+// Challenge Calendar 밑에 Check List 예시를 보여줌.
+
 class ChallengeCheckList extends StatelessWidget {
   const ChallengeCheckList({super.key});
 
@@ -25,6 +28,7 @@ class ChallengeCheckList extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 40, bottom: 20),
+            // 세로로 컨테이너를 겹처야 하기 때문에 Stack으로 생성.
             child: Stack(
               children: [
                 Container(
@@ -42,6 +46,7 @@ class ChallengeCheckList extends StatelessWidget {
                 ),
                 Column(
                   children: [
+                    // 각각 다른 Opacity 값을 갖게 해서 순서대로 배치.
                     StackContainer(
                       title: "레시피 등록",
                       color: Theme.of(context).colorScheme.secondary,

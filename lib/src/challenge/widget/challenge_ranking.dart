@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 class ChallengeRanking extends StatelessWidget {
   const ChallengeRanking({super.key});
 
+// Challenge Storage ( 보관함 )
+// 사용자들의 순위를 확인시켜준다.
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,6 +21,7 @@ class ChallengeRanking extends StatelessWidget {
   }
 }
 
+// title 부분과 전체보기 텍스트 버튼 생성.
 Widget _header() {
   return SizedBox(
     width: double.infinity,
@@ -45,6 +49,8 @@ Widget _header() {
   );
 }
 
+// 사용자의 순위를 최대 3명까지 랜더링.
+// 가로로 배치된 3개의 컨테이너.
 Widget _body() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +58,7 @@ Widget _body() {
     children: [
       Flexible(
         fit: FlexFit.tight,
+        // 임시로 생성한 데이터.
         child: _rankingContainer(),
       ),
       Flexible(
@@ -66,6 +73,8 @@ Widget _body() {
   );
 }
 
+// 사용자의 순위를 최대 3명까지 랜더링.
+// 하나의 컨테이너
 Widget _bottom() {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -98,30 +107,7 @@ Widget _bottom() {
   );
 }
 
-Widget _rank() {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8),
-    child: Builder(builder: (context) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            "46",
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-          const Padding(
-              padding: EdgeInsets.only(left: 10, right: 8),
-              child: Icon(Icons.circle)),
-          Text(
-            "data",
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ],
-      );
-    }),
-  );
-}
-
+// 3개의 컨테이너 안에 들어가는 데이터.
 Widget _rankingContainer() {
   return Builder(builder: (context) {
     return Padding(
@@ -153,4 +139,29 @@ Widget _rankingContainer() {
       ),
     );
   });
+}
+
+// 하나의 컨테이너 안에 들어가는 사용자의 정보와 최대 3명의 데이터.
+Widget _rank() {
+  return Padding(
+    padding: const EdgeInsets.only(top: 8),
+    child: Builder(builder: (context) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            "46",
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+          const Padding(
+              padding: EdgeInsets.only(left: 10, right: 8),
+              child: Icon(Icons.circle)),
+          Text(
+            "data",
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+        ],
+      );
+    }),
+  );
 }
