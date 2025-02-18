@@ -5,6 +5,7 @@ import 'package:yum_application/src/app/page/app_page.dart';
 import 'package:yum_application/src/app/config/app_config.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
 import 'package:yum_application/src/recipe/view/review_view.dart';
+import 'package:yum_application/src/recipe/view/review_write_view.dart';
 import 'package:yum_application/src/util/app_theme.dart';
 import 'package:yum_application/src/util/global_variable.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: GlobalVariable.naviagatorState,
       theme: light,
-      home: const ReviewView(),
+      home: const ReviewWriteView(),
     );
   }
 }

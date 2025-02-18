@@ -7,7 +7,6 @@ class ReviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
-      floatingActionButton: _floating(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SingleChildScrollView(
           child: Column(children: [
@@ -50,7 +49,7 @@ class ReviewView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 8),
+                  padding: const EdgeInsets.only(left: 8),
                   child: Text(
                     "최신순",
                     style: Theme.of(context).textTheme.bodySmall,
@@ -80,6 +79,7 @@ class ReviewView extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    /// 사용자 정보 표시
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Container(
@@ -91,6 +91,7 @@ class ReviewView extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 10),
                       child: Text(
@@ -100,6 +101,8 @@ class ReviewView extends StatelessWidget {
                     )
                   ],
                 ),
+
+                /// 키워드 표시
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 15, bottom: 15, left: 10, right: 5),
@@ -147,6 +150,8 @@ class ReviewView extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                /// 사진
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -188,6 +193,8 @@ class ReviewView extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                /// 내용 입력
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Text(
@@ -197,18 +204,6 @@ class ReviewView extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        );
-      });
-
-  Widget _floating() => Builder(builder: (context) {
-        return FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Color(0xffFFB300),
-          child: Image.asset(
-            'assets/images/floating.png',
-            width: 33,
-            height: 28,
           ),
         );
       });
