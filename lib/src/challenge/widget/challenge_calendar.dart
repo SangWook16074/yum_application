@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yum_application/src/challenge/widget/challenge_check_list.dart';
 
+// Challenge Storage ( 보관함 )
+// Git의 잔디 심기처럼 이 앱을 사용했던 기록을 기반해 점점 진해지는 컨테이너를 달력 형식으로 보여줌.
+
 class ChallengeCalendar extends StatelessWidget {
   const ChallengeCalendar({super.key});
 
@@ -15,6 +18,7 @@ class ChallengeCalendar extends StatelessWidget {
     List<bool> dayCompletion =
         List.generate(daysInMonth, (index) => index % 2 == 0);
 
+// Figma에 생성된 컨테이너 투명도
     List<double> opacities = [
       0.23,
       0.51,
@@ -37,6 +41,7 @@ class ChallengeCalendar extends StatelessWidget {
               ),
             ),
           ),
+          // 오늘의 챌린지 컨테이너 생성.
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
@@ -75,6 +80,7 @@ class ChallengeCalendar extends StatelessWidget {
                         "금",
                         "토"
                       ];
+                      // 요일을 크기에 맞춰 배치해줌.
                       return Center(
                         child: Text(
                           weekdays[index],
@@ -86,7 +92,7 @@ class ChallengeCalendar extends StatelessWidget {
                       if (dayIndex < 0 || dayIndex >= daysInMonth) {
                         return const SizedBox();
                       }
-
+                      // 컨테이너의 개수.
                       int day = dayIndex + 1;
                       bool isToday = (day == now.day);
 
@@ -103,6 +109,7 @@ class ChallengeCalendar extends StatelessWidget {
                                       .withOpacity(opacity)
                                   : Theme.of(context).colorScheme.scrim,
                           borderRadius: BorderRadius.circular(5),
+                          // 현재 날짜를 표시해주는 컨테이너는 배경이 흰색, 테두리 적용, 현재 날짜 보여주기.
                           border: isToday
                               ? Border.all(
                                   color:
@@ -125,7 +132,7 @@ class ChallengeCalendar extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.only(top: 20),
-            child: ChallengeCheckList(),
+            child: ChallengeCheckList(), // 잔디 밑 예시 부분.
           ),
         ],
       ),
