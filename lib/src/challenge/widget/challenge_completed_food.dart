@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
+// Challenge Storage ( 보관함 )
+// 챌린지 달성 시 보상 화면.
+
 class ChallengeCompletedFood extends StatelessWidget {
   final String title;
   final String imagePath;
@@ -21,9 +24,10 @@ class ChallengeCompletedFood extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _header(context),
-          _body(context),
-          _bottom(),
+          // 위젯을 3개로 나누어 구성.
+          _header(context), // 가장 상단 텍스트를 구성.
+          _body(context), // 이미지와 그 밑 텍스트를 구성.
+          _bottom(), // 버튼을 구성.
         ],
       ),
     );
@@ -41,7 +45,7 @@ class ChallengeCompletedFood extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 2, bottom: 60),
             child: Text(
-              title,
+              title, // 이미지에 맞는 텍스트를 명시.
               style: Theme.of(context).textTheme.headlineLarge,
             ),
           ),
@@ -56,6 +60,7 @@ class ChallengeCompletedFood extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
+            // 이미지의 크기를 지정.
             width: 240,
             height: 190,
             child: Image.asset(imagePath),
@@ -63,6 +68,7 @@ class ChallengeCompletedFood extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 40, bottom: 60),
             child: Column(
+              // 이미지 밑 텍스트를 구성.
               children: [
                 Text(
                   label,
