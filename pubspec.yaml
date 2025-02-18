@@ -43,6 +43,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   equatable: ^2.0.7
   flutter_native_splash: ^2.4.4
+  flutter_svg: ^2.0.17
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,9 @@ flutter:
     - family: PartialSansKR
       fonts:
         - asset: assets/fonts/PartialSansKR-Regular.otf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

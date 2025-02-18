@@ -12,12 +12,23 @@ List<ChangeNotifierProvider> getInitProvider() {
       RemoteDatasourceImpl(apiClient: http.Client(), baseUrl: baseUrl);
   final IngredientRepositoryImpl ingredientRepositoryImpl =
       IngredientRepositoryImpl(remoteDatasource: remoteDatasource);
+
+  final IngredientViewModelImpl ingredientViewModel =
+      IngredientViewModelImpl(ingredientRepository: ingredientRepositoryImpl);
+
+  final BasicIngredientViewModel basicIngredientViewModel =
+      BasicIngredientViewModel(ingredientRepository: ingredientRepositoryImpl);
+
+  /// 재료 뷰모델에서
+  /// 재료 가져와서 정렬한 다음에
+  /// 3 개만 뽑기
+  /// 그리고 레시피 뷰모델 생성할 때,
+  /// 3 개 전달
+
   return [
     ChangeNotifierProvider<IngredientViewModelImpl>(
-        create: (context) => IngredientViewModelImpl(
-            ingredientRepository: ingredientRepositoryImpl)),
+        create: (context) => ingredientViewModel),
     ChangeNotifierProvider<BasicIngredientViewModel>(
-        create: (context) => BasicIngredientViewModel(
-            ingredientRepository: ingredientRepositoryImpl)),
+        create: (context) => basicIngredientViewModel),
   ];
 }
