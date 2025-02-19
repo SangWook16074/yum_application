@@ -53,7 +53,7 @@ PreferredSizeWidget _appBar() {
 // Image, title, subTitle을 담당해줌.
 Widget _header(String imagePath) => Builder(builder: (context) {
       return SliverAppBar(
-        toolbarHeight: 220,
+        toolbarHeight: 260,
         floating: true,
         pinned: false,
         backgroundColor: Colors.white,
@@ -69,11 +69,14 @@ Widget _header(String imagePath) => Builder(builder: (context) {
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 138,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: ImageWidget(path: imagePath),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 27),
+                    child: SizedBox(
+                      height: 138,
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: ImageWidget(path: imagePath),
+                      ),
                     ),
                   ),
                   Padding(
@@ -122,13 +125,19 @@ Widget _body() {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "3단계 도전중",
-                style: Theme.of(context).textTheme.headlineSmall,
+              Padding(
+                padding: const EdgeInsets.only(top: 16, left: 16.51),
+                child: Text(
+                  "3단계 도전중",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
-              Text(
-                "3개 달성! 다음 단계까지 2개 남았어요",
-                style: Theme.of(context).textTheme.labelSmall,
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 16.51),
+                child: Text(
+                  "3개 달성! 다음 단계까지 2개 남았어요",
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -183,9 +192,12 @@ Widget _bottom() {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "레시피 리뷰 작성 발자취",
-                style: Theme.of(context).textTheme.headlineSmall,
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 20),
+                child: Text(
+                  "레시피 리뷰 작성 발자취",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
               const SizedBox(height: 12),
               GridView.builder(
