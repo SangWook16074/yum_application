@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
-import 'package:yum_application/src/domain/ingredient/widget/ingredient_edit_bottom_sheet.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
 
 void main() {
   late final Ingredient ingredient;

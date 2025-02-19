@@ -6,9 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
-import 'package:yum_application/src/domain/ingredient/view/home_view.dart';
-import 'package:yum_application/src/domain/ingredient/widget/ingredient_image.dart';
+import 'package:yum_application/src/ingredient/view/home_view.dart';
+import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
 import '../../common/mock_navigator_observer.dart';
 import 'home_view_test.mocks.dart';

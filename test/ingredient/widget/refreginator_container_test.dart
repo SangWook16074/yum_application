@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
-import 'package:yum_application/src/domain/ingredient/widget/ingredient_image.dart';
-import 'package:yum_application/src/domain/ingredient/widget/refreginator_container.dart';
+import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
+import 'package:yum_application/src/ingredient/widget/refreginator_container.dart';
 
 void main() {
   group("Refreginator Container Widget Test", () {
