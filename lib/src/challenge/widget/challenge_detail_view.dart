@@ -199,9 +199,9 @@ Widget _bottom() {
                 ),
                 itemCount: 12,
                 itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: ImageWidget(path: "assets/images/reward.png"),
+                  return Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ImageWidget(path: ChallengeImagePath.reward),
                   );
                 },
               ),
@@ -239,4 +239,8 @@ Widget _button() {
       );
     }),
   );
+}
+
+extension ChallengeImagePath on ImagePath {
+  static String get reward => 'assets/images/reward.png';
 }

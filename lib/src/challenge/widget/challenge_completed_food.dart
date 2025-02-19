@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
 // Challenge Storage ( 보관함 )
@@ -63,7 +64,7 @@ class ChallengeCompletedFood extends StatelessWidget {
             // 이미지의 크기를 지정.
             width: 240,
             height: 190,
-            child: Image.asset(imagePath),
+            child: ImageWidget(path: imagePath),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 40, bottom: 60),
