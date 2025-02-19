@@ -1,9 +1,8 @@
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
@@ -12,10 +11,10 @@ import 'ingredient_view_model_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<IngredientRepositoryImpl>()])
 main() {
   late final MockIngredientRepositoryImpl ingredientRepository;
-  late final IngredientViewModelImpl ingredientViewModel;
+  late final RefreginatorIngredientViewModel ingredientViewModel;
 
   final freezedIngredients = [
-    Ingredient(
+    RefreginatorIngredient(
       id: 1,
       name: "egg",
       category: IngredientCategory.egg,
@@ -23,7 +22,7 @@ main() {
       startAt: DateTime(2024, 12, 2),
       endAt: DateTime(2024, 12, 30),
     ),
-    Ingredient(
+    RefreginatorIngredient(
       id: 2,
       name: "beef",
       category: IngredientCategory.beef,
@@ -31,7 +30,7 @@ main() {
       startAt: DateTime(2024, 12, 2),
       endAt: DateTime(2024, 12, 30),
     ),
-    Ingredient(
+    RefreginatorIngredient(
       id: 3,
       name: "bread",
       category: IngredientCategory.bread,
@@ -42,7 +41,7 @@ main() {
   ];
 
   final unfreezedIngredients = [
-    Ingredient(
+    RefreginatorIngredient(
       id: 4,
       name: "beef",
       category: IngredientCategory.beef,
@@ -50,7 +49,7 @@ main() {
       startAt: DateTime(2024, 12, 2),
       endAt: DateTime(2024, 12, 30),
     ),
-    Ingredient(
+    RefreginatorIngredient(
       id: 5,
       name: "bread",
       category: IngredientCategory.bread,
@@ -65,14 +64,12 @@ main() {
       ingredientRepository = MockIngredientRepositoryImpl();
       when(ingredientRepository.getMyIngredient()).thenAnswer(
           (_) async => [...freezedIngredients, ...unfreezedIngredients]);
-      ingredientViewModel =
-          IngredientViewModelImpl(ingredientRepository: ingredientRepository);
+      ingredientViewModel = RefreginatorIngredientViewModel(
+          ingredientRepository: ingredientRepository);
 
       verify(ingredientRepository.getMyIngredient()).called(1);
 
       TestWidgetsFlutterBinding.ensureInitialized();
-      SchedulerBinding.instance
-          .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     });
 
     test("fetchData 실패 테스트", () {
@@ -92,10 +89,9 @@ main() {
     });
 
     test("selectIngredient메소드를 이용해서 새로운 재료를 생성할 수 있다.", () {
-      final newIngredient = BasicIngredient(
+      final newIngredient = InitialIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       final selectIngredient = ingredientViewModel.selectedIngredient!;
@@ -105,8 +101,18 @@ main() {
     });
 
     test("updateIngredient메소드를 통해서 기존의 재료정보를 수정할 수 있다.", () async {
+      provideDummy(
+        RefreginatorIngredient(
+          id: 1,
+          name: "updated",
+          category: IngredientCategory.egg,
+          isFreezed: true,
+          startAt: DateTime(2024, 12, 2),
+          endAt: DateTime(2024, 12, 30),
+        ),
+      );
       when(ingredientRepository.updateIngredient(any)).thenAnswer(
-        (_) async => Ingredient(
+        (_) async => RefreginatorIngredient(
           id: 1,
           name: "updated",
           category: IngredientCategory.egg,
@@ -127,10 +133,9 @@ main() {
     });
 
     test("toggleIsFreezed메소드를 이용해서 재료의 냉장 냉동 여부를 바꿀 수 있다.", () {
-      final newIngredient = BasicIngredient(
+      final newIngredient = InitialIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       ingredientViewModel.toggleIsFreezed(true);
@@ -138,10 +143,9 @@ main() {
     });
 
     test("updateStartAt 메소드로 구매날짜를 갱신할 수 있다.", () {
-      final newIngredient = BasicIngredient(
+      final newIngredient = InitialIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       ingredientViewModel.updateStartAt(DateTime(2024, 12, 3));
@@ -150,10 +154,9 @@ main() {
     });
 
     test("updateEndAt 메소드로 소비날짜를 갱신할 수 있다.", () {
-      final newIngredient = BasicIngredient(
+      final newIngredient = InitialIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        type: IngredientType.meatsAndEggs,
       );
       ingredientViewModel.selectIngredient(newIngredient);
       ingredientViewModel.updateEndAt(DateTime(2024, 12, 30));
@@ -162,13 +165,22 @@ main() {
     });
 
     test("createNewIngredients는 새로운 재료를 추가한 후 새로운 재료를 재료에 추가한다", () async {
-      final newIngredient = BasicIngredient(
+      final newIngredient = InitialIngredient(
         name: "egg",
         category: IngredientCategory.egg,
-        type: IngredientType.meatsAndEggs,
+      );
+      provideDummy(
+        RefreginatorIngredient(
+          id: 1,
+          name: "updated",
+          category: IngredientCategory.egg,
+          isFreezed: true,
+          startAt: DateTime(2024, 12, 2),
+          endAt: DateTime(2024, 12, 30),
+        ),
       );
       when(ingredientRepository.createNewIngredient(any)).thenAnswer(
-          (_) async => Ingredient(
+          (_) async => RefreginatorIngredient(
               id: 6,
               name: "egg",
               category: IngredientCategory.egg,

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/widgets/date_picker_widget.dart';
 import 'package:yum_application/src/common/widgets/scroll_date_dialog.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/widget/select_ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
 class IngredientUpdateView extends StatefulWidget {
-  final Ingredient currIngredient;
+  final RefreginatorIngredient currIngredient;
   const IngredientUpdateView({super.key, required this.currIngredient});
 
   @override
@@ -16,12 +16,12 @@ class IngredientUpdateView extends StatefulWidget {
 }
 
 class _IngredientUpdateViewState extends State<IngredientUpdateView> {
-  late final IngredientViewModelImpl _ingredientViewModel;
+  late final RefreginatorIngredientViewModel _ingredientViewModel;
 
   @override
   void initState() {
     _ingredientViewModel =
-        Provider.of<IngredientViewModelImpl>(context, listen: false);
+        Provider.of<RefreginatorIngredientViewModel>(context, listen: false);
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
             child: SizedBox(
               height: 250,
               child: Center(
-                child: Consumer<IngredientViewModelImpl>(
+                child: Consumer<RefreginatorIngredientViewModel>(
                     builder: (context, provider, child) {
                   return GestureDetector(
                     onTap: () {
@@ -90,7 +90,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
               "냉동",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            Consumer<IngredientViewModelImpl>(
+            Consumer<RefreginatorIngredientViewModel>(
                 builder: (context, provider, child) {
               return Switch.adaptive(
                 value: provider.isFreezed,
@@ -118,9 +118,9 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
             width: 155,
             height: 44,
             child: TextField(
-              onChanged:
-                  Provider.of<IngredientViewModelImpl>(context, listen: false)
-                      .updateIngredientName,
+              onChanged: Provider.of<RefreginatorIngredientViewModel>(context,
+                      listen: false)
+                  .updateIngredientName,
               decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -152,7 +152,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: [
-                      Consumer<IngredientViewModelImpl>(
+                      Consumer<RefreginatorIngredientViewModel>(
                           builder: (context, provider, child) {
                         return DatePickerWidget(
                           time: provider.selectedIngredient?.startAt,
@@ -198,7 +198,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                             "소비기한",
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
-                          Consumer<IngredientViewModelImpl>(
+                          Consumer<RefreginatorIngredientViewModel>(
                             builder: (context, provider, child) {
                               return Switch(
                                 // value: false,
@@ -220,7 +220,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
-                      Consumer<IngredientViewModelImpl>(
+                      Consumer<RefreginatorIngredientViewModel>(
                           builder: (context, provider, child) {
                         // if (provider.notInfinity) {
                         return DatePickerWidget(

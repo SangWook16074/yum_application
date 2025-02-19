@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/page_indicator.dart';
 
 class RefreginatorContainer extends StatefulWidget {
-  final List<Ingredient> children;
+  final List<RefreginatorIngredient> children;
   final int rowCount;
   final String label;
   const RefreginatorContainer({
@@ -40,7 +40,11 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
     _pageController.jumpToPage(index);
   }
 
-  List<List<List<dynamic>>> convertTo3D(List<Ingredient> children) {
+  /// 전달받은 아이템을 3차원 배열로 전환하는 convert 메소드
+  ///
+  /// 위젯에 전달된 children에 대하여 3차원 배열로 변환합니다.
+  /// 만약 정해진만큼 공간을 차지하지 못하면, empty가 채워집니다.
+  List<List<List<dynamic>>> convertTo3D(List<RefreginatorIngredient> children) {
     final oneDArray = children.map((i) => _buildItem(i)).toList();
     int groupSize = widget.rowCount * 4;
 
@@ -208,7 +212,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
         ],
       );
 
-  Widget _buildItem(Ingredient item) => GestureDetector(
+  Widget _buildItem(RefreginatorIngredient item) => GestureDetector(
         onTap: () {
           showModalBottomSheet(
               shape: const RoundedRectangleBorder(
@@ -283,7 +287,7 @@ class _RefreginatorContainerState extends State<RefreginatorContainer>
 }
 
 class AnimatedRefreginatorItem extends StatefulWidget {
-  final Ingredient item;
+  final RefreginatorIngredient item;
   final double width;
   const AnimatedRefreginatorItem(
       {super.key, required this.item, required this.width});
@@ -318,7 +322,6 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
     if (_scrollController.offset < _scrollController.position.maxScrollExtent &&
         !_scrolling) {
       _scrolling = true;
-      print("시작");
       _scrollController
           .animateTo(_scrollController.position.maxScrollExtent,
               duration: const Duration(seconds: 2), curve: Curves.linear)
@@ -327,7 +330,6 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
       });
     } else if (_scrollController.offset ==
         _scrollController.position.maxScrollExtent) {
-      print("초기화");
       _scrollController.jumpTo(0);
     }
   }
@@ -366,7 +368,7 @@ class _AnimatedRefreginatorItemState extends State<AnimatedRefreginatorItem>
 }
 
 class RefreginatorItem extends StatelessWidget {
-  final Ingredient item;
+  final RefreginatorIngredient item;
 
   const RefreginatorItem({super.key, required this.item});
 

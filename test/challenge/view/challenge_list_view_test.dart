@@ -11,14 +11,15 @@ import '../../ingredient/view/home_view_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<IngredientRepository>()])
 void main() {
   late IngredientRepository repository;
-  late IngredientViewModelImpl viewModel;
+  late RefreginatorIngredientViewModel viewModel;
   late Widget challengeListView;
 
   setUp(() {
     repository = MockIngredientRepository();
-    viewModel = IngredientViewModelImpl(ingredientRepository: repository);
+    viewModel =
+        RefreginatorIngredientViewModel(ingredientRepository: repository);
     final observer = MockNavigatorObserver();
-    challengeListView = ChangeNotifierProvider<IngredientViewModelImpl>(
+    challengeListView = ChangeNotifierProvider<RefreginatorIngredientViewModel>(
       create: (_) => viewModel,
       builder: (_, __) => MaterialApp(
         navigatorObservers: [observer],

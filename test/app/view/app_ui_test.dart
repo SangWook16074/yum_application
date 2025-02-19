@@ -7,12 +7,12 @@ import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.d
 
 import 'app_ui_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<IngredientViewModelImpl>()])
+@GenerateNiceMocks([MockSpec<RefreginatorIngredientViewModel>()])
 void main() {
-  late IngredientViewModelImpl ingredientViewModel;
+  late RefreginatorIngredientViewModel ingredientViewModel;
   late Widget widget;
   group("App UI Test", () {
-    ingredientViewModel = MockIngredientViewModelImpl();
+    ingredientViewModel = MockRefreginatorIngredientViewModel();
     setUpAll(() {
       widget = ChangeNotifierProvider(
         create: (context) => ingredientViewModel,

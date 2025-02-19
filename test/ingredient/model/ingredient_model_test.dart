@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 
 void main() {
   group("Ingredient Model Unit Test", () {
     test(
         "기본생성자로 Ingredient Model을 생성하는 경우 기본값으로 시작일과 종료일은 모두 현재날짜이다. isFavorite은 false이다.",
         () {
-      final ingredient = Ingredient(
+      final ingredient = RefreginatorIngredient(
           name: "egg", category: IngredientCategory.egg, isFreezed: false);
       final now = DateTime.now();
       final year = now.year;
@@ -22,7 +22,7 @@ void main() {
     });
 
     test("copy함수를 실행하면 새로운 재료 인스턴스가 갱신된다.", () {
-      final ingredient = Ingredient(
+      final ingredient = RefreginatorIngredient(
           name: "egg", category: IngredientCategory.egg, isFreezed: false);
       final newIngredient = ingredient.copy(startAt: DateTime(2024, 11, 12));
       expect(newIngredient.startAt, DateTime(2024, 11, 12));
@@ -38,7 +38,7 @@ void main() {
         "startAt": "2024-11-12",
         "endAt": "2024-11-17"
       };
-      final ingredient = Ingredient.fromJson(json);
+      final ingredient = RefreginatorIngredient.fromJson(json);
       expect(ingredient.id, 1);
       expect(ingredient.name, "egg");
       expect(ingredient.isFreezed, false);
@@ -48,7 +48,7 @@ void main() {
     });
 
     test("toJson 테스트", () {
-      final ingredient = Ingredient(
+      final ingredient = RefreginatorIngredient(
         name: "egg",
         isFreezed: false,
         category: IngredientCategory.egg,

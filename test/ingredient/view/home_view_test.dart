@@ -3,11 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/ingredient/view/home_view.dart';
-import 'package:yum_application/src/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
@@ -20,14 +19,15 @@ void main() {
   /// HomeView는 IngredientViewModel이 주입되어야
   /// Consumer 위젯이 해당 데이터를 가져옴
   late IngredientRepository repository;
-  late IngredientViewModelImpl viewModel;
+  late RefreginatorIngredientViewModel viewModel;
   late Widget homeView;
   group("Home View Widget Initialize test", () {
     setUp(() {
       repository = MockIngredientRepository();
-      viewModel = IngredientViewModelImpl(ingredientRepository: repository);
+      viewModel =
+          RefreginatorIngredientViewModel(ingredientRepository: repository);
       final observer = MockNavigatorObserver();
-      homeView = ChangeNotifierProvider<IngredientViewModelImpl>(
+      homeView = ChangeNotifierProvider<RefreginatorIngredientViewModel>(
         create: (context) => viewModel,
         builder: (context, child) => MaterialApp(
           navigatorObservers: [observer],
@@ -47,21 +47,21 @@ void main() {
     testWidgets("사용자의 냉장고 재료가 올바르게 렌더링 된다.", (WidgetTester tester) async {
       await tester.pumpWidget(homeView);
       when(repository.getMyIngredient()).thenAnswer((_) async => [
-            Ingredient(
+            RefreginatorIngredient(
                 id: 1,
                 name: "계란",
                 category: IngredientCategory.egg,
                 isFreezed: true,
                 startAt: DateTime(2024, 12, 4),
                 endAt: DateTime(2024, 12, 4)),
-            Ingredient(
+            RefreginatorIngredient(
                 id: 1,
                 name: "소고기",
                 category: IngredientCategory.egg,
                 isFreezed: true,
                 startAt: DateTime(2024, 12, 4),
                 endAt: DateTime(2024, 12, 4)),
-            Ingredient(
+            RefreginatorIngredient(
                 id: 1,
                 name: "우유",
                 category: IngredientCategory.milk,
@@ -81,7 +81,7 @@ void main() {
       when(repository.getMyIngredient()).thenAnswer((_) async =>
           List.generate(
               10,
-              (index) => Ingredient(
+              (index) => RefreginatorIngredient(
                   id: index + 1,
                   name: "egg",
                   category: IngredientCategory.egg,
@@ -90,7 +90,7 @@ void main() {
                   endAt: DateTime(2024, 12, 4))) +
           List.generate(
               20,
-              (index) => Ingredient(
+              (index) => RefreginatorIngredient(
                   id: index + 1,
                   name: "egg",
                   category: IngredientCategory.egg,

@@ -2,7 +2,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
-import 'package:yum_application/src/ingredient/viewModel/basic_ingredient_view_model.dart';
+import 'package:yum_application/src/ingredient/viewModel/initial_ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,11 +13,13 @@ List<ChangeNotifierProvider> getInitProvider() {
   final IngredientRepositoryImpl ingredientRepositoryImpl =
       IngredientRepositoryImpl(remoteDatasource: remoteDatasource);
 
-  final IngredientViewModelImpl ingredientViewModel =
-      IngredientViewModelImpl(ingredientRepository: ingredientRepositoryImpl);
+  final RefreginatorIngredientViewModel ingredientViewModel =
+      RefreginatorIngredientViewModel(
+          ingredientRepository: ingredientRepositoryImpl);
 
-  final BasicIngredientViewModel basicIngredientViewModel =
-      BasicIngredientViewModel(ingredientRepository: ingredientRepositoryImpl);
+  final InitialIngredientViewModel basicIngredientViewModel =
+      InitialIngredientViewModel(
+          ingredientRepository: ingredientRepositoryImpl);
 
   /// 재료 뷰모델에서
   /// 재료 가져와서 정렬한 다음에
@@ -26,9 +28,9 @@ List<ChangeNotifierProvider> getInitProvider() {
   /// 3 개 전달
 
   return [
-    ChangeNotifierProvider<IngredientViewModelImpl>(
+    ChangeNotifierProvider<RefreginatorIngredientViewModel>(
         create: (context) => ingredientViewModel),
-    ChangeNotifierProvider<BasicIngredientViewModel>(
+    ChangeNotifierProvider<InitialIngredientViewModel>(
         create: (context) => basicIngredientViewModel),
   ];
 }
