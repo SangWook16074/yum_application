@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/widget/single_button.dart';
+
+// Challenge List ( 도전하기 )
+// 항목을 선택했을때 보여줄 상세한 화면을 보여줌.
 
 class ChallengeDetailView extends StatelessWidget {
   final String imagePath;
@@ -49,10 +50,11 @@ PreferredSizeWidget _appBar() {
   );
 }
 
+// Image, title, subTitle을 담당해줌.
 Widget _header(String imagePath) => Builder(builder: (context) {
       return SliverAppBar(
         toolbarHeight: 220,
-        floating: false,
+        floating: true,
         pinned: false,
         backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
@@ -104,6 +106,8 @@ Widget _header(String imagePath) => Builder(builder: (context) {
       );
     });
 
+// 앞으로 몇 단계가 남았는지 그래프로 사용자에게 알려줌.
+// 로직을 구성해야함.
 Widget _body() {
   return SliverToBoxAdapter(
     child: Padding(
@@ -160,6 +164,8 @@ Widget _body() {
   );
 }
 
+// 사용자가 해당 항목을 정해진만큼 수행했다면, Reward를 제공.
+// 음식 재료를 제공해준다. 개수는 12개.
 Widget _bottom() {
   return SliverToBoxAdapter(
     child: Padding(

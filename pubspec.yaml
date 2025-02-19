@@ -94,6 +94,9 @@ flutter:
     - family: PartialSansKR
       fonts:
         - asset: assets/fonts/PartialSansKR-Regular.otf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

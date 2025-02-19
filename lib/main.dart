@@ -3,6 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/app/page/app_page.dart';
 import 'package:yum_application/src/app/config/app_config.dart';
+import 'package:yum_application/src/auth/page/login_page.dart';
+import 'package:yum_application/src/auth/view/login_view.dart';
 import 'package:yum_application/src/common/widgets/loading_progress_indicator.dart';
 import 'package:yum_application/src/util/app_theme.dart';
 import 'package:yum_application/src/util/global_variable.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: GlobalVariable.naviagatorState,
       theme: light,
-      home: const AppPage(),
+      home: const LoginPage(),
     );
   }
 }

@@ -1,118 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yum_application/src/challenge/widget/challenge_detail_view.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/challenge/widget/challenge_row.dart';
-import 'package:yum_application/src/ingredient/widget/single_button.dart';
 
-class ChallengeCaseView extends StatelessWidget {
-  const ChallengeCaseView({super.key});
+// Challenge List ( 도전하기 )
+// 사용자가 수행해야 할 5개의 항목을 리스트로 보여줌.
+
+class ChallengeList extends StatelessWidget {
+  const ChallengeList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: _appBar(),
-        body: Container(
-          color: Theme.of(context).colorScheme.tertiary,
-          child: CustomScrollView(
-            slivers: [
-              _header(),
-            ],
-          ),
-        ));
-  }
-}
-
-PreferredSizeWidget _appBar() {
-  return PreferredSize(
-    preferredSize: AppBar().preferredSize,
-    child: Builder(builder: (context) {
-      return AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-        foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        elevation: 0.0,
-        title: Text(
-          "챌린지 도전",
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-      );
-    }),
-  );
-}
-
-Widget _header() {
-  return SliverAppBar(
-    toolbarHeight: 140,
-    floating: true,
-    pinned: false,
-    backgroundColor: Colors.white,
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-    // expandedHeight: 300,
-    title: Column(
-      children: [
-        Builder(
-          builder: (context) {
-            return Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                          color: Theme.of(context).colorScheme.tertiary))),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "단계마다 비밀 식재료를 획득해요\n식재료를 모아 요리를 완성해보세요",
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: Image.asset(
-                        "assets/images/trophy.png",
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: const Text("도전하기"),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text("보관함"),
-              ),
-            ],
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-Widget _challenges() {
-  return SliverToBoxAdapter(
-    child: Builder(builder: (context) {
-      bool isRecipeFirst = true;
-      return Column(
-        key: const Key("Challenge Body"),
+    bool isRecipeFirst = true;
+    return SingleChildScrollView(
+      child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20, bottom: 10, top: 40),
@@ -124,6 +25,7 @@ Widget _challenges() {
               ),
             ),
           ),
+          // 위젯을 사용하여 각각의 항목을 생성해줌.
           ChallengeRow(
             key: const Key("Recipe registration"),
             title: "레시피 등록",
@@ -202,7 +104,7 @@ Widget _challenges() {
             },
           ),
         ],
-      );
-    }),
-  );
+      ),
+    );
+  }
 }
