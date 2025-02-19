@@ -10,12 +10,18 @@ class ChallengeRewardCard extends StatelessWidget {
   final String subTitle;
   final String rewardTitle;
   final String imagePath;
+  final double scale;
+  final double offSetx;
+  final double offSety;
 
   const ChallengeRewardCard({
     required this.title,
     required this.subTitle,
     required this.imagePath,
     required this.rewardTitle,
+    required this.scale,
+    required this.offSetx,
+    required this.offSety,
     super.key,
   });
 
@@ -44,25 +50,36 @@ class ChallengeRewardCard extends StatelessWidget {
         children: [
           // 메인 이미지
           SizedBox(
-              width: double.infinity,
-              height: 344,
-              child: ImageWidget(
-                path: imagePath,
-              )),
+            width: double.infinity,
+            height: 344,
+            child: ClipRect(
+              child: Transform.translate(
+                offset: Offset(offSetx, offSety), // 이미지의 위치를 지정.
+                child: Transform.scale(
+                  scale: scale, // 이미지의 크기를 지정.
+                  alignment: Alignment.topCenter,
+                  child: ImageWidget(
+                    path: imagePath,
+                  ),
+                ),
+              ),
+            ),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
               height: 30,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   // 이미지의 밑 부분 그라데이션 생성.
                   colors: [
-                    Color.fromARGB(0, 255, 255, 255),
-                    Color(0xffFFB300),
+                    const Color.fromARGB(0, 255, 255, 0),
+                    const Color(0xffFFB300).withOpacity(0.8),
+                    const Color(0xffFFB300),
                   ],
                 ),
               ),
