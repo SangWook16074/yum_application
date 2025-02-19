@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<IngredientViewModelImpl>(
+    return Consumer<RefreginatorIngredientViewModel>(
         builder: (context, provider, child) {
       if (provider.status == Status.error) {
         return _error();
@@ -67,7 +67,7 @@ class HomeView extends StatelessWidget {
     return Padding(
       key: const Key("freezer"),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Consumer<IngredientViewModelImpl>(
+      child: Consumer<RefreginatorIngredientViewModel>(
           builder: (context, provider, child) {
         return RefreginatorContainer(
             label: "냉동 보관", children: provider.myFreezedIngredients);
@@ -79,7 +79,7 @@ class HomeView extends StatelessWidget {
     return Padding(
       key: const Key("fridge"),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-      child: Consumer<IngredientViewModelImpl>(
+      child: Consumer<RefreginatorIngredientViewModel>(
           builder: (context, provider, child) {
         return RefreginatorContainer(
             label: "냉장 보관",
@@ -135,7 +135,7 @@ class HomeView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Consumer<IngredientViewModelImpl>(
+            Consumer<RefreginatorIngredientViewModel>(
                 builder: (context, provider, child) {
               return IngredientFilterCheckBox(
                   value: provider.isWarningFilterOn,

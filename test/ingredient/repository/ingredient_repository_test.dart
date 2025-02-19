@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 
 import 'ingredient_repository_test.mocks.dart';
@@ -33,7 +33,7 @@ void main() {
           ]);
       final result = await ingredientRepository.getMyIngredient();
       verify(remoteDatasource.getMyIngredient()).called(1);
-      expect(result, isA<List<Ingredient>>());
+      expect(result, isA<List<RefreginatorIngredient>>());
       final first = result.first;
       expect(first.id, 1);
       expect(first.name, "egg");
@@ -44,7 +44,7 @@ void main() {
     });
 
     test("createIngredient 요청이 성공하면 Ingredient가 반환된다", () async {
-      final Ingredient ingredient = Ingredient(
+      final RefreginatorIngredient ingredient = RefreginatorIngredient(
           name: "egg",
           category: IngredientCategory.egg,
           isFreezed: false,
@@ -64,7 +64,7 @@ void main() {
       final result = await ingredientRepository.createNewIngredient(ingredient);
       verify(remoteDatasource.createNewIngredient(ingredient.toJson()))
           .called(1);
-      expect(result, isA<Ingredient>());
+      expect(result, isA<RefreginatorIngredient>());
       expect(result.name, "egg");
       expect(result.isFreezed, false);
       expect(result.category, IngredientCategory.egg);

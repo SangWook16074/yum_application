@@ -8,9 +8,9 @@ import 'dart:ui' as _i8;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:yum_application/src/common/enums/status.dart' as _i4;
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart'
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart'
     as _i7;
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart'
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart'
     as _i5;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;
@@ -41,11 +41,11 @@ class _FakeIngredientRepository_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [IngredientViewModelImpl].
+/// A class which mocks [RefreginatorIngredientViewModel].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIngredientViewModelImpl extends _i1.Mock
-    implements _i3.IngredientViewModelImpl {
+class MockRefreginatorIngredientViewModel extends _i1.Mock
+    implements _i3.RefreginatorIngredientViewModel {
   @override
   _i2.IngredientRepository get ingredientRepository => (super.noSuchMethod(
         Invocation.getter(#ingredientRepository),
@@ -92,18 +92,27 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  List<_i5.Ingredient> get myFreezedIngredients => (super.noSuchMethod(
+  List<_i5.RefreginatorIngredient> get myFreezedIngredients =>
+      (super.noSuchMethod(
         Invocation.getter(#myFreezedIngredients),
-        returnValue: <_i5.Ingredient>[],
-        returnValueForMissingStub: <_i5.Ingredient>[],
-      ) as List<_i5.Ingredient>);
+        returnValue: <_i5.RefreginatorIngredient>[],
+        returnValueForMissingStub: <_i5.RefreginatorIngredient>[],
+      ) as List<_i5.RefreginatorIngredient>);
 
   @override
-  List<_i5.Ingredient> get myUnfreezedIngredients => (super.noSuchMethod(
+  List<_i5.RefreginatorIngredient> get myUnfreezedIngredients =>
+      (super.noSuchMethod(
         Invocation.getter(#myUnfreezedIngredients),
-        returnValue: <_i5.Ingredient>[],
-        returnValueForMissingStub: <_i5.Ingredient>[],
-      ) as List<_i5.Ingredient>);
+        returnValue: <_i5.RefreginatorIngredient>[],
+        returnValueForMissingStub: <_i5.RefreginatorIngredient>[],
+      ) as List<_i5.RefreginatorIngredient>);
+
+  @override
+  bool get notINF => (super.noSuchMethod(
+        Invocation.getter(#notINF),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 
   @override
   bool get isFreezed => (super.noSuchMethod(
@@ -130,7 +139,7 @@ class MockIngredientViewModelImpl extends _i1.Mock
       ) as _i6.Future<void>);
 
   @override
-  void toggleWarning(bool? value) => super.noSuchMethod(
+  dynamic toggleWarning(bool? value) => super.noSuchMethod(
         Invocation.method(
           #toggleWarning,
           [value],
@@ -168,7 +177,8 @@ class MockIngredientViewModelImpl extends _i1.Mock
       ) as _i6.Future<void>);
 
   @override
-  void deleteIngredient(_i5.Ingredient? ingredient) => super.noSuchMethod(
+  void deleteIngredient(_i5.RefreginatorIngredient? ingredient) =>
+      super.noSuchMethod(
         Invocation.method(
           #deleteIngredient,
           [ingredient],
@@ -177,7 +187,8 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  void selectIngredient(_i7.BasicIngredient? ingredient) => super.noSuchMethod(
+  void selectIngredient(_i7.InitialIngredient? ingredient) =>
+      super.noSuchMethod(
         Invocation.method(
           #selectIngredient,
           [ingredient],
@@ -186,7 +197,7 @@ class MockIngredientViewModelImpl extends _i1.Mock
       );
 
   @override
-  void selectPrevIngredient(_i5.Ingredient? prevIngredient) =>
+  void selectPrevIngredient(_i5.RefreginatorIngredient? prevIngredient) =>
       super.noSuchMethod(
         Invocation.method(
           #selectPrevIngredient,
@@ -208,6 +219,15 @@ class MockIngredientViewModelImpl extends _i1.Mock
   void toggleIsFreezed(bool? value) => super.noSuchMethod(
         Invocation.method(
           #toggleIsFreezed,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void toggleNotInfinity(bool? value) => super.noSuchMethod(
+        Invocation.method(
+          #toggleNotInfinity,
           [value],
         ),
         returnValueForMissingStub: null,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ingredient/widget/refreginator_container.dart';
 
@@ -31,7 +31,7 @@ void main() {
     testWidgets("Item Row는 전달된 rowCount만큼 랜더링된다", (WidgetTester tester) async {
       final testIngredients = List.generate(
         10,
-        (_) => Ingredient(
+        (_) => RefreginatorIngredient(
             name: "egg",
             category: IngredientCategory.egg,
             isFreezed: false,
@@ -48,7 +48,7 @@ void main() {
     testWidgets("아이템이 채워지지 않은 칸은 Empty Item으로 채워진다.",
         (WidgetTester tester) async {
       final testIngredients = [
-        Ingredient(
+        RefreginatorIngredient(
             name: "egg",
             category: IngredientCategory.egg,
             isFreezed: false,
@@ -67,7 +67,7 @@ void main() {
         (WidgetTester tester) async {
       final testIngredients = List.generate(
         10,
-        (_) => Ingredient(
+        (_) => RefreginatorIngredient(
             name: "egg",
             category: IngredientCategory.egg,
             isFreezed: false,

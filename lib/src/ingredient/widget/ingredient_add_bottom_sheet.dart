@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/common/widgets/basic_bottom_sheet.dart';
 import 'package:yum_application/src/common/widgets/ingredient_tile.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/ingredient/viewModel/basic_ingredient_view_model.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+
+import 'package:yum_application/src/ingredient/viewModel/initial_ingredient_view_model.dart';
 import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
 
 class IngredientAddBottomSheet extends StatelessWidget {
@@ -61,19 +62,12 @@ class IngredientAddBottomSheet extends StatelessWidget {
   Widget _buildLabelAndImages(String label, IngredientType type) {
     return Builder(builder: (context) {
       final ingredientViewModel =
-          Provider.of<IngredientViewModelImpl>(context, listen: false);
-      final basicIngredientViewModel =
-          Provider.of<BasicIngredientViewModel>(context);
-      final ingredients = switch (type) {
-        IngredientType.carbohydrate => basicIngredientViewModel.carbohydrate,
-        IngredientType.vegetable => basicIngredientViewModel.vegetables,
-        IngredientType.meatsAndEggs => basicIngredientViewModel.meatsAndEggs,
-        IngredientType.fishAndShrimp => basicIngredientViewModel.fishAndShrimp,
-        IngredientType.processedFood => basicIngredientViewModel.processedFood,
-        IngredientType.milkAndNuts => basicIngredientViewModel.milkAndNuts,
-        IngredientType.drink => basicIngredientViewModel.drink,
-        IngredientType.favorite => basicIngredientViewModel.favorite,
-      };
+          Provider.of<RefreginatorIngredientViewModel>(context, listen: false);
+      final allIngredient =
+          context.read<InitialIngredientViewModel>().allInitialIngredients;
+      final ingredients = allIngredient
+          .where((initailIngredient) => initailIngredient.type == type)
+          .toList();
       return (ingredients.isNotEmpty)
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +90,7 @@ class IngredientAddBottomSheet extends StatelessWidget {
                                 ingredientViewModel.selectIngredient(i);
                                 Navigator.of(context).pop();
                               },
-                              child: Consumer<BasicIngredientViewModel>(
+                              child: Consumer<InitialIngredientViewModel>(
                                   builder: (context, provider, child) {
                                 return IngredientTile(
                                   ingredient: i,

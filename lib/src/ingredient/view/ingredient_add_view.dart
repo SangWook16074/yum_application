@@ -18,7 +18,8 @@ class IngredientAddView extends StatelessWidget {
         leading: Builder(builder: (context) {
           return GestureDetector(
             onTap: () {
-              Provider.of<IngredientViewModelImpl>(context, listen: false)
+              Provider.of<RefreginatorIngredientViewModel>(context,
+                      listen: false)
                   .cancel();
               Navigator.of(context).pop();
             },
@@ -39,7 +40,7 @@ class IngredientAddView extends StatelessWidget {
             child: SizedBox(
               height: 250,
               child: Center(
-                child: Consumer<IngredientViewModelImpl>(
+                child: Consumer<RefreginatorIngredientViewModel>(
                     builder: (context, provider, child) {
                   return GestureDetector(
                     onTap: () {
@@ -79,7 +80,7 @@ class IngredientAddView extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               );
             }),
-            Consumer<IngredientViewModelImpl>(
+            Consumer<RefreginatorIngredientViewModel>(
               builder: (context, provider, child) {
                 return Switch.adaptive(
                   value: provider.isFreezed,
@@ -111,7 +112,7 @@ class IngredientAddView extends StatelessWidget {
             height: 44,
             child: Builder(builder: (context) {
               return TextField(
-                onChanged: Provider.of<IngredientViewModelImpl>(context)
+                onChanged: Provider.of<RefreginatorIngredientViewModel>(context)
                     .updateIngredientName,
                 decoration: InputDecoration(
                   contentPadding:
@@ -147,7 +148,7 @@ class IngredientAddView extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: [
-                      Consumer<IngredientViewModelImpl>(
+                      Consumer<RefreginatorIngredientViewModel>(
                           builder: (context, provider, child) {
                         return DatePickerWidget(
                           time: provider.selectedIngredient?.startAt,
@@ -193,7 +194,7 @@ class IngredientAddView extends StatelessWidget {
                             "소비기한",
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
-                          Consumer<IngredientViewModelImpl>(
+                          Consumer<RefreginatorIngredientViewModel>(
                             builder: (context, provider, child) {
                               return Switch(
                                 // value: false,
@@ -215,7 +216,7 @@ class IngredientAddView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Row(
                     children: [
-                      Consumer<IngredientViewModelImpl>(
+                      Consumer<RefreginatorIngredientViewModel>(
                           builder: (context, provider, child) {
                         // if (provider.notInfinity) {
                         return DatePickerWidget(
@@ -285,7 +286,7 @@ class IngredientAddView extends StatelessWidget {
         return SingleButton(
           text: "등록하기",
           onTap: () {
-            Provider.of<IngredientViewModelImpl>(context, listen: false)
+            Provider.of<RefreginatorIngredientViewModel>(context, listen: false)
                 .createNewIngredient();
           },
         );

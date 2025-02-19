@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:yum_application/src/common/enums/status.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 import 'package:yum_application/src/util/global_variable.dart';
 
-class IngredientViewModelImpl extends ChangeNotifier
-    implements IngredientViewModel {
+class RefreginatorIngredientViewModel extends ChangeNotifier {
   final IngredientRepository ingredientRepository;
 
   /// 연결 상태 [Status]
@@ -18,16 +17,15 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 냉장고 식재료 데이터
   ///
   /// 초기에는 빈 배열로 초기화됩니다.
-  List<Ingredient> _myIngredients = List.empty(growable: true);
+  List<RefreginatorIngredient> _myIngredients = List.empty(growable: true);
 
-  IngredientViewModelImpl({required this.ingredientRepository}) {
+  RefreginatorIngredientViewModel({required this.ingredientRepository}) {
     fetchData();
   }
 
   /// 사용자가 자신의 모든 재료를 READ하는 메소드
   ///
   /// 사용자가 이 메소드를 호출하면 모든 재료를 불러오는 API 호출을 실행합니다.
-  @override
   Future<void> fetchData() async {
     status = Status.loading;
     notifyListeners();
@@ -57,7 +55,6 @@ class IngredientViewModelImpl extends ChangeNotifier
   bool isWarningFilterOn = false;
 
   /// [isWarningFilterOn]은 이 메소드를 통해서 값을 변경할 수 있습니다.
-  @override
   toggleWarning(bool value) {
     isWarningFilterOn = value;
 
@@ -73,8 +70,7 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 나의 냉동 재료 getter
   /// [isWarningFilterOn]이 활성화되면 기간이 임박한
   /// 냉동 식재료만을 반환합니다.
-  @override
-  List<Ingredient> get myFreezedIngredients {
+  List<RefreginatorIngredient> get myFreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == true)
         .where((ingredient) => !isWarningFilterOn || ingredient.isWarning)
@@ -84,18 +80,16 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 나의 냉장 재료 getter
   /// /// [isWarningFilterOn]이 활성화되면 기간이 임박한
   /// 냉장 식재료만을 반환합니다.
-  @override
-  List<Ingredient> get myUnfreezedIngredients {
+  List<RefreginatorIngredient> get myUnfreezedIngredients {
     return _myIngredients
         .where((ingredient) => ingredient.isFreezed == false)
         .where((ingredient) => !isWarningFilterOn || ingredient.isWarning)
         .toList();
   }
 
-  Ingredient? _selectedIngredient;
+  RefreginatorIngredient? _selectedIngredient;
 
-  @override
-  Ingredient? get selectedIngredient => _selectedIngredient;
+  RefreginatorIngredient? get selectedIngredient => _selectedIngredient;
 
   bool _notInfinity = true;
   bool get notINF => _notInfinity;
@@ -107,7 +101,6 @@ class IngredientViewModelImpl extends ChangeNotifier
   ///
   /// 새로운 재료 생성에 성공한다면, 생성된 재료를 기존 재료 List에 추가합니다.
   /// 실패한다면 에러를 반환합니다.
-  @override
   Future<void> createNewIngredient() async {
     // 선택한 재료가 없으면 return;
     if (_selectedIngredient == null) {
@@ -142,7 +135,6 @@ class IngredientViewModelImpl extends ChangeNotifier
     }
   }
 
-  @override
   Future<void> updateIngredient() async {
     // 선택한 재료가 없으면 return;
     if (_selectedIngredient == null) {
@@ -151,7 +143,6 @@ class IngredientViewModelImpl extends ChangeNotifier
     try {
       final updatedIngredient =
           _selectedIngredient!.copy(name: _ingredientName);
-      print(updatedIngredient);
       // 선택한 재료를 타겟으로 설정
       // 기존 냉장고 재료 목록에서 해당 재료를 찾아 수정
       _myIngredients = _myIngredients.map((ingredient) {
@@ -171,7 +162,6 @@ class IngredientViewModelImpl extends ChangeNotifier
       // Api를 통해 재료 수정
       final result =
           await ingredientRepository.updateIngredient(updatedIngredient);
-      print(result);
       _myIngredients = _myIngredients.map((ingredient) {
         if (ingredient.id == result.id) {
           return result;
@@ -188,8 +178,7 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 재료 삭제 API 호출 메소드
   ///
   /// 사용자가 자신의 재료를 삭제하는 경우 이 메소드를 통해서 삭제할 수 있습니다.
-  @override
-  void deleteIngredient(Ingredient ingredient) {
+  void deleteIngredient(RefreginatorIngredient ingredient) {
     try {
       ingredientRepository.deleteIngredient(ingredient.id!);
       SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -208,9 +197,8 @@ class IngredientViewModelImpl extends ChangeNotifier
   ///
   /// 사용자는 이 메소드를 통해서 새로운 재료를 이미지와 함께 시트에 렌더링할 수 있습니다.
   /// 기본 이름은 [BasicIngredient]의 기본 이름을 따릅니다.
-  @override
-  void selectIngredient(BasicIngredient ingredient) {
-    final newIngredient = Ingredient(
+  void selectIngredient(InitialIngredient ingredient) {
+    final newIngredient = RefreginatorIngredient(
         name: ingredient.name,
         category: ingredient.category,
         isFreezed: _isFreezed);
@@ -218,8 +206,7 @@ class IngredientViewModelImpl extends ChangeNotifier
     notifyListeners();
   }
 
-  @override
-  void selectPrevIngredient(Ingredient prevIngredient) {
+  void selectPrevIngredient(RefreginatorIngredient prevIngredient) {
     _selectedIngredient = prevIngredient;
     _isFreezed = prevIngredient.isFreezed;
     notifyListeners();
@@ -228,7 +215,6 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 선택 재료 초기화 메소드
   ///
   /// 사용자는 이 메소드를 통해서 선택한 재료 데이터를 지울 수 있습니다.
-  @override
   void cancel() {
     _selectedIngredient = null;
     notifyListeners();
@@ -237,7 +223,6 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 냉동 여부 토글링 함수
   ///
   /// 이 메소드를 통해서 재료의 냉동 냉장 여부를 선택할 수 있습니다.
-  @override
   void toggleIsFreezed(bool value) {
     _isFreezed = value;
     // 선택한 재료가 있는 경우에만 수행
@@ -261,7 +246,6 @@ class IngredientViewModelImpl extends ChangeNotifier
   }
 
   /// 재료의 생성일 수정 메소드
-  @override
   void updateStartAt(DateTime newStartAt) {
     // 선택한 재료가 없다면 종료
     if (_selectedIngredient == null) return;
@@ -272,41 +256,10 @@ class IngredientViewModelImpl extends ChangeNotifier
   /// 재료의 유통기한 수정 메소드
   ///
   /// 사용자는 이 메소드를 통해서 유통기한을 지정할 수 있습니다.
-  @override
   void updateEndAt(DateTime newEndAt) {
     // 선택한 재료가 없다면 종료
     if (_selectedIngredient == null) return;
     _selectedIngredient = _selectedIngredient!.copy(endAt: newEndAt);
     notifyListeners();
   }
-}
-
-abstract class IngredientViewModel {
-  List<Ingredient> get myFreezedIngredients;
-
-  List<Ingredient> get myUnfreezedIngredients;
-
-  Ingredient? get selectedIngredient;
-
-  Future<void> fetchData();
-
-  void createNewIngredient();
-
-  void updateIngredient();
-
-  void deleteIngredient(Ingredient ingredient);
-
-  void selectIngredient(BasicIngredient ingredient);
-
-  void selectPrevIngredient(Ingredient prevIngredient);
-
-  void cancel();
-
-  void toggleIsFreezed(bool value);
-
-  void updateStartAt(DateTime startAt);
-
-  void updateEndAt(DateTime endAt);
-
-  void toggleWarning(bool value);
 }

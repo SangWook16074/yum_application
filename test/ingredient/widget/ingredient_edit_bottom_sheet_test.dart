@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_edit_bottom_sheet.dart';
 
 void main() {
-  late final Ingredient ingredient;
+  late final RefreginatorIngredient ingredient;
   late final Widget widget;
 
   group("Ingredient Edit Bottom Sheet Widget Test", () {
     setUpAll(() {
-      ingredient = Ingredient(
+      ingredient = RefreginatorIngredient(
           name: "egg",
           category: IngredientCategory.egg,
           isFreezed: false,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/data/ingredient/model/basic_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
 import 'package:yum_application/src/ingredient/widget/ingredient_image.dart';
 
 class IngredientTile extends StatelessWidget {
-  final BasicIngredient ingredient;
+  final InitialIngredient ingredient;
   final void Function()? onTap;
   const IngredientTile({
     super.key,
