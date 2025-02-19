@@ -17,12 +17,19 @@ class ChallengeStorageBox extends StatefulWidget {
 class _ChallengeStorageBoxState extends State<ChallengeStorageBox> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        ChallengeCardScroll(), // Reward Card + Scroll.
-        ChallengeRanking(), // 사용자 순위 부분.
-        ChallengeCalendar(), // 잔디 심기 부분.
+        _myChallenges(),
+        _myRanking(),
+        _todayChallenges(),
       ],
     );
   }
+
+  Widget _myChallenges() =>
+      const ChallengeCardScroll(); // Reward Card + Scroll.
+
+  Widget _myRanking() => const ChallengeRanking(); // 사용자 순위 부분.
+
+  Widget _todayChallenges() => const ChallengeCalendar(); // 잔디 심기 부분.
 }

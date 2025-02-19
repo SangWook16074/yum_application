@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/widget/challenge_list.dart';
 import 'package:yum_application/src/challenge/widget/challenge_storage_box.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 
 // Challenge View로 바텀 네비게이션에서 선택했을때 보이는 가장 초기 화면.
 
@@ -8,7 +9,7 @@ class ChallengeView extends StatefulWidget {
   const ChallengeView({super.key});
 
   @override
-  _ChallengeViewState createState() => _ChallengeViewState();
+  State<ChallengeView> createState() => _ChallengeViewState();
 }
 
 class _ChallengeViewState extends State<ChallengeView> {
@@ -66,13 +67,10 @@ class _ChallengeViewState extends State<ChallengeView> {
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               SizedBox(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "assets/images/trophy.png",
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
+                                  width: 48,
+                                  height: 48,
+                                  child: ImageWidget(
+                                      path: ChallengeImagePath.throphy)),
                             ],
                           ),
                         ),
@@ -136,7 +134,7 @@ class _ChallengeViewState extends State<ChallengeView> {
                                   context),
                         ),
                         SliverPadding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(0.0),
                           sliver: SliverToBoxAdapter(
                             child: name == '도전하기'
                                 ? _challenges() // 도전하기 탭
@@ -158,4 +156,8 @@ class _ChallengeViewState extends State<ChallengeView> {
   Widget _challenges() => const ChallengeList();
 
   Widget _challengesStorageView() => const ChallengeStorageBox();
+}
+
+extension ChallengeImagePath on ImagePath {
+  static String get throphy => 'assets/images/trophy.png';
 }

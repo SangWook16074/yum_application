@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/challenge/widget/challenge_reward_card.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 
 // Challenge Storage ( 보관함 )
 // 나의 챌린지 부분 Challenge Reward Card를 보여주는 Scroll의 기능을 구성해줌.
@@ -8,47 +9,62 @@ class ChallengeCardScroll extends StatefulWidget {
   const ChallengeCardScroll({super.key});
 
   @override
-  _ChallengeCardScrollState createState() => _ChallengeCardScrollState();
+  State<ChallengeCardScroll> createState() => _ChallengeCardScrollState();
 }
 
 class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
   final PageController _pageController = PageController(
-    viewportFraction: 0.7,
+    viewportFraction: 0.8,
     initialPage: 0,
   );
 
   double _currentPage = 0.0;
 
   final List<Widget> _cards = [
-    const ChallengeRewardCard(
+    ChallengeRewardCard(
       title: '부대찌개 완성🔥',
       subTitle: '레시피북을 만들어도 되겠어요!',
       rewardTitle: '레시피 등록 100회',
-      imagePath: 'assets/images/spicy_sausage_stew.png',
+      imagePath: ChallengeImagePath.spicyStew,
+      scale: 1.2,
+      offSetx: 1,
+      offSety: 10,
     ),
-    const ChallengeRewardCard(
+    ChallengeRewardCard(
       title: '연어 샌드위치 완성🔥',
       subTitle: '꼼꼼한 리뷰로 레시피 퀄리티 Up!',
       rewardTitle: '레시피 등록 100회',
-      imagePath: 'assets/images/salmon_salad.png',
+      imagePath: ChallengeImagePath.salmonSalad,
+      scale: 1,
+      offSetx: 1,
+      offSety: 2,
     ),
-    const ChallengeRewardCard(
+    ChallengeRewardCard(
       title: '계란 볶음밥 완성🔥',
       subTitle: '레시피북을 만들어도 되겠어요!',
       rewardTitle: '레시피 등록 100회',
-      imagePath: 'assets/images/egg_fried_rice.png',
+      imagePath: ChallengeImagePath.eggRice,
+      scale: 1.5,
+      offSetx: 1,
+      offSety: 2,
     ),
-    const ChallengeRewardCard(
+    ChallengeRewardCard(
       title: '새우 토마토 파스타 완성🔥',
       subTitle: '레시피북을 만들어도 되겠어요!',
       rewardTitle: '레시피 등록 100회',
-      imagePath: 'assets/images/tomato_pasta.png',
+      imagePath: ChallengeImagePath.tomatoPasta,
+      scale: 1.3,
+      offSetx: 1,
+      offSety: 2,
     ),
-    const ChallengeRewardCard(
+    ChallengeRewardCard(
       title: '수제 햄버거 완성🔥',
       subTitle: '레시피북을 만들어도 되겠어요!',
       rewardTitle: '레시피 등록 100회',
-      imagePath: 'assets/images/handmade_hamburger.png',
+      imagePath: ChallengeImagePath.hambuger,
+      scale: 1,
+      offSetx: 1,
+      offSety: 2,
     ),
   ];
 
@@ -81,7 +97,7 @@ class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
           ),
         ),
         SizedBox(
-          height: 453,
+          height: 409,
           width: double.infinity,
           child: PageView.builder(
             controller: _pageController,
@@ -102,4 +118,12 @@ class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
       ],
     );
   }
+}
+
+extension ChallengeImagePath on ImagePath {
+  static String get spicyStew => 'assets/images/spicy_sausage_stew.png';
+  static String get salmonSalad => 'assets/images/salmon_salad.png';
+  static String get eggRice => 'assets/images/egg_fried_rice.png';
+  static String get tomatoPasta => 'assets/images/tomato_pasta.png';
+  static String get hambuger => 'assets/images/handmade_hamburger.png';
 }

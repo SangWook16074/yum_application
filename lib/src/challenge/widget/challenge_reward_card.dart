@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yum_application/src/common/widgets/image_widget.dart';
 
 // Challenge Storage ( 보관함 )
 // 사용자가 Check List를 정해진 횟수만큼 수행했다면 Reward Card를 제공.
@@ -9,12 +10,18 @@ class ChallengeRewardCard extends StatelessWidget {
   final String subTitle;
   final String rewardTitle;
   final String imagePath;
+  final double scale;
+  final double offSetx;
+  final double offSety;
 
   const ChallengeRewardCard({
     required this.title,
     required this.subTitle,
     required this.imagePath,
     required this.rewardTitle,
+    required this.scale,
+    required this.offSetx,
+    required this.offSety,
     super.key,
   });
 
@@ -42,10 +49,21 @@ class ChallengeRewardCard extends StatelessWidget {
       child: Stack(
         children: [
           // 메인 이미지
-          Image.asset(
-            imagePath,
-            height: 344,
-            fit: BoxFit.cover,
+          SizedBox(
+            width: double.infinity,
+            height: 300,
+            child: ClipRect(
+              child: Transform.translate(
+                offset: Offset(offSetx, offSety), // 이미지의 위치를 지정.
+                child: Transform.scale(
+                  scale: scale, // 이미지의 크기를 지정.
+                  alignment: Alignment.topCenter,
+                  child: ImageWidget(
+                    path: imagePath,
+                  ),
+                ),
+              ),
+            ),
           ),
           Positioned(
             bottom: 0,
@@ -53,14 +71,15 @@ class ChallengeRewardCard extends StatelessWidget {
             right: 0,
             child: Container(
               height: 30,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   // 이미지의 밑 부분 그라데이션 생성.
                   colors: [
-                    Color.fromARGB(0, 255, 255, 255),
-                    Color(0xffFFB300),
+                    const Color.fromARGB(0, 255, 255, 0),
+                    const Color(0xffFFB300).withOpacity(0.8),
+                    const Color(0xffFFB300),
                   ],
                 ),
               ),
@@ -70,32 +89,30 @@ class ChallengeRewardCard extends StatelessWidget {
           Positioned(
             bottom: 8,
             left: 8,
-            right: 8,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(rewardTitle,
                     style: Theme.of(context).textTheme.titleMedium),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: SizedBox(
-                        height: 28,
-                        child: Image.asset("assets/images/download.png"),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 6.52),
-                      child: GestureDetector(
+                Padding(
+                  padding: const EdgeInsets.only(left: 50),
+                  child: Row(
+                    children: [
+                      GestureDetector(
                         onTap: () {},
                         child: SizedBox(
-                          height: 28,
-                          child: Image.asset("assets/images/sharing.png"),
-                        ),
+                            height: 28,
+                            child:
+                                ImageWidget(path: ChallengeImagePath.download)),
                       ),
-                    ),
-                  ],
+                      GestureDetector(
+                        onTap: () {},
+                        child: SizedBox(
+                            height: 28,
+                            child:
+                                ImageWidget(path: ChallengeImagePath.sharing)),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -136,4 +153,9 @@ class ChallengeRewardCard extends StatelessWidget {
       ),
     );
   }
+}
+
+extension ChallengeImagePath on ImagePath {
+  static String get download => 'assets/images/download.png';
+  static String get sharing => 'assets/images/sharing.png';
 }

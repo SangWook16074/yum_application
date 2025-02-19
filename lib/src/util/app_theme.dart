@@ -76,6 +76,7 @@ ThemeData get light => ThemeData(
       colorScheme: const ColorScheme.light(
         primary: Color(0xff362703),
         secondary: Color(0xffFFB300),
+        onSecondary: Color(0xffFFE9B7),
         secondaryContainer: Color(0xffFFE9B7),
         onPrimaryContainer: Color(0xffffffff),
         onSecondaryContainer: Color(0xffd7d7d7),
