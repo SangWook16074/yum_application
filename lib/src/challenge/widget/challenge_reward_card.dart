@@ -51,7 +51,7 @@ class ChallengeRewardCard extends StatelessWidget {
           // 메인 이미지
           SizedBox(
             width: double.infinity,
-            height: 344,
+            height: 300,
             child: ClipRect(
               child: Transform.translate(
                 offset: Offset(offSetx, offSety), // 이미지의 위치를 지정.
@@ -90,26 +90,29 @@ class ChallengeRewardCard extends StatelessWidget {
             bottom: 8,
             left: 8,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(rewardTitle,
                     style: Theme.of(context).textTheme.titleMedium),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: SizedBox(
-                          height: 28,
-                          child:
-                              ImageWidget(path: ChallengeImagePath.download)),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: SizedBox(
-                          height: 28,
-                          child: ImageWidget(path: ChallengeImagePath.sharing)),
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 50),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: SizedBox(
+                            height: 28,
+                            child:
+                                ImageWidget(path: ChallengeImagePath.download)),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: SizedBox(
+                            height: 28,
+                            child:
+                                ImageWidget(path: ChallengeImagePath.sharing)),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

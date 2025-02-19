@@ -9,12 +9,12 @@ class ChallengeCardScroll extends StatefulWidget {
   const ChallengeCardScroll({super.key});
 
   @override
-  _ChallengeCardScrollState createState() => _ChallengeCardScrollState();
+  State<ChallengeCardScroll> createState() => _ChallengeCardScrollState();
 }
 
 class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
   final PageController _pageController = PageController(
-    viewportFraction: 0.7,
+    viewportFraction: 0.8,
     initialPage: 0,
   );
 
@@ -97,7 +97,7 @@ class _ChallengeCardScrollState extends State<ChallengeCardScroll> {
           ),
         ),
         SizedBox(
-          height: 453,
+          height: 409,
           width: double.infinity,
           child: PageView.builder(
             controller: _pageController,

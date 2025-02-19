@@ -9,7 +9,7 @@ class ChallengeView extends StatefulWidget {
   const ChallengeView({super.key});
 
   @override
-  _ChallengeViewState createState() => _ChallengeViewState();
+  State<ChallengeView> createState() => _ChallengeViewState();
 }
 
 class _ChallengeViewState extends State<ChallengeView> {
@@ -134,7 +134,7 @@ class _ChallengeViewState extends State<ChallengeView> {
                                   context),
                         ),
                         SliverPadding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(0.0),
                           sliver: SliverToBoxAdapter(
                             child: name == '도전하기'
                                 ? _challenges() // 도전하기 탭
