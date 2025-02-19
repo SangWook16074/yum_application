@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/challenge/widget/challenge_detail_view.dart';
+import 'package:yum_application/src/challenge/widget/challenge_detail_page.dart';
 import 'package:yum_application/src/common/widgets/image_widget.dart';
 import 'package:yum_application/src/challenge/widget/challenge_row.dart';
 
@@ -34,7 +34,7 @@ class ChallengeList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ChallengeDetailView(
+                  builder: (context) => ChallengeDetailPage(
                     imagePath: ImagePath.recipeResister,
                   ),
                 ),
@@ -50,7 +50,7 @@ class ChallengeList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ChallengeDetailView(
+                  builder: (context) => ChallengeDetailPage(
                     imagePath: ImagePath.recipeReview,
                   ),
                 ),
@@ -65,7 +65,7 @@ class ChallengeList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ChallengeDetailView(
+                  builder: (context) => ChallengeDetailPage(
                     imagePath: ImagePath.recipeRecommendation,
                   ),
                 ),
@@ -81,7 +81,7 @@ class ChallengeList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ChallengeDetailView(
+                  builder: (context) => ChallengeDetailPage(
                     imagePath: ImagePath.recipeUses,
                   ),
                 ),
@@ -96,7 +96,7 @@ class ChallengeList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => ChallengeDetailView(
+                  builder: (context) => ChallengeDetailPage(
                     imagePath: ImagePath.consecutiveUses,
                   ),
                 ),

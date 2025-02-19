@@ -5,10 +5,10 @@ import 'package:yum_application/src/ingredient/widget/single_button.dart';
 // Challenge List ( 도전하기 )
 // 항목을 선택했을때 보여줄 상세한 화면을 보여줌.
 
-class ChallengeDetailView extends StatelessWidget {
+class ChallengeDetailPage extends StatelessWidget {
   final String imagePath;
 
-  const ChallengeDetailView({
+  const ChallengeDetailPage({
     required this.imagePath,
     super.key,
   });
