@@ -63,11 +63,9 @@ class IngredientAddBottomSheet extends StatelessWidget {
     return Builder(builder: (context) {
       final ingredientViewModel =
           Provider.of<RefreginatorIngredientViewModel>(context, listen: false);
-      final allIngredient =
-          context.read<InitialIngredientViewModel>().allInitialIngredients;
-      final ingredients = allIngredient
-          .where((initailIngredient) => initailIngredient.type == type)
-          .toList();
+      final ingredients = context
+          .read<InitialIngredientViewModel>()
+          .getInitialIngredientBy(type);
       return (ingredients.isNotEmpty)
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
