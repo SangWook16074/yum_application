@@ -7,14 +7,14 @@ import 'dart:async' as _i6;
 import 'dart:ui' as _i8;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:yum_application/src/common/enums/status.dart' as _i4;
+import 'package:yum_application/src/ui/common/enums/status.dart' as _i4;
 import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart'
     as _i7;
 import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart'
     as _i5;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart'
+import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart'
     as _i3;
 
 // ignore_for_file: type=lint
