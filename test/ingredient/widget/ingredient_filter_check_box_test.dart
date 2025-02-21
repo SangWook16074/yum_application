@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/ingredient/widget/ingredient_filter_check_box.dart';
+import 'package:yum_application/src/ui/ingredient/widget/ingredient_filter_check_box.dart';
 
 void main() {
   late Widget widget;

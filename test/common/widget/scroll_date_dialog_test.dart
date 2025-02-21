@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/common/widgets/basic_bottom_sheet.dart';
-import 'package:yum_application/src/common/widgets/scroll_date_dialog.dart';
+import 'package:yum_application/src/ui/common/widgets/basic_bottom_sheet.dart';
+import 'package:yum_application/src/ui/common/widgets/scroll_date_dialog.dart';
 
 main() {
   late final MaterialApp widget;

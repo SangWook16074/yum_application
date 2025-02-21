@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
-import 'package:yum_application/src/app/page/app_page.dart';
-import 'package:yum_application/src/app/config/app_config.dart';
-import 'package:yum_application/src/auth/page/login_page.dart';
-import 'package:yum_application/src/auth/view/login_view.dart';
-import 'package:yum_application/src/common/widgets/loading_progress_indicator.dart';
-import 'package:yum_application/src/util/app_theme.dart';
-import 'package:yum_application/src/util/global_variable.dart';
+import 'package:yum_application/src/ui/auth/page/login_page.dart';
+import 'package:yum_application/src/core/utils/theme/app_theme.dart';
+import 'package:yum_application/src/core/utils/variable/global_variable.dart';
+
+import 'src/core/providers/app/app_provider.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  final providers = getInitProvider();
-  runApp(MultiProvider(
-    providers: providers,
-    builder: (context, child) => const MyApp(),
+  // final providers = getInitProvider();
+  runApp(const AppProvider(
+    child: MyApp(),
   ));
 }
 
