@@ -1,9 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
+import 'package:yum_application/src/ui/ingredient/model/model.dart';
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
 
 import 'ingredient_view_model_test.mocks.dart';
@@ -89,7 +88,7 @@ main() {
     });
 
     test("selectIngredient메소드를 이용해서 새로운 재료를 생성할 수 있다.", () {
-      final newIngredient = InitialIngredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
       );
@@ -133,7 +132,7 @@ main() {
     });
 
     test("toggleIsFreezed메소드를 이용해서 재료의 냉장 냉동 여부를 바꿀 수 있다.", () {
-      final newIngredient = InitialIngredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
       );
@@ -143,7 +142,7 @@ main() {
     });
 
     test("updateStartAt 메소드로 구매날짜를 갱신할 수 있다.", () {
-      final newIngredient = InitialIngredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
       );
@@ -154,7 +153,7 @@ main() {
     });
 
     test("updateEndAt 메소드로 소비날짜를 갱신할 수 있다.", () {
-      final newIngredient = InitialIngredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
       );
@@ -165,7 +164,7 @@ main() {
     });
 
     test("createNewIngredients는 새로운 재료를 추가한 후 새로운 재료를 재료에 추가한다", () async {
-      final newIngredient = InitialIngredient(
+      final newIngredient = BasicIngredient(
         name: "egg",
         category: IngredientCategory.egg,
       );

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/ui/common/widgets/image_widget.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
-import 'package:yum_application/src/ingredient/widget/ingredient_add_bottom_sheet.dart';
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart';
 
 class SelectIngredientImage extends StatefulWidget {
   final RefreginatorIngredient? ingredient;
@@ -68,42 +67,29 @@ class _SelectIngredientImageState extends State<SelectIngredientImage>
 
   @override
   Widget build(BuildContext context) {
-    return (widget.ingredient != null)
-        ? Stack(
-            alignment: Alignment.center,
-            children: [
-              ScaleTransition(
-                scale: _backgroundAnimation,
-                child: ImageWidget(
-                  path: IceImage.background,
-                  width: widget.width + 200,
-                ),
-              ),
-              _icon(),
-              FadeTransition(
-                opacity: _foregroundAnimation,
-                child: Opacity(
-                  opacity: 0.5,
-                  child: ImageWidget(
-                    path: IceImage.background,
-                    width: widget.width + 200,
-                  ),
-                ),
-              ),
-            ],
-          )
-        : GestureDetector(
-            onTap: () {
-              showModalBottomSheet(
-                  backgroundColor: Colors.red,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(32.0))),
-                  context: context,
-                  builder: (context) => const IngredientAddBottomSheet());
-            },
-            child:
-                Text("+ 아이콘", style: Theme.of(context).textTheme.titleLarge));
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        ScaleTransition(
+          scale: _backgroundAnimation,
+          child: ImageWidget(
+            path: IceImage.background,
+            width: widget.width + 200,
+          ),
+        ),
+        _icon(),
+        FadeTransition(
+          opacity: _foregroundAnimation,
+          child: Opacity(
+            opacity: 0.5,
+            child: ImageWidget(
+              path: IceImage.background,
+              width: widget.width + 200,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _icon() => ImageWidget(

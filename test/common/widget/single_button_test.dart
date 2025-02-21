@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/ingredient/widget/single_button.dart';
+import 'package:yum_application/src/ui/ingredient/widget/single_button.dart';
 
 main() {
   late final MaterialApp widget;

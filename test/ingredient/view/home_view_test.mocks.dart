@@ -7,9 +7,9 @@ import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart'
+import 'package:yum_application/src/data/ingredient/entity/ingredient_category.dart'
     as _i6;
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart'
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart'
     as _i4;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;

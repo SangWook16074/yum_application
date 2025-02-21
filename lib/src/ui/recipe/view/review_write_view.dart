@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/ingredient/widget/single_button.dart';
+import 'package:yum_application/src/ui/ingredient/widget/single_button.dart';
 import 'package:yum_application/src/ui/recipe/widget/review_keyword_container.dart';
 
 class ReviewWriteView extends StatefulWidget {

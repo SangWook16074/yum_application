@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/ui/app/viewModel/app_view_model.dart';
 import 'package:yum_application/src/ui/challenge/view/challenge_view.dart';
 import 'package:yum_application/src/ui/common/widgets/image_widget.dart';
-import 'package:yum_application/src/ingredient/view/home_view.dart';
+import 'package:yum_application/src/ui/ingredient/view/home_view.dart';
 import 'package:yum_application/src/ui/recipe/view/recipe_view.dart';
 import 'package:yum_application/src/ui/user/view/mypage_view.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class AppView extends StatelessWidget {
+  const AppView({super.key});
 
   @override
   Widget build(BuildContext context) {

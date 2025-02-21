@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yum_application/src/ui/common/widgets/image_widget.dart';
-import 'package:yum_application/src/ingredient/widget/single_button.dart';
+import 'package:yum_application/src/ui/ingredient/widget/single_button.dart';
 
 // Challenge List ( 도전하기 )
 // 항목을 선택했을때 보여줄 상세한 화면을 보여줌.

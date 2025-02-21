@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/ingredient_category.dart';
 
 final class RefreginatorIngredient extends Ingredient with EquatableMixin {
   /// [RefreginatorIngredient]의 식별자입니다.

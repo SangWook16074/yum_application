@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/ui/common/widgets/date_picker_widget.dart';
 import 'package:yum_application/src/ui/common/widgets/scroll_date_dialog.dart';
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/ingredient/widget/select_ingredient_image.dart';
-import 'package:yum_application/src/ingredient/widget/single_button.dart';
+import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
+import 'package:yum_application/src/ui/ingredient/widget/ingredient_add_bottom_sheet.dart';
+import 'package:yum_application/src/ui/ingredient/widget/select_ingredient_image.dart';
+import 'package:yum_application/src/ui/ingredient/widget/single_button.dart';
 
 class IngredientAddView extends StatelessWidget {
   const IngredientAddView({super.key});
@@ -18,9 +19,9 @@ class IngredientAddView extends StatelessWidget {
         leading: Builder(builder: (context) {
           return GestureDetector(
             onTap: () {
-              Provider.of<RefreginatorIngredientViewModel>(context,
-                      listen: false)
-                  .cancel();
+              context
+                  .read<RefreginatorIngredientViewModel>()
+                  .resetSelectIngredient();
               Navigator.of(context).pop();
             },
             child: const Icon(
@@ -42,15 +43,37 @@ class IngredientAddView extends StatelessWidget {
               child: Center(
                 child: Consumer<RefreginatorIngredientViewModel>(
                     builder: (context, provider, child) {
-                  return GestureDetector(
-                    onTap: () {
-                      provider.cancel();
-                    },
-                    child: SelectIngredientImage(
-                      ingredient: provider.selectedIngredient,
-                      width: 300,
-                    ),
-                  );
+                  /// 선택한 재료가 있는 경우
+                  ///
+                  /// 현재 선택된 재료 이미지를 볼 수 있음.
+                  if (provider.selectedIngredient != null) {
+                    return GestureDetector(
+                      onTap: () {
+                        provider.resetSelectIngredient();
+                      },
+                      child: SelectIngredientImage(
+                        ingredient: provider.selectedIngredient,
+                        width: 300,
+                      ),
+                    );
+
+                    /// 선택한 재료가 없는 경우
+                    /// 시트를 통해서 새로운 재료를 선택할 수 있음.
+                  } else {
+                    return GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                              backgroundColor: Colors.red,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(32.0))),
+                              context: context,
+                              builder: (context) =>
+                                  const IngredientAddBottomSheet());
+                        },
+                        child: Text("+ 아이콘",
+                            style: Theme.of(context).textTheme.titleLarge));
+                  }
                 }),
               ),
             )),
@@ -112,7 +135,8 @@ class IngredientAddView extends StatelessWidget {
             height: 44,
             child: Builder(builder: (context) {
               return TextField(
-                onChanged: Provider.of<RefreginatorIngredientViewModel>(context)
+                onChanged: context
+                    .read<RefreginatorIngredientViewModel>()
                     .updateIngredientName,
                 decoration: InputDecoration(
                   contentPadding:

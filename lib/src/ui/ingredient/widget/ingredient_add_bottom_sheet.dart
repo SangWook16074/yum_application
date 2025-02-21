@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/ui/common/widgets/basic_bottom_sheet.dart';
 import 'package:yum_application/src/ui/common/widgets/ingredient_tile.dart';
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
-
-import 'package:yum_application/src/ingredient/viewModel/initial_ingredient_view_model.dart';
-import 'package:yum_application/src/ingredient/viewModel/ingredient_view_model.dart';
+import 'package:yum_application/src/ui/ingredient/model/basic_ingredient.dart';
+import 'package:yum_application/src/ui/ingredient/viewModel/basic_ingredient_view_model.dart';
+import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
 
 class IngredientAddBottomSheet extends StatelessWidget {
   const IngredientAddBottomSheet({super.key});
@@ -62,10 +61,10 @@ class IngredientAddBottomSheet extends StatelessWidget {
   Widget _buildLabelAndImages(String label, IngredientType type) {
     return Builder(builder: (context) {
       final ingredientViewModel =
-          Provider.of<RefreginatorIngredientViewModel>(context, listen: false);
-      final ingredients = context
-          .read<InitialIngredientViewModel>()
-          .getInitialIngredientBy(type);
+          context.read<RefreginatorIngredientViewModel>();
+
+      final ingredients =
+          context.watch<BasicIngredientViewModel>().getBasicIngredientBy(type);
       return (ingredients.isNotEmpty)
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +87,7 @@ class IngredientAddBottomSheet extends StatelessWidget {
                                 ingredientViewModel.selectIngredient(i);
                                 Navigator.of(context).pop();
                               },
-                              child: Consumer<InitialIngredientViewModel>(
+                              child: Consumer<BasicIngredientViewModel>(
                                   builder: (context, provider, child) {
                                 return IngredientTile(
                                   ingredient: i,
