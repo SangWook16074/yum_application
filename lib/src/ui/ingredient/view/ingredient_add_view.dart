@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yum_application/src/ui/common/widgets/date_picker_widget.dart';
 import 'package:yum_application/src/ui/common/widgets/scroll_date_dialog.dart';
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/ui/ingredient/widget/select_ingredient_image.dart';
+import 'package:yum_application/src/ui/ingredient/view/select_ingredient_image.dart';
 import 'package:yum_application/src/ui/ingredient/widget/single_button.dart';
 
 class IngredientAddView extends StatelessWidget {
@@ -11,60 +11,63 @@ class IngredientAddView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-        foregroundColor: Theme.of(context).colorScheme.onSecondary,
-        leading: Builder(builder: (context) {
-          return GestureDetector(
-            onTap: () {
-              Provider.of<RefreginatorIngredientViewModel>(context,
-                      listen: false)
-                  .cancel();
-              Navigator.of(context).pop();
-            },
-            child: const Icon(
-              Icons.arrow_back_ios,
-            ),
-          );
-        }),
-        elevation: 0.0,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20.0))),
-        title: Text(
-          "새로운 식재료",
-          style: Theme.of(context).textTheme.headlineLarge,
-        ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(250),
-            child: SizedBox(
-              height: 250,
-              child: Center(
-                child: Consumer<RefreginatorIngredientViewModel>(
-                    builder: (context, provider, child) {
-                  return GestureDetector(
-                    onTap: () {
-                      provider.cancel();
-                    },
-                    child: SelectIngredientImage(
-                      ingredient: provider.selectedIngredient,
-                      width: 300,
-                    ),
-                  );
-                }),
+    return PopScope(
+      onPopInvokedWithResult: context
+          .read<RefreginatorIngredientViewModel>()
+          .onPopInvokedWithResult,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+          foregroundColor: Theme.of(context).colorScheme.onSecondary,
+          leading: Builder(builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                context
+                    .read<RefreginatorIngredientViewModel>()
+                    .resetSelectIngredient();
+                Navigator.of(context).pop();
+              },
+              child: const Icon(
+                Icons.arrow_back_ios,
               ),
-            )),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _toggle(),
-            _description(),
-          ],
+            );
+          }),
+          elevation: 0.0,
+          shape: const RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.vertical(bottom: Radius.circular(20.0))),
+          title: Text(
+            "새로운 식재료",
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+          bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(250),
+              child: SizedBox(
+                height: 250,
+                child: Center(
+                  /// 선택한 재료가 있는 경우
+                  ///
+                  /// 현재 선택된 재료 이미지를 볼 수 있음.
+                  child: SelectIngredientImage(
+                    ingredient: context
+                        .watch<RefreginatorIngredientViewModel>()
+                        .selectedIngredient,
+                    width: 300,
+                  ),
+                ),
+              )),
         ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _toggle(),
+              _description(),
+            ],
+          ),
+        ),
+        bottomNavigationBar: _button(),
       ),
-      bottomNavigationBar: _button(),
     );
   }
 
@@ -112,9 +115,16 @@ class IngredientAddView extends StatelessWidget {
             height: 44,
             child: Builder(builder: (context) {
               return TextField(
-                onChanged: Provider.of<RefreginatorIngredientViewModel>(context)
+                onChanged: context
+                    .read<RefreginatorIngredientViewModel>()
                     .updateIngredientName,
                 decoration: InputDecoration(
+                  // 재료가 선택되면 선택한 기본재료의 이름이 hintLabel로 지정됨.
+                  hintText: context
+                          .read<RefreginatorIngredientViewModel>()
+                          .selectedIngredient
+                          ?.name ??
+                      "",
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   filled: true,

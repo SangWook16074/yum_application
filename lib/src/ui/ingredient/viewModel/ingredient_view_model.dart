@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:yum_application/src/ui/common/enums/status.dart';
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
+import 'package:yum_application/src/ui/ingredient/model/basic_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
-import 'package:yum_application/src/util/global_variable.dart';
+import 'package:yum_application/src/core/utils/variable/global_variable.dart';
 
 class RefreginatorIngredientViewModel extends ChangeNotifier {
   final IngredientRepository ingredientRepository;
@@ -61,10 +61,16 @@ class RefreginatorIngredientViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _ingredientName = "";
+  /// 사용자가 새롭게 생성하려는 재료의 이름을 제공하는 변수입니다.
+  ///
+  /// 사용자가 새로운 이름을 입력하면 그에 따른 새로운 이름이
+  /// 변경되어 적용됩니다.
+  String _newIngredientName = "";
+
+  String get newIngredientName => _newIngredientName;
 
   void updateIngredientName(String newName) {
-    _ingredientName = newName;
+    _newIngredientName = newName;
   }
 
   /// 나의 냉동 재료 getter
@@ -109,7 +115,7 @@ class RefreginatorIngredientViewModel extends ChangeNotifier {
 
     try {
       // 선택한 재료를 타겟으로 설정
-      final newIngredient = selectedIngredient!.copy(name: _ingredientName);
+      final newIngredient = selectedIngredient!.copy(name: _newIngredientName);
       final prevIngredients = _myIngredients;
       _myIngredients = [
         ...prevIngredients,
@@ -129,7 +135,7 @@ class RefreginatorIngredientViewModel extends ChangeNotifier {
         result,
       ];
       // 선택 재료 초기화 및 화면 갱신
-      cancel();
+      resetSelectIngredient();
     } on Exception catch (e) {
       throw Exception("재료 생성 에러");
     }
@@ -142,7 +148,7 @@ class RefreginatorIngredientViewModel extends ChangeNotifier {
     }
     try {
       final updatedIngredient =
-          _selectedIngredient!.copy(name: _ingredientName);
+          _selectedIngredient!.copy(name: _newIngredientName);
       // 선택한 재료를 타겟으로 설정
       // 기존 냉장고 재료 목록에서 해당 재료를 찾아 수정
       _myIngredients = _myIngredients.map((ingredient) {
@@ -197,26 +203,19 @@ class RefreginatorIngredientViewModel extends ChangeNotifier {
   ///
   /// 사용자는 이 메소드를 통해서 새로운 재료를 이미지와 함께 시트에 렌더링할 수 있습니다.
   /// 기본 이름은 [BasicIngredient]의 기본 이름을 따릅니다.
-  void selectIngredient(InitialIngredient ingredient) {
+  void selectIngredient(BasicIngredient ingredient) {
     final newIngredient = RefreginatorIngredient(
         name: ingredient.name,
         category: ingredient.category,
         isFreezed: _isFreezed);
     _selectedIngredient = newIngredient;
+    _newIngredientName = newIngredient.name;
     notifyListeners();
   }
 
   void selectPrevIngredient(RefreginatorIngredient prevIngredient) {
     _selectedIngredient = prevIngredient;
     _isFreezed = prevIngredient.isFreezed;
-    notifyListeners();
-  }
-
-  /// 선택 재료 초기화 메소드
-  ///
-  /// 사용자는 이 메소드를 통해서 선택한 재료 데이터를 지울 수 있습니다.
-  void cancel() {
-    _selectedIngredient = null;
     notifyListeners();
   }
 
@@ -261,5 +260,25 @@ class RefreginatorIngredientViewModel extends ChangeNotifier {
     if (_selectedIngredient == null) return;
     _selectedIngredient = _selectedIngredient!.copy(endAt: newEndAt);
     notifyListeners();
+  }
+
+  /// 선택한 재료 데이터를 모두 초기화하는 함수
+  ///
+  /// 사용자가 재료 생성 화면에서 벗어나는경우
+  /// 선택한 재료에 대한 모든 정보는 삭제되어야 합니다.
+  /// 따라서, 반드시 이 함수를 호출하여 데이터를 지워주어야 합니다.
+  void resetSelectIngredient() {
+    _selectedIngredient = null;
+    _newIngredientName = "";
+    notifyListeners();
+  }
+
+  /// 뒤로가기를 수행하는 경우
+  /// 선택한 재료를 모두 초기화함.
+  void onPopInvokedWithResult(bool didPop, result) {
+    /// 선택한 재료가 있거나, 이름을 수정한 경우
+    if (selectedIngredient != null || _newIngredientName.isNotEmpty) {
+      resetSelectIngredient();
+    }
   }
 }

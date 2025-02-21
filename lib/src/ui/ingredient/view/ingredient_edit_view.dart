@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/ui/common/widgets/date_picker_widget.dart';
 import 'package:yum_application/src/ui/common/widgets/scroll_date_dialog.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart';
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/ui/ingredient/widget/select_ingredient_image.dart';
+import 'package:yum_application/src/ui/ingredient/view/select_ingredient_image.dart';
 import 'package:yum_application/src/ui/ingredient/widget/single_button.dart';
 
 class IngredientUpdateView extends StatefulWidget {
@@ -33,7 +33,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
         foregroundColor: Theme.of(context).colorScheme.onSecondary,
         leading: GestureDetector(
           onTap: () {
-            _ingredientViewModel.cancel();
+            _ingredientViewModel.resetSelectIngredient();
             Navigator.of(context).pop();
           },
           child: const Icon(
@@ -56,7 +56,7 @@ class _IngredientUpdateViewState extends State<IngredientUpdateView> {
                     builder: (context, provider, child) {
                   return GestureDetector(
                     onTap: () {
-                      provider.cancel();
+                      provider.resetSelectIngredient();
                     },
                     child: SelectIngredientImage(
                       ingredient: provider.selectedIngredient,

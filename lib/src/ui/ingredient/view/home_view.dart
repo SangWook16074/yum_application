@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/ui/common/enums/status.dart';
 import 'package:yum_application/src/ui/common/widgets/loading_progress_indicator.dart';
-import 'package:yum_application/src/ui/ingredient/view/ingredient_add_view.dart';
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
 import 'package:yum_application/src/ui/ingredient/widget/ingredient_filter_check_box.dart';
 import 'package:yum_application/src/ui/ingredient/widget/refreginator_container.dart';
@@ -20,7 +19,6 @@ class HomeView extends StatelessWidget {
       return Stack(
         children: [
           Scaffold(
-            // floatingActionButton: _fab(),
             body: SafeArea(
               top: true,
               bottom: false,
@@ -29,9 +27,13 @@ class HomeView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    // 헤더 영역
                     _header(),
+                    // 기간임박 필터 토글 버튼
                     _toggleWarning(),
+                    // 냉동칸
                     _freezer(),
+                    // 냉장칸
                     _fridge(),
                   ],
                 ),
@@ -44,6 +46,8 @@ class HomeView extends StatelessWidget {
     });
   }
 
+  /// 헤더 영역입니다.
+  ///
   Widget _header() {
     return Padding(
       key: const Key("header"),
@@ -62,6 +66,9 @@ class HomeView extends StatelessWidget {
     );
   }
 
+  /// 냉동칸 영역입니다.
+  ///
+  /// 사용자의 냉동칸에 해당하는 [RefreginatorIngredient]를 보여줍니다.
   Widget _freezer() {
     return Padding(
       key: const Key("freezer"),
@@ -74,6 +81,9 @@ class HomeView extends StatelessWidget {
     );
   }
 
+  /// 냉장칸 영역입니다.
+  ///
+  /// 사용자의 냉장칸에 해당하는 [RefreginatorIngredient]를 보여줍니다.
   Widget _fridge() {
     return Padding(
       key: const Key("fridge"),
@@ -88,22 +98,6 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _fab() => Builder(builder: (context) {
-        return FloatingActionButton(
-          key: const Key("fab"),
-          foregroundColor: const Color(0xffffffff),
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const IngredientAddView()));
-          },
-          child: const Icon(
-            Icons.add,
-            size: 32,
-          ),
-        );
-      });
-
   List<Widget> _loading() => [
         ModalBarrier(
           color: Colors.white.withOpacity(0.2),
@@ -114,6 +108,10 @@ class HomeView extends StatelessWidget {
         )
       ];
 
+  /// 에러 위젯
+  ///
+  /// 데이터 통신 간 에러가 발생하면
+  /// 해당 위젯이 렌더링 됩니다.
   Widget _error() => const Scaffold(
         body: Center(
           child: Column(
@@ -129,6 +127,12 @@ class HomeView extends StatelessWidget {
         ),
       );
 
+  /// 기간임박 필터 토글 영역
+  ///
+  /// 사용자의 재료 중 유통기한이 3일 이내로 임박한 [RefreginatorIngredient]를
+  /// 필터링 합니다.
+  /// On인 경우 필터링이 켜집니다.
+  /// Off인 경우 필터링이 해제됩니다.
   Widget _toggleWarning() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(

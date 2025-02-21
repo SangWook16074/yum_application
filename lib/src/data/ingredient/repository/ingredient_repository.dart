@@ -1,6 +1,6 @@
 import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart';
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/ingredient_category.dart';
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart';
 
 class IngredientRepositoryImpl implements IngredientRepository {
   final RemoteDatasource remoteDatasource;

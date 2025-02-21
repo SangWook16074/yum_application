@@ -7,8 +7,8 @@ import 'package:yum_application/src/ui/ingredient/view/home_view.dart';
 import 'package:yum_application/src/ui/recipe/view/recipe_view.dart';
 import 'package:yum_application/src/ui/user/view/mypage_view.dart';
 
-class App extends StatelessWidget {
-  const App({super.key});
+class AppView extends StatelessWidget {
+  const AppView({super.key});
 
   @override
   Widget build(BuildContext context) {

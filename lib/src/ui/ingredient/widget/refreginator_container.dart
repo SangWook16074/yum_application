@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart';
 import 'package:yum_application/src/ui/ingredient/widget/ingredient_edit_bottom_sheet.dart';
 import 'package:yum_application/src/ui/ingredient/widget/ingredient_image.dart';
 import 'package:yum_application/src/ui/ingredient/widget/page_indicator.dart';

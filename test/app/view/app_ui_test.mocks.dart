@@ -7,13 +7,13 @@ import 'dart:async' as _i6;
 import 'dart:ui' as _i8;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:yum_application/src/ui/common/enums/status.dart' as _i4;
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart'
-    as _i7;
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart'
+import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredient.dart'
     as _i5;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;
+import 'package:yum_application/src/ui/common/enums/status.dart' as _i4;
+import 'package:yum_application/src/ui/ingredient/model/basic_ingredient.dart'
+    as _i7;
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart'
     as _i3;
 
@@ -187,8 +187,7 @@ class MockRefreginatorIngredientViewModel extends _i1.Mock
       );
 
   @override
-  void selectIngredient(_i7.InitialIngredient? ingredient) =>
-      super.noSuchMethod(
+  void selectIngredient(_i7.BasicIngredient? ingredient) => super.noSuchMethod(
         Invocation.method(
           #selectIngredient,
           [ingredient],
@@ -202,15 +201,6 @@ class MockRefreginatorIngredientViewModel extends _i1.Mock
         Invocation.method(
           #selectPrevIngredient,
           [prevIngredient],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void cancel() => super.noSuchMethod(
-        Invocation.method(
-          #cancel,
-          [],
         ),
         returnValueForMissingStub: null,
       );
@@ -247,6 +237,15 @@ class MockRefreginatorIngredientViewModel extends _i1.Mock
         Invocation.method(
           #updateEndAt,
           [newEndAt],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void resetSelectIngredient() => super.noSuchMethod(
+        Invocation.method(
+          #resetSelectIngredient,
+          [],
         ),
         returnValueForMissingStub: null,
       );

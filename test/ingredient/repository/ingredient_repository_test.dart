@@ -2,8 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:yum_application/src/data/ingredient/datasource/remote_datasource.dart';
-import 'package:yum_application/src/data/ingredient/model/initial_ingredient.dart';
-import 'package:yum_application/src/data/ingredient/model/refreginator_ingredient.dart';
+import 'package:yum_application/src/data/ingredient/entity/entity.dart';
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart';
 
 import 'ingredient_repository_test.mocks.dart';
