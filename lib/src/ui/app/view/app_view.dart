@@ -4,7 +4,7 @@ import 'package:yum_application/src/ui/app/viewModel/app_view_model.dart';
 import 'package:yum_application/src/ui/challenge/view/challenge_view.dart';
 import 'package:yum_application/src/ui/common/widgets/image_widget.dart';
 import 'package:yum_application/src/ui/ingredient/view/home_view.dart';
-import 'package:yum_application/src/ui/recipe/view/recipe_view.dart';
+import 'package:yum_application/src/ui/recipe/recipe_ui.dart';
 import 'package:yum_application/src/ui/user/view/mypage_view.dart';
 
 class AppView extends StatelessWidget {
@@ -27,7 +27,7 @@ class AppView extends StatelessWidget {
             HomeView(
               key: Key("app view ingredient view"),
             ),
-            RecipeView(
+            RecipeUI(
               key: Key("app view recipe view"),
             ),
             ChallengeView(

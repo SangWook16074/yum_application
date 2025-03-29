@@ -12,7 +12,6 @@ import 'package:yum_application/src/data/ingredient/entity/refreginator_ingredie
     as _i7;
 import 'package:yum_application/src/data/ingredient/repository/ingredient_repository.dart'
     as _i2;
-import 'package:yum_application/src/data/recipe/model/recipe.dart' as _i12;
 import 'package:yum_application/src/data/recipe/repository/recipe_respository.dart'
     as _i3;
 import 'package:yum_application/src/ui/common/enums/status.dart' as _i5;
@@ -20,6 +19,10 @@ import 'package:yum_application/src/ui/ingredient/model/basic_ingredient.dart'
     as _i9;
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart'
     as _i4;
+import 'package:yum_application/src/ui/recipe/model/recipe_view_event.dart'
+    as _i13;
+import 'package:yum_application/src/ui/recipe/model/recipe_view_state.dart'
+    as _i12;
 import 'package:yum_application/src/ui/recipe/viewModel/recipe_view_model.dart'
     as _i11;
 
@@ -351,11 +354,24 @@ class MockRecipeViewModel extends _i1.Mock implements _i11.RecipeViewModel {
       ) as _i3.RecipeRepository);
 
   @override
-  List<_i12.Recipe> get recipes => (super.noSuchMethod(
-        Invocation.getter(#recipes),
-        returnValue: <_i12.Recipe>[],
-        returnValueForMissingStub: <_i12.Recipe>[],
-      ) as List<_i12.Recipe>);
+  _i12.RecipeViewState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _i6.dummyValue<_i12.RecipeViewState>(
+          this,
+          Invocation.getter(#state),
+        ),
+        returnValueForMissingStub: _i6.dummyValue<_i12.RecipeViewState>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i12.RecipeViewState);
+
+  @override
+  bool get isLoading => (super.noSuchMethod(
+        Invocation.getter(#isLoading),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 
   @override
   bool get hasListeners => (super.noSuchMethod(
@@ -363,6 +379,33 @@ class MockRecipeViewModel extends _i1.Mock implements _i11.RecipeViewModel {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
+  @override
+  void onEvent(_i13.RecipeViewEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void getFirstPages() => super.noSuchMethod(
+        Invocation.method(
+          #getFirstPages,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void getSecondPages(int? page) => super.noSuchMethod(
+        Invocation.method(
+          #getSecondPages,
+          [page],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(

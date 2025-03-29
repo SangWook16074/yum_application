@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
 import 'package:yum_application/src/data/recipe/repository/recipe_respository.dart';
-import 'package:yum_application/src/ui/recipe/view/recipe_%20register_view.dart';
 import 'package:yum_application/src/ui/recipe/viewModel/recipe_view_model.dart';
+import 'package:yum_application/src/ui/recipe/view/recipe_%20register_view.dart';
 
 import 'recipe_resister_view_test.mocks.dart';
 

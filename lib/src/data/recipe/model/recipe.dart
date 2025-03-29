@@ -69,3 +69,32 @@ class Recipe {
         "steps": steps.map((item) => item.toJson()).toList()
       };
 }
+
+class CursorPaginationMeta {
+  final int page;
+  final int size;
+
+  CursorPaginationMeta({required this.page, required this.size});
+
+  factory CursorPaginationMeta.fromJson(Map<String, dynamic> json) {
+    return CursorPaginationMeta(page: json['page'], size: json['size']);
+  }
+}
+
+class RecipeResponse {
+  final List<Recipe> recipes;
+  final CursorPaginationMeta meta;
+
+  RecipeResponse({required this.recipes, required this.meta});
+
+  factory RecipeResponse.fromJson(Map<String, dynamic> json) {
+    var recipesJson = json['recipes'] as List;
+    List<Recipe> recipesList =
+        recipesJson.map((recipe) => Recipe.fromJson(recipe)).toList();
+
+    return RecipeResponse(
+      recipes: recipesList,
+      meta: CursorPaginationMeta.fromJson(json['meta']),
+    );
+  }
+}

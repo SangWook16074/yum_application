@@ -28,10 +28,18 @@ import 'package:yum_application/src/data/recipe/repository/recipe_respository.da
 /// See the documentation for Mockito's code generation for more information.
 class MockRecipeRepository extends _i1.Mock implements _i2.RecipeRepository {
   @override
-  _i3.Future<List<_i4.Recipe>> getAllRecipes() => (super.noSuchMethod(
+  _i3.Future<List<_i4.Recipe>> getAllRecipes({
+    int? page,
+    int? size,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getAllRecipes,
           [],
+          {
+            #page: page,
+            #size: size,
+          },
         ),
         returnValue: _i3.Future<List<_i4.Recipe>>.value(<_i4.Recipe>[]),
         returnValueForMissingStub:

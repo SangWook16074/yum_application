@@ -7,12 +7,13 @@ class RecipeRepositoryImpl implements RecipeRepository {
   RecipeRepositoryImpl({required this.remoteDatasource});
 
   @override
-  Future<List<Recipe>> getAllRecipes() {
-    return remoteDatasource.getAllRecipes().then(
-        (response) => response.map((json) => Recipe.fromJson(json)).toList());
+  Future<List<Recipe>> getAllRecipes({int page = 0, int size = 10}) async {
+    final response =
+        await remoteDatasource.getAllRecipes(page: page, size: size);
+    return response.map((json) => Recipe.fromJson(json)).toList();
   }
 }
 
 abstract class RecipeRepository {
-  Future<List<Recipe>> getAllRecipes();
+  Future<List<Recipe>> getAllRecipes({int page, int size});
 }

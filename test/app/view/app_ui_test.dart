@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
+import 'package:yum_application/src/ui/recipe/viewModel/recipe_view_model.dart';
 import 'package:yum_application/src/ui/app/page/app_page.dart';
 import 'package:yum_application/src/ui/ingredient/viewModel/ingredient_view_model.dart';
-import 'package:yum_application/src/ui/recipe/viewModel/recipe_view_model.dart';
 
 import 'app_ui_test.mocks.dart';
 
@@ -16,7 +16,7 @@ void main() {
   late Widget widget;
   group("App UI Test", () {
     ingredientViewModel = MockRefreginatorIngredientViewModel();
-    recipeViewModel = MockRecipeViewModel();
+    recipeViewModel = MockRecipeViewModel() as RecipeViewModel;
     setUpAll(() {
       widget = MultiProvider(
         providers: [
