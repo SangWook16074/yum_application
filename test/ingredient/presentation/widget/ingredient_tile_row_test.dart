@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:yum_application/src/ui/widget/ingredient_list_tile.dart';
+import 'package:yum_application/src/features/ingredients/presentation/widget/ingredient_list_tile.dart';
 
 void main() {
   const name = '양파';
