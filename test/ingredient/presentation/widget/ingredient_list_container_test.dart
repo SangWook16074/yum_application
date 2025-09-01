@@ -57,7 +57,7 @@ void main() {
     });
   });
 
-  group('IngredientKategori 위젯 테스트', () {
+  group('Ingredient List Container 위젯 테스트', () {
     testWidgets('자식이 0개일 때 렌더링 확인', (tester) async {
       await tester.pumpWidget(buildTestWidget([]));
 
