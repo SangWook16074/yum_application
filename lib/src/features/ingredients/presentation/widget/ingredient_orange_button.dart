@@ -20,7 +20,7 @@ class IngredientOrangeButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xffF97316), // 주황색 배경
+          color: const Color(0xffF97316),
           borderRadius: BorderRadius.circular(8),
         ),
         width: width,
@@ -37,7 +37,7 @@ class IngredientOrangeButton extends StatelessWidget {
                 size: 12,
                 color: const Color(0xffffffff),
               ),
-              const SizedBox(width: 4), // 아이콘과 텍스트 사이 여백
+              const SizedBox(width: 4),
             ],
             Text(
               title,
