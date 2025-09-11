@@ -27,7 +27,7 @@ void main() {
     return tester.widget<Text>(find.text(text)).style;
   }
 
-  group('Ingredient Tile Row 위젯 테스트', () {
+  group('Ingredient List Tile 위젯 테스트', () {
     testWidgets('텍스트가 올바르게 렌더링 되는지 확인', (tester) async {
       await tester.pumpWidget(buildTestWidget(onEdit: () {}, onDelete: () {}));
 
@@ -83,7 +83,7 @@ void main() {
     });
   });
 
-  group('Ingredient Tile Row 골든 테스트', () {
+  group('Ingredient List Tile 골든 테스트', () {
     testWidgets('골든 테스트 - 기본 UI', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
